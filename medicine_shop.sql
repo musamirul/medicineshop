@@ -2,8 +2,8 @@
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3308
--- Generation Time: Dec 28, 2021 at 04:16 PM
+-- Host: 127.0.0.1:3306
+-- Generation Time: Dec 29, 2021 at 05:11 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -72,7 +72,14 @@ CREATE TABLE IF NOT EXISTS `billing_address` (
   `country` varchar(45) NOT NULL,
   `FK_BillAdd_Cust_ID` int(45) NOT NULL,
   PRIMARY KEY (`BillAdd_ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `billing_address`
+--
+
+INSERT INTO `billing_address` (`BillAdd_ID`, `address`, `city`, `state`, `zipcode`, `country`, `FK_BillAdd_Cust_ID`) VALUES
+(1, 'no 34455', 'klang', 'Kedah', 41222, 'Malaysia', 1);
 
 -- --------------------------------------------------------
 
@@ -122,7 +129,14 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `Cust_Email` varchar(45) NOT NULL,
   `FK_Cust_Login_ID` int(45) NOT NULL,
   PRIMARY KEY (`Cust_ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`Cust_ID`, `Cust_Name`, `Cust_DOB`, `Cust_Gender`, `Cust_Phone`, `Cust_Email`, `FK_Cust_Login_ID`) VALUES
+(1, 'Ameirul Mustaqim', '2021-12-14', 'male', '0193071722', 'musamirul.kpj@gmail.com', 1);
 
 -- --------------------------------------------------------
 
@@ -169,7 +183,17 @@ CREATE TABLE IF NOT EXISTS `login` (
   `password` varchar(45) NOT NULL,
   `role` varchar(45) NOT NULL,
   PRIMARY KEY (`Login_ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `login`
+--
+
+INSERT INTO `login` (`Login_ID`, `username`, `password`, `role`) VALUES
+(1, 'musamirul', 'qwerty30', 'customer'),
+(2, 'test', '123', 'administrator'),
+(3, 'testseller', '123', 'seller'),
+(4, 'ameirul', 'qwerty30', 'customer');
 
 -- --------------------------------------------------------
 
@@ -283,7 +307,15 @@ CREATE TABLE IF NOT EXISTS `shipping_address` (
   `country` varchar(45) NOT NULL,
   `FK_ShipAdd_Cust_ID` int(45) NOT NULL,
   PRIMARY KEY (`ShipAdd_ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `shipping_address`
+--
+
+INSERT INTO `shipping_address` (`ShipAdd_ID`, `address`, `city`, `state`, `zipcode`, `country`, `FK_ShipAdd_Cust_ID`) VALUES
+(3, 'no 39', 'klang', 'Selangor', 41222, 'Malaysia', 1),
+(4, 'no 39', 'klang', 'Selangor', 41222, 'Malaysia', 1);
 
 -- --------------------------------------------------------
 
