@@ -1,9 +1,12 @@
 <?php
     session_start();
     include("../includes/config.php");
-    echo $_SESSION['id'];
-    echo $_SESSION['username'];
-    echo $_SESSION['role'];
+    if($_SESSION['id']==""){
+        header("location:http://localhost/medicineshop/login.php");
+    }
+    $_SESSION['id'];
+    $_SESSION['username'];
+    $_SESSION['role'];
 ?>
 <h4>My Profile</h4>
 <p>Manage and protect your account</p>
