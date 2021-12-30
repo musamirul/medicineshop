@@ -3,5 +3,5 @@ session_start();
 echo $_SESSION['id'];
 echo $_SESSION['username'];
 echo $_SESSION['role'];
-echo $_SESSION['cust_id'];
+echo $_SESSION['Cust_Id'];
 ?>

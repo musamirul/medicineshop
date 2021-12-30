@@ -4,6 +4,7 @@
  $_SESSION['id'];
  $_SESSION['username'];
  $_SESSION['role'];
+ $_SESSION['Cust_Id'];
 ?>
 <h1>Medical History</h1>
 <form method="post">

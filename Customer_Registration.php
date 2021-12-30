@@ -20,7 +20,6 @@ if(isset($_POST['CreateAccountBtn'])){
     }else{
         //If username not exist insert into 'login' db
         $Query_Submit = mysqli_query($con, "INSERT INTO login ( username, password, role) VALUES ('$username','$password','customer')");
-        
             
     }
     

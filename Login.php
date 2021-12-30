@@ -35,11 +35,12 @@ if(isset($_POST['login'])){
             if($result_check>0){
                 //go to homepage
                 echo 'true';
-                
+                $_SESSION['Cust_Id'] = $result_check['Cust_ID'];
                 header("location:http://localhost/medicineshop/homepage.php");
 
             }else{
                 echo 'false';
+                $_SESSION['Cust_Id'] = "";
                 //go to profile page to update user account
                 header("location:http://localhost/medicineshop/customer/profile.php");
                 exit();

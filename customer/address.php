@@ -4,7 +4,8 @@ include("../includes/config.php");
 if($_SESSION['id']==""){
     header("location:http://localhost/medicineshop/login.php");
 }
-$loginId = $_SESSION['id'];
+$loginId = $_SESSION['Cust_Id'];
+
 ?>
 <h1>My Addresses</h1>
 <h2>Shipping Address</h2>
