@@ -29,12 +29,17 @@ if(isset($_POST['login'])){
             
             //if fk_cust_id dont have login_id - go to profile page
             $login_id = $result['Login_ID'];
-            $Query_Check_ID = mysqli_query($con,"SELECT * FROM customer WHERE FK_Cust_Login_ID = '$login_id");
-            if(mysqli_num_rows($Query_Check_ID)>0){
+            $Query_Check_ID = mysqli_query($con,"SELECT * FROM customer WHERE FK_Cust_Login_ID = '$login_id'");
+            $result_check = mysqli_fetch_array($Query_Check_ID);
+            
+            if($result_check>0){
                 //go to homepage
-                echo "found";
+                echo 'true';
+                
+                header("location:http://localhost/medicineshop/homepage.php");
 
             }else{
+                echo 'false';
                 //go to profile page to update user account
                 header("location:http://localhost/medicineshop/customer/profile.php");
                 exit();

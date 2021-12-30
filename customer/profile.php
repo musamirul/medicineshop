@@ -7,6 +7,8 @@
     $_SESSION['id'];
     $_SESSION['username'];
     $_SESSION['role'];
+    echo $_SESSION['Cust_ID'];
+    
 ?>
 <h4>My Profile</h4>
 <p>Manage and protect your account</p>
@@ -28,6 +30,7 @@ if($result_check>0){
     echo $result_check['Cust_Phone'];
     echo "<br>";
     echo $result_check['Cust_Email'];
+    $_SESSION['cust_id'] = $result_check['Cust_ID'];
 
 }else{
 

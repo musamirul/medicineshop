@@ -63,6 +63,9 @@ $loginId = $_SESSION['id'];
             $country = $_POST['country'];
             $query_ship = mysqli_query($con,"INSERT INTO shipping_address(address, city,state, zipcode, country, FK_ShipAdd_Cust_ID) 
             VALUES ('$address','$city','$state','$zipcode','$country','$loginId')");
+
+            //clear post request
+            header('Location:http://localhost/medicineshop/customer/address.php?msg=success');
         }
         //End enter shipping address
     //end else if
@@ -129,6 +132,8 @@ if($result_bill>0){
         $bill_country = $_POST['bill_country'];
         $query_bill = mysqli_query($con,"INSERT INTO `billing_address`(address, city, state, zipcode, country, FK_BillAdd_Cust_ID) 
         VALUES ('$bill_address','$bill_city','$bill_state','$bill_zipcode','$bill_country',$loginId)");
+        //clear post request
+        header('Location:http://localhost/medicineshop/customer/address.php?msg=success');
     }
     //End enter bill address
 //end else if
