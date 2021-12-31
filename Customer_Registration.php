@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include("includes/config.php");
 ?>
 <form method="post">
@@ -20,6 +21,8 @@ if(isset($_POST['CreateAccountBtn'])){
     }else{
         //If username not exist insert into 'login' db
         $Query_Submit = mysqli_query($con, "INSERT INTO login ( username, password, role) VALUES ('$username','$password','customer')");
+        $_SESSION['username'] = $_POST['username'];
+        header("location:http://localhost/medicineshop/customer/create_profile.php");
             
     }
     
