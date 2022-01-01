@@ -58,8 +58,11 @@ if(isset($_POST['login'])){
         
         //SELLER
         }else {
+            //check if account have approve
+            $query_checkApproval = mysqli_query($con);
             //go to seller page
-            echo 'seller';
+            header("location:seller/Seller_Dashboard.php");
+            exit();
         }
     }else{
         echo 'false';
