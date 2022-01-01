@@ -1,10 +1,13 @@
 <?php
  session_start();
  include("../includes/config.php");
+ if($_SESSION['id']==""){
+    header("location:../login.php");
+ }
  $_SESSION['id'];
  $_SESSION['username'];
  $_SESSION['role'];
- $_SESSION['Cust_Id'];
+ $Cust_ID =  $_SESSION['Cust_Id'];
 ?>
 <h1>Medical History</h1>
 <form method="post">
@@ -50,8 +53,8 @@
         $height_meter = $height/100;
         $bmi = round($weight/($height_meter*$height_meter),2);
 
-        //$query_hist = mysqli_query($con,"INSERT INTO medical_history(Blood_Group, Weight, Height, Alcohol, Smoking, Exercise, Illness, BMI, Surgery, FK_Med_Cust_ID) 
-        //VALUES ('$blood','$weight','$height','$alcohol','$smoking','$exercise','$illness','$bmi','$c',[value-10],[value-11])")
+        $query_hist = mysqli_query($con,"INSERT INTO medical_history(Blood_Group, Weight, Height, Alcohol, Smoking, Exercise, Illness, BMI, Surgery, FK_Med_Cust_ID) 
+        VALUES ('$blood','$weight','$height','$alcohol','$smoking','$exercise','$illness','$bmi','$surgery','$Cust_ID')");
         
         
     }
