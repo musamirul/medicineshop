@@ -2,6 +2,7 @@
     session_start();
     include("includes/config.php");
 ?>
+<h2>Registration</h2>
 <form method="post">
     <input type="text" name="username" placeholder="Enter Username"/>
     <input type="password" name="password" placeholder="Enter Password"/>

@@ -1,7 +1,12 @@
 <?php
     session_start();
     include("includes/config.php");
+    if(isset($_SESSION['message'])){
+        echo $_SESSION['message'];
+        unset($_SESSION['message']);
+    }
 ?>
+<h2>Login page</h2>
 <form method="POST">
     <input type="text" name="username" placeholder="Please enter your username"/>
     <input type="password" name="password" placeholder="Please enter your password"/>
@@ -17,10 +22,15 @@ if(isset($_POST['login'])){
     $result = mysqli_fetch_array($Query_Check);
     
     if($result>0){
+        //ADMINISTRATOR
         if($result['role']=='administrator'){
             //go to admin page
+            $_SESSION['id'] = $result['Login_ID'];
+            $_SESSION['username'] = $result['username'];
+            $_SESSION['role'] = $result['role'];
             echo 'administrator';
-            
+        
+        //CUSTOMER
         }elseif($result['role']=='customer'){
             //go to user page
             $_SESSION['id'] = $result['Login_ID'];
@@ -45,7 +55,8 @@ if(isset($_POST['login'])){
                 header("location:http://localhost/medicineshop/customer/profile.php");
                 exit();
             }
-            
+        
+        //SELLER
         }else {
             //go to seller page
             echo 'seller';

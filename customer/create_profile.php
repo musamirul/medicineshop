@@ -39,6 +39,8 @@ if(isset($_POST['Save'])){
     $_SESSION['role'] = "";
     $_SESSION['cust_id'] = "";
     session_unset();
+
+    $_SESSION['message'] = "yours account have activated, please login";
     header("location:../login.php");
 }
 
