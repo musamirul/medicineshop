@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 29, 2021 at 05:11 PM
+-- Generation Time: Jan 02, 2022 at 04:11 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -35,7 +35,14 @@ CREATE TABLE IF NOT EXISTS `administrator` (
   `Admin_Dept` varchar(45) NOT NULL,
   `FK_Admin_Login_ID` int(45) NOT NULL,
   PRIMARY KEY (`Admin_ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `administrator`
+--
+
+INSERT INTO `administrator` (`Admin_ID`, `Admin_Email`, `Admin_EmpNo`, `Admin_Dept`, `FK_Admin_Login_ID`) VALUES
+(1, 'musamirul@it.gmail', '344343', 'finance', 20);
 
 -- --------------------------------------------------------
 
@@ -72,14 +79,16 @@ CREATE TABLE IF NOT EXISTS `billing_address` (
   `country` varchar(45) NOT NULL,
   `FK_BillAdd_Cust_ID` int(45) NOT NULL,
   PRIMARY KEY (`BillAdd_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `billing_address`
 --
 
 INSERT INTO `billing_address` (`BillAdd_ID`, `address`, `city`, `state`, `zipcode`, `country`, `FK_BillAdd_Cust_ID`) VALUES
-(1, 'no 34455', 'klang', 'Kedah', 41222, 'Malaysia', 1);
+(1, 'no 34455', 'klang', 'Kedah', 41222, 'Malaysia', 1),
+(2, 'no 79 lorong ali', 'bandar baru klang', 'Selangor', 47000, 'Malaysia', 4),
+(3, 'no 89', 'bandar baru', 'Selangor', 123455, 'Malaysia', 3);
 
 -- --------------------------------------------------------
 
@@ -129,14 +138,17 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `Cust_Email` varchar(45) NOT NULL,
   `FK_Cust_Login_ID` int(45) NOT NULL,
   PRIMARY KEY (`Cust_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `customer`
 --
 
 INSERT INTO `customer` (`Cust_ID`, `Cust_Name`, `Cust_DOB`, `Cust_Gender`, `Cust_Phone`, `Cust_Email`, `FK_Cust_Login_ID`) VALUES
-(1, 'Ameirul Mustaqim', '2021-12-14', 'male', '0193071722', 'musamirul.kpj@gmail.com', 1);
+(1, 'Ameirul Mustaqim', '2021-12-14', 'male', '0193071722', 'musamirul.kpj@gmail.com', 1),
+(2, 'test', '2021-12-16', 'male', '0193071722', 'musamirul.kpj@gmail.com', 5),
+(3, 'ameirul mustaqim', '2021-11-30', 'male', '0123456789', 'muss@kpjklang.com', 7),
+(4, 'ali bin abu', '2022-01-06', 'male', '0193071722', 'mus@kpjklang.com', 12);
 
 -- --------------------------------------------------------
 
@@ -147,11 +159,21 @@ INSERT INTO `customer` (`Cust_ID`, `Cust_Name`, `Cust_DOB`, `Cust_Gender`, `Cust
 DROP TABLE IF EXISTS `declaration`;
 CREATE TABLE IF NOT EXISTS `declaration` (
   `Declaration_ID` int(45) NOT NULL AUTO_INCREMENT,
-  `Declaration_File` varchar(45) NOT NULL,
-  `Declaration_TimeStamp` timestamp(6) NOT NULL,
+  `Declaration_Name` varchar(45) NOT NULL,
+  `Declaration_File` varchar(254) NOT NULL,
+  `Declaration_TimeStamp` varchar(45) NOT NULL,
   `FK_Declaration_Cust_ID` int(45) NOT NULL,
   PRIMARY KEY (`Declaration_ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `declaration`
+--
+
+INSERT INTO `declaration` (`Declaration_ID`, `Declaration_Name`, `Declaration_File`, `Declaration_TimeStamp`, `FK_Declaration_Cust_ID`) VALUES
+(11, 'report', '20220103000953_RALAT BORANG_PERMOHONAN_BANTUAN_BENCANA_2021 (1) (1).pdf', '2022-01-03 12:09:53am', 1),
+(10, 'Declaration Form', '20220103000930_RALAT BORANG_PERMOHONAN_BANTUAN_BENCANA_2021 (1) (2).pdf', '2022-01-03 12:09:30am', 1),
+(9, 'Kad Pengenalan', '20220103000527_RALAT BORANG_PERMOHONAN_BANTUAN_BENCANA_2021 (1) (2).pdf', '2022-01-03 12:05:27am', 1);
 
 -- --------------------------------------------------------
 
@@ -183,7 +205,7 @@ CREATE TABLE IF NOT EXISTS `login` (
   `password` varchar(45) NOT NULL,
   `role` varchar(45) NOT NULL,
   PRIMARY KEY (`Login_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `login`
@@ -193,7 +215,15 @@ INSERT INTO `login` (`Login_ID`, `username`, `password`, `role`) VALUES
 (1, 'musamirul', 'qwerty30', 'customer'),
 (2, 'test', '123', 'administrator'),
 (3, 'testseller', '123', 'seller'),
-(4, 'ameirul', 'qwerty30', 'customer');
+(4, 'ameirul', 'qwerty30', 'customer'),
+(5, 'mus', '123', 'customer'),
+(7, 'amir', '123', 'customer'),
+(12, 'ali', '123', 'customer'),
+(11, 'pharmas', '123', 'seller'),
+(19, 'admin1', '123', 'administrator'),
+(18, 'administrator', '123', 'administrator'),
+(20, 'admin2', '123', 'administrator'),
+(21, 'bigpharma', '123', 'seller');
 
 -- --------------------------------------------------------
 
@@ -215,7 +245,14 @@ CREATE TABLE IF NOT EXISTS `medical_history` (
   `Surgery` varchar(45) NOT NULL,
   `FK_Med_Cust_ID` int(45) NOT NULL,
   PRIMARY KEY (`Medical_ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `medical_history`
+--
+
+INSERT INTO `medical_history` (`Medical_ID`, `Blood_Group`, `Weight`, `Height`, `Alcohol`, `Smoking`, `Exercise`, `Illness`, `BMI`, `Surgery`, `FK_Med_Cust_ID`) VALUES
+(1, 'A+', 41, 150, 'yes', 'no', 'yes', 'illness saya adalah', 18.22, 'surgery saya adalah', 3);
 
 -- --------------------------------------------------------
 
@@ -254,7 +291,16 @@ CREATE TABLE IF NOT EXISTS `product` (
   `Product_SellingPrice` double NOT NULL,
   `FK_Product_Seller_ID` int(45) NOT NULL,
   PRIMARY KEY (`Product_ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`Product_ID`, `Product_Name`, `Product_Desc`, `Product_Image`, `Product_Qty`, `Product_Type`, `Product_RecordType`, `Product_ExpiracyDate`, `Product_ManufacturerName`, `Product_SellingPrice`, `FK_Product_Seller_ID`) VALUES
+(5, 'prod3', 'desc3', 'img/11.PNG', 15, 'control', 'yes', '2022-01-01', 'testete', 150, 1),
+(3, 'naman', 'desc', 'img/123213.PNG', 12, 'noncontrol', 'yes', '2022-01-21', 'pharma', 123, 1),
+(4, 'prod name', 'this is desc', 'img/1111.png', 15, 'control', 'yes', '2022-01-03', 'this is manufacturer name ', 8222, 1);
 
 -- --------------------------------------------------------
 
@@ -287,9 +333,18 @@ CREATE TABLE IF NOT EXISTS `seller` (
   `Seller_Address` varchar(255) NOT NULL,
   `Seller_BankAccName` varchar(45) NOT NULL,
   `Seller_BankAccNo` varchar(45) NOT NULL,
+  `Seller_Registration_Status` varchar(45) NOT NULL,
   `FK_Seller_Login_ID` int(45) NOT NULL,
   PRIMARY KEY (`Seller_ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `seller`
+--
+
+INSERT INTO `seller` (`Seller_ID`, `Seller_Name`, `Seller_RegistrationNo`, `Seller_Phone`, `Seller_Address`, `Seller_BankAccName`, `Seller_BankAccNo`, `Seller_Registration_Status`, `FK_Seller_Login_ID`) VALUES
+(1, 'pharma niaga', 123342323, '0193224748', 'lorong 5343 jalan 123', 'maybank', '123558437', 'Active', 11),
+(2, 'big pharmacy', 53234252, '012834737', 'lorong pharmacy', 'rhb', '1234889123489', 'reqApproval', 21);
 
 -- --------------------------------------------------------
 
@@ -307,7 +362,7 @@ CREATE TABLE IF NOT EXISTS `shipping_address` (
   `country` varchar(45) NOT NULL,
   `FK_ShipAdd_Cust_ID` int(45) NOT NULL,
   PRIMARY KEY (`ShipAdd_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `shipping_address`
@@ -315,7 +370,9 @@ CREATE TABLE IF NOT EXISTS `shipping_address` (
 
 INSERT INTO `shipping_address` (`ShipAdd_ID`, `address`, `city`, `state`, `zipcode`, `country`, `FK_ShipAdd_Cust_ID`) VALUES
 (3, 'no 39', 'klang', 'Selangor', 41222, 'Malaysia', 1),
-(4, 'no 39', 'klang', 'Selangor', 41222, 'Malaysia', 1);
+(4, 'no 39', 'klang', 'Selangor', 41222, 'Malaysia', 1),
+(5, 'no 39 lorong tahir', 'klang', 'Selangor', 41222, 'Malaysia', 4),
+(6, 'no 70', 'klang', 'Selangor', 412555, 'Malaysia', 3);
 
 -- --------------------------------------------------------
 
