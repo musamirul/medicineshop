@@ -1,6 +1,10 @@
 <?php
     session_start();
     include("../includes/config.php");
+    if($_SESSION['username']=="" || $_SESSION['role']!="customer"){
+        session_unset();
+        header("location:../login.php");
+    }
 ?>
 <form enctype="multipart/form-data" method="post">
     Select File
@@ -18,7 +22,7 @@
             <th>Action</th>
         </thead>
 <?php
-    $query_showDoc = mysqli_query($con,"SELECT * FROM declaration");
+    $query_showDoc = mysqli_query($con,"SELECT * FROM declaration WHERE FK_Declaration_Cust_ID = '$Cust_Id'");
     while($result_showDoc = mysqli_fetch_array($query_showDoc)){
         $name = $result_showDoc['Declaration_FileName'];   
 ?>
@@ -41,7 +45,7 @@ if(isset($_POST['submit'])){
     $type=$_FILES['file']['type'];
     $temp=$_FILES['file']['tmp_name'];
     $fileName = $_POST['fileName'];
-    $Cust_Id = $_SESSION['Cust_Id'];
+
 
     //get date and time
     date_default_timezone_set("Asia/Kuala_Lumpur");
