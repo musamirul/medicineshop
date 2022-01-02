@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 02, 2022 at 04:11 PM
+-- Generation Time: Jan 02, 2022 at 04:42 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -160,20 +160,21 @@ DROP TABLE IF EXISTS `declaration`;
 CREATE TABLE IF NOT EXISTS `declaration` (
   `Declaration_ID` int(45) NOT NULL AUTO_INCREMENT,
   `Declaration_Name` varchar(45) NOT NULL,
+  `Declaration_FileName` varchar(45) NOT NULL,
   `Declaration_File` varchar(254) NOT NULL,
   `Declaration_TimeStamp` varchar(45) NOT NULL,
   `FK_Declaration_Cust_ID` int(45) NOT NULL,
   PRIMARY KEY (`Declaration_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `declaration`
 --
 
-INSERT INTO `declaration` (`Declaration_ID`, `Declaration_Name`, `Declaration_File`, `Declaration_TimeStamp`, `FK_Declaration_Cust_ID`) VALUES
-(11, 'report', '20220103000953_RALAT BORANG_PERMOHONAN_BANTUAN_BENCANA_2021 (1) (1).pdf', '2022-01-03 12:09:53am', 1),
-(10, 'Declaration Form', '20220103000930_RALAT BORANG_PERMOHONAN_BANTUAN_BENCANA_2021 (1) (2).pdf', '2022-01-03 12:09:30am', 1),
-(9, 'Kad Pengenalan', '20220103000527_RALAT BORANG_PERMOHONAN_BANTUAN_BENCANA_2021 (1) (2).pdf', '2022-01-03 12:05:27am', 1);
+INSERT INTO `declaration` (`Declaration_ID`, `Declaration_Name`, `Declaration_FileName`, `Declaration_File`, `Declaration_TimeStamp`, `FK_Declaration_Cust_ID`) VALUES
+(14, '123123123', 'dynamic_rpt_061221 (3).xls', '20220103003924_dynamic_rpt_061221 (3).xls', '2022-01-03 12:39:24am', 1),
+(13, 'test123', 'instructions_for_use.pdf', '20220103003719_instructions_for_use.pdf', '2022-01-03 12:37:19am', 1),
+(12, 'test1', 'instructions_for_use.pdf', '20220103003436_instructions_for_use.pdf', '2022-01-03 12:34:36am', 1);
 
 -- --------------------------------------------------------
 
