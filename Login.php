@@ -33,10 +33,6 @@ if(isset($_POST['login'])){
         //CUSTOMER
         }elseif($result['role']=='customer'){
             //go to user page
-            $_SESSION['id'] = $result['Login_ID'];
-            $_SESSION['username'] = $_POST['username'];
-            $_SESSION['role'] = $result['role'];
-            
             //if fk_cust_id dont have login_id - go to profile page
             $login_id = $result['Login_ID'];
             $Query_Check_ID = mysqli_query($con,"SELECT * FROM customer WHERE FK_Cust_Login_ID = '$login_id'");
@@ -44,7 +40,9 @@ if(isset($_POST['login'])){
             
             if($result_check>0){
                 //go to homepage
-                echo 'true';
+                $_SESSION['id'] = $result['Login_ID'];
+                $_SESSION['username'] = $_POST['username'];
+                $_SESSION['role'] = $result['role'];
                 $_SESSION['Cust_Id'] = $result_check['Cust_ID'];
                 header("location:http://localhost/medicineshop/homepage.php");
 
@@ -58,11 +56,25 @@ if(isset($_POST['login'])){
         
         //SELLER
         }else {
+            $login_id = $result['Login_ID'];
             //check if account have approve
-            $query_checkApproval = mysqli_query($con);
-            //go to seller page
-            header("location:seller/Seller_Dashboard.php");
-            exit();
+            $query_checkApproval = mysqli_query($con,"SELECT * FROM seller WHERE FK_Seller_Login_ID = '$login_id'");
+            $result_checkApproval = mysqli_fetch_array($query_checkApproval);
+            if($result_checkApproval['Seller_Registration_Status']=="Active"){
+
+                $_SESSION['id'] = $result['Login_ID'];
+                $_SESSION['username'] = $_POST['username'];
+                $_SESSION['role'] = $result['role'];
+                $_SESSION['RegStatus'] = $result_checkApproval['Seller_Registration_Status'];
+                $_SESSION['Seller_Id'] = $result_checkApproval['Seller_ID'];
+                //go to seller page
+                header("location:seller/Seller_Dashboard.php");
+                exit();
+
+            }else{
+                echo "Account is inactive";
+            }
+            
         }
     }else{
         echo 'false';
