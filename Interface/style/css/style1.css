@@ -1,5 +1,6 @@
 body {
-	background-color: #339933;
+	background-color: #fbfbfb;
+
 !important
   }
   @media (min-width: 991.98px) {
@@ -38,11 +39,11 @@ body {
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
   }
-span .p-text {
-	font-size: 16px;
-	font-weight: bold;
-	color: #0C9;
-}
-.p-text {
-	color: #0F6;
+.Straight-Line {
+	border-top-width: thin;
+	border-top-style: solid;
+	border-top-color: #EFEFEF;
+	width: 100%;
+	margin-top: 30px;
+	margin-bottom: 20px;
 }
