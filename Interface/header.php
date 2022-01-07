@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style/bootstrap/css/bootstrap.min.css" media="screen">
+    <link rel="stylesheet" href="Interface/style/bootstrap/css/bootstrap.min.css" media="screen">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-    <link href="style/css/style1.css" rel="stylesheet" type="text/css" />
+    <link href="Interface/style/css/style1.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
 
@@ -80,36 +80,3 @@
         <!-- Container wrapper -->
       </nav>
     </header>
-<main style="margin-top: 58px">
-  <div class="container pt-4">
-	testtests
-  </div>
-</main>
-
-<footer class="text-center text-white fixed-bottom bg-dark">
-	<div class="container pt-4">
-    	<section class="mb-4">
-        	<a class="btn btn-outline-light rounded-circle m-1 me-3" href="#" role="button"><i class="fab fa-facebook-f"></i></a>
-            <a class="btn btn-outline-light rounded-circle m-1 me-3" href="#" role="button"><i class="fab fa-twitter"></i></a>
-            <a class="btn btn-outline-light rounded-circle m-1 me-3" href="#" role="button"><i class="fab fa-google"></i></a>
-            <a class="btn btn-outline-light rounded-circle m-1 me-3" href="#" role="button"><i class="fab fa-instagram"></i></a> 
-            <a class="btn btn-outline-light rounded-circle m-1 me-3" href="#" role="button"><i class="fab fa-linkedin"></i></a>  
-            <a class="btn btn-outline-light rounded-circle m-1 me-3" href="#" role="button"><i class="fab fa-github"></i></a>           
-        </section>
-    </div>
-    <div class="text-center p-3" style="background-color:rgba(0,0,0,0.2);">
-    @ 2022 Copyright :
-    <a class="text-white text-decoration-none" href="#">OnlineMedicineShopping.com</a>
-    </div>
-    <!-- 
-    Active navbar button by
-    1) get current file name (php)
-    2) set if else on button class 
-    3) if file name = product.php therefore button == active
-    -->
-</footer>
-
-    <script src="style/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  </body>
-</html>

@@ -1,8 +1,3 @@
-<?php
-    session_start();
-    echo $_SESSION['id'];
-    echo $_SESSION['username'];
-    echo $_SESSION['role'];
-    echo $_SESSION['RegStatus'];
-    echo $_SESSION['Seller_Id'];
-?>
+<?php include("Interface/header.php"); ?>
+<h5>Dashboard</h5>
+<?php include("Interface/footer.php"); ?>

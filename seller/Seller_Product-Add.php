@@ -1,3 +1,5 @@
+
+<?php include("Interface/header.php"); ?>
 <style type="text/css">
 
 #imagelist{
@@ -8,23 +10,11 @@ width:auto;
 margin: 0 5px 0 0;
 }
 
-img{
+.imgProd{
 height: 225px;
 
 </style>
-<?php
-    session_start();
-    include("../includes/config.php");
-    if($_SESSION['role']!="seller" || $_SESSION['role']!="seller" || $_SESSION['RegStatus']!= "Active"){
-        session_unset();
-        header("Location:../Login.php");
-    }
-    $_SESSION['id'];
-    $_SESSION['username'];
-    $_SESSION['role'];
-    $_SESSION['RegStatus'];
-    $_SESSION['Seller_Id'];
-?>
+<h5>Add Product</h5>
 <form method="post" enctype="multipart/form-data" >
     <input type="text" placeholder="Enter Product Name" name="name"/><br/>
     <textarea rows="5" cols="50" name="description" placeholder="Enter Product Description"></textarea><br/>
@@ -50,9 +40,10 @@ $query_image = mysqli_query($con,"SELECT * FROM product");
 while($result_image = mysqli_fetch_array($query_image))
 {
 echo '<div id="imagelist">';
-echo '<p><img src="'.$result_image['Product_Image'].'"></p>';
+echo '<p><img class="imgProd" src="'.$result_image['Product_Image'].'"></p>';
 echo '<p>'.$result_image['Product_Name'].'</p>';
 echo '</div>';
+
 }
 
 if(isset($_POST['createProduct'])){
@@ -79,3 +70,4 @@ if(isset($_POST['createProduct'])){
     
 }
 ?>
+<?php include("Interface/footer.php"); ?>
