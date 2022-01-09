@@ -24,6 +24,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link href="Interface/style/css/style1.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="Interface/style/DataTables/css/jquery.dataTables.css">
+    <!--<link rel="stylesheet" href="Interface/style/DataTables/dataTables.bootstrap5.min.css">-->
   </head>
   <body>
 
@@ -38,7 +40,7 @@
                     <ul class="collapse list-group list-group-flush ps-4" id="productCollapse">
                     	<li class="list-group-item py-1 <?php if($current_file_name== "Seller_Product-Add.php") echo "active"?>"><a href="Seller_Product-Add.php" class="text-decoration-none text-reset"><i style="font-size:14px" class="bi bi-bag-plus-fill me-3"></i>Add product</a></li>
                         <li class="list-group-item py-1"><a href="#" class="text-decoration-none text-reset"><i style="font-size:14px" class="bi bi-bag-dash-fill me-3"></i>Update product</a></li>
-                        <li class="list-group-item py-1"><a href="#" class="text-decoration-none text-reset"><i style="font-size:14px" class="bi bi-bag-check-fill me-3"></i>List product</a></li>
+                        <li class="list-group-item py-1 <?php if($current_file_name== "Seller_Product-View.php") echo "active"?>"><a href="Seller_Product-View.php" class="text-decoration-none text-reset"><i style="font-size:14px" class="bi bi-bag-check-fill me-3"></i>List product</a></li>
                     </ul>
                     
                     

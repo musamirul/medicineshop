@@ -1,4 +1,6 @@
-<footer class="text-center text-white fixed-bottom bg-dark">
+</div>
+<footer class="text-center text-white fixed-bottom bg-dark mt-5">
+    
 	<!--<div class="container pt-4">
     	<section class="mb-4">
         	<a class="btn btn-outline-light rounded-circle m-1 me-3" href="#" role="button"><i class="fab fa-facebook-f"></i></a>
@@ -22,6 +24,13 @@
 </footer>
 
     <script src="Interface/style/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+    <script src="Interface/style/jQuery/jquery-3.6.0.min.js"></script>
+    <script src="Interface/style/DataTables/js/jquery.dataTables.min.js"></script>
+    <script src="Interface/style/DataTables/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+    </script>
   </body>
 </html>

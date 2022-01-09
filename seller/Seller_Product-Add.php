@@ -13,17 +13,18 @@ margin: 0 5px 0 0;
 .imgProd{
 height: 225px;
 
+}
 </style>
-
 <h4>Add Product</h4>
 <small><b>Here you can add product to your store</b></small>
+
 <div class="row">
     <div class="col-6 bg-white shadow-sm p-3 mb-5 bg-body rounded me-5">
         <b>PRODUCT DETAILS</b> <br />
         <small>Add product details here</small>
         <br /><br />
         <form class="row g-3" method="post" enctype="multipart/form-data" >
-            <div class="col-12>
+            <div class="col-12">
             <label for="inputProduct" class="form-label">Product Name</label>
             <input type="text" class="form-control" id="inputProduct" placeholder="Enter Product Name" name="name"/>
             </div>
@@ -59,7 +60,7 @@ height: 225px;
             
             <div class="col-md-4">
             <label for="inputPrice" class="form-label">Selling Price</label>
-            <input class="form-control" type="number" name="price" placeholder="Enter Selling Price"/>
+            <input class="form-control" type="text" name="price" placeholder="Enter Selling Price"/>
             </div>
 
             <div class="col-sm-10">
@@ -88,7 +89,7 @@ height: 225px;
     </form>
 </div>
 <?php
-$query_image = mysqli_query($con,"SELECT * FROM product");
+/*$query_image = mysqli_query($con,"SELECT * FROM product");
 while($result_image = mysqli_fetch_array($query_image))
 {
 echo '<div id="imagelist">';
@@ -96,7 +97,7 @@ echo '<p><img class="imgProd" src="'.$result_image['Product_Image'].'"></p>';
 echo '<p>'.$result_image['Product_Name'].'</p>';
 echo '</div>';
 
-}
+}*/
 
 if(isset($_POST['createProduct'])){
     $name = $_POST['name'];
@@ -118,6 +119,7 @@ if(isset($_POST['createProduct'])){
             $query_addProduct = mysqli_query($con,"INSERT INTO product (Product_Name, Product_Desc, Product_Image, Product_Qty, Product_Type, Product_RecordType, Product_ExpiracyDate, Product_ManufacturerName, Product_SellingPrice, FK_Product_Seller_ID)
             VALUES ('$name','$description','$location','$qty','$prodType','$recordType','$expiredDate','$manufacturer','$price','$sellerID')");
 
+           
     
 }
 ?>
