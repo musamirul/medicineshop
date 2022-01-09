@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 02, 2022 at 04:42 PM
+-- Generation Time: Jan 09, 2022 at 04:43 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -117,6 +117,7 @@ CREATE TABLE IF NOT EXISTS `cart_item` (
   `Cart_Item_ID` int(45) NOT NULL AUTO_INCREMENT,
   `Cart_Item_Qty` int(45) NOT NULL,
   `Cart_Item_Amount` double NOT NULL,
+  `FK_Cart_ID` int(45) NOT NULL,
   `FK_Item_Product_ID` int(45) NOT NULL,
   `FK_Item_Seller_ID` int(45) NOT NULL,
   PRIMARY KEY (`Cart_Item_ID`)
@@ -165,7 +166,7 @@ CREATE TABLE IF NOT EXISTS `declaration` (
   `Declaration_TimeStamp` varchar(45) NOT NULL,
   `FK_Declaration_Cust_ID` int(45) NOT NULL,
   PRIMARY KEY (`Declaration_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `declaration`
@@ -174,7 +175,9 @@ CREATE TABLE IF NOT EXISTS `declaration` (
 INSERT INTO `declaration` (`Declaration_ID`, `Declaration_Name`, `Declaration_FileName`, `Declaration_File`, `Declaration_TimeStamp`, `FK_Declaration_Cust_ID`) VALUES
 (14, '123123123', 'dynamic_rpt_061221 (3).xls', '20220103003924_dynamic_rpt_061221 (3).xls', '2022-01-03 12:39:24am', 1),
 (13, 'test123', 'instructions_for_use.pdf', '20220103003719_instructions_for_use.pdf', '2022-01-03 12:37:19am', 1),
-(12, 'test1', 'instructions_for_use.pdf', '20220103003436_instructions_for_use.pdf', '2022-01-03 12:34:36am', 1);
+(12, 'test1', 'instructions_for_use.pdf', '20220103003436_instructions_for_use.pdf', '2022-01-03 12:34:36am', 1),
+(15, '123', 'instructions_for_use.pdf', '20220103004736_instructions_for_use.pdf', '2022-01-03 12:47:36am', 2),
+(16, 'test1', 'instructions_for_use (1).pdf', '20220103214123_instructions_for_use (1).pdf', '2022-01-03 09:41:23pm', 1);
 
 -- --------------------------------------------------------
 
@@ -292,16 +295,15 @@ CREATE TABLE IF NOT EXISTS `product` (
   `Product_SellingPrice` double NOT NULL,
   `FK_Product_Seller_ID` int(45) NOT NULL,
   PRIMARY KEY (`Product_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `product`
 --
 
 INSERT INTO `product` (`Product_ID`, `Product_Name`, `Product_Desc`, `Product_Image`, `Product_Qty`, `Product_Type`, `Product_RecordType`, `Product_ExpiracyDate`, `Product_ManufacturerName`, `Product_SellingPrice`, `FK_Product_Seller_ID`) VALUES
-(5, 'prod3', 'desc3', 'img/11.PNG', 15, 'control', 'yes', '2022-01-01', 'testete', 150, 1),
-(3, 'naman', 'desc', 'img/123213.PNG', 12, 'noncontrol', 'yes', '2022-01-21', 'pharma', 123, 1),
-(4, 'prod name', 'this is desc', 'img/1111.png', 15, 'control', 'yes', '2022-01-03', 'this is manufacturer name ', 8222, 1);
+(26, 'product3', 'product3', 'img/hits2 hang.PNG', 56, 'control', 'yes', '2022-01-11', 'product3', 45.5, 1),
+(25, 'product2 edit 2', 'product2 edit desc 2', 'img/123.PNG', 200, 'control', 'yes', '2022-01-11', 'product3 edit man', 2000, 1);
 
 -- --------------------------------------------------------
 
@@ -312,12 +314,20 @@ INSERT INTO `product` (`Product_ID`, `Product_Name`, `Product_Desc`, `Product_Im
 DROP TABLE IF EXISTS `record`;
 CREATE TABLE IF NOT EXISTS `record` (
   `Record_ID` int(45) NOT NULL AUTO_INCREMENT,
-  `Record_Timestamp` timestamp(6) NOT NULL,
-  `Record_File` varchar(45) NOT NULL,
+  `Record_Timestamp` varchar(45) NOT NULL,
+  `Record_File` varchar(254) NOT NULL,
+  `Record_FileName` varchar(45) NOT NULL,
   `FK_Record_Product_ID` int(45) NOT NULL,
   `FK_Record_Cust_ID` int(45) NOT NULL,
   PRIMARY KEY (`Record_ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `record`
+--
+
+INSERT INTO `record` (`Record_ID`, `Record_Timestamp`, `Record_File`, `Record_FileName`, `FK_Record_Product_ID`, `FK_Record_Cust_ID`) VALUES
+(1, '2022-01-03 09:43:04pm', '20220103214304_instructions_for_use (1).pdf', 'instructions_for_use (1).pdf', 0, 1);
 
 -- --------------------------------------------------------
 
