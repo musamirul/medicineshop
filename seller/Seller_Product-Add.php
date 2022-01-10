@@ -85,6 +85,13 @@ height: 225px;
             <input type="file" name="image"><br /><br />
             <small style="color: red;" class="">NOTES:</small>
             <small><i>Image can be uploaded of any dimension but we recommend you to upload image with dimension of 1024x1024 & its size must be less than 15mb</i></small>
+
+            <div class="col-12 mt-4">
+                <label for="inputDescription" class="form-label"><b>Product Tags</b></label>
+                <textarea class="form-control" rows="5" cols="50" name="prodTags" placeholder="Enter Product Tags"></textarea>
+                <small style="color: red;" class="">NOTES:</small>
+                <small><i>Puts comma ',' after each tags</i></small>
+            </div>
         </div>
     </form>
 </div>
@@ -108,6 +115,7 @@ if(isset($_POST['createProduct'])){
     $expiredDate = $_POST['expiredDate'];
     $manufacturer = $_POST['manufacturer'];
     $price = $_POST['price'];
+    $tags = $_POST['prodTags'];
     $sellerID = $_SESSION['Seller_Id'];
 
     $file=$_FILES['image']['tmp_name'];
@@ -116,8 +124,8 @@ if(isset($_POST['createProduct'])){
 			
 			move_uploaded_file($_FILES["image"]["tmp_name"],"img/" . $_FILES["image"]["name"]);
             $location="img/" . $_FILES["image"]["name"];
-            $query_addProduct = mysqli_query($con,"INSERT INTO product (Product_Name, Product_Desc, Product_Image, Product_Qty, Product_Type, Product_RecordType, Product_ExpiracyDate, Product_ManufacturerName, Product_SellingPrice, FK_Product_Seller_ID)
-            VALUES ('$name','$description','$location','$qty','$prodType','$recordType','$expiredDate','$manufacturer','$price','$sellerID')");
+            $query_addProduct = mysqli_query($con,"INSERT INTO product (Product_Name, Product_Desc, Product_Image, Product_Qty, Product_Type, Product_RecordType, Product_ExpiracyDate, Product_ManufacturerName, Product_SellingPrice, Product_Tags, FK_Product_Seller_ID)
+            VALUES ('$name','$description','$location','$qty','$prodType','$recordType','$expiredDate','$manufacturer','$price','$tags','$sellerID')");
 
            
     
