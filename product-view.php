@@ -44,6 +44,14 @@ $product_result= mysqli_fetch_array($product_query);
 </div>
 
 <div class="container mt-3 bg-white shadow bg-body rounded">
+    <div class="row">
+        <div class="col-2 m-3">
+            <img src="" class="rounded-circle"/>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-3 bg-white shadow bg-body rounded">
     <p>Product Specification</p>
 </div>
 
