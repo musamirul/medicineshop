@@ -1,6 +1,6 @@
 </div>
 </main>
-<footer class="text-center text-white fixed-bottom bg-dark">
+<footer class="text-center text-white bg-dark mt-5">
 	<div class="container pt-4">
     	<section class="mb-4">
         	<a class="btn btn-outline-light rounded-circle m-1 me-3" href="#" role="button"><i class="fab fa-facebook-f"></i></a>
