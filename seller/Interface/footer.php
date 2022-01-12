@@ -24,13 +24,43 @@
 </footer>
 
     <script src="Interface/style/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="Interface/style/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="Interface/style/jQuery/jquery-3.6.0.min.js"></script>
     <script src="Interface/style/DataTables/js/jquery.dataTables.min.js"></script>
     <script src="Interface/style/DataTables/js/dataTables.bootstrap5.min.js"></script>
+    <script src="Interface/style/summernote/summernote-lite.js"></script>
     <script>
     $(document).ready(function() {
         $('#example').DataTable();
     } );
     </script>
+    <script>
+    $('#summernote').summernote({
+      placeholder: 'Enter Product Details',
+      tabsize: 2,
+      height: 120,
+      toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'underline', 'clear']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['table', ['table']],
+        ['view', ['fullscreen', 'codeview', 'help']]
+      ]
+    });
+    $('#summernote_spec').summernote({
+      placeholder: 'Enter Product Details',
+      tabsize: 2,
+      height: 120,
+      toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'underline', 'clear']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['table', ['table']],
+        ['view', ['fullscreen', 'codeview', 'help']]
+      ]
+    });
+  </script>
   </body>
 </html>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 09, 2022 at 04:43 PM
+-- Generation Time: Jan 12, 2022 at 04:52 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -285,7 +285,8 @@ DROP TABLE IF EXISTS `product`;
 CREATE TABLE IF NOT EXISTS `product` (
   `Product_ID` int(45) NOT NULL AUTO_INCREMENT,
   `Product_Name` varchar(45) NOT NULL,
-  `Product_Desc` varchar(45) NOT NULL,
+  `Product_Desc` text NOT NULL,
+  `Product_Spec` text NOT NULL,
   `Product_Image` varchar(45) NOT NULL,
   `Product_Qty` int(45) NOT NULL,
   `Product_Type` varchar(45) NOT NULL,
@@ -293,17 +294,18 @@ CREATE TABLE IF NOT EXISTS `product` (
   `Product_ExpiracyDate` varchar(45) NOT NULL,
   `Product_ManufacturerName` varchar(45) NOT NULL,
   `Product_SellingPrice` double NOT NULL,
+  `Product_Tags` varchar(254) NOT NULL,
   `FK_Product_Seller_ID` int(45) NOT NULL,
   PRIMARY KEY (`Product_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`Product_ID`, `Product_Name`, `Product_Desc`, `Product_Image`, `Product_Qty`, `Product_Type`, `Product_RecordType`, `Product_ExpiracyDate`, `Product_ManufacturerName`, `Product_SellingPrice`, `FK_Product_Seller_ID`) VALUES
-(26, 'product3', 'product3', 'img/hits2 hang.PNG', 56, 'control', 'yes', '2022-01-11', 'product3', 45.5, 1),
-(25, 'product2 edit 2', 'product2 edit desc 2', 'img/123.PNG', 200, 'control', 'yes', '2022-01-11', 'product3 edit man', 2000, 1);
+INSERT INTO `product` (`Product_ID`, `Product_Name`, `Product_Desc`, `Product_Spec`, `Product_Image`, `Product_Qty`, `Product_Type`, `Product_RecordType`, `Product_ExpiracyDate`, `Product_ManufacturerName`, `Product_SellingPrice`, `Product_Tags`, `FK_Product_Seller_ID`) VALUES
+(50, 'product 2', '<p><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\"><span style=\"background-color: rgb(255, 255, 0);\">is simply dummy text of the printing </span>and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuri<b>es, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset shee</b>ts containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span><br></p>', '<ol><li><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">is simply dummy text of the printing and typesetting industry. </span></li><li><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,</span></li><li><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\"> when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></li><li><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\"> It has survived not only five centuries, but also the leap into electronic typesetting, </span></li><li><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software </span></li><li><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">like Aldus PageMaker including versions of Lorem Ipsum.</span><br></li></ol>', 'img/1111.png', 19, 'control', 'yes', '2022-01-14', 'product 2', 30, 'panadol', 1),
+(49, 'product 1', '<p><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span><br></p>', '<p><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span><br></p>', 'img/123.PNG', 12, 'control', 'yes', '2022-01-14', 'product 1', 19, 'panadol', 1);
 
 -- --------------------------------------------------------
 

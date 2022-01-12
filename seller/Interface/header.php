@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link href="Interface/style/css/style1.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="Interface/style/DataTables/css/jquery.dataTables.css">
+    <link href="Interface/style/summernote/summernote-lite.css" rel="stylesheet">
     <!--<link rel="stylesheet" href="Interface/style/DataTables/dataTables.bootstrap5.min.css">-->
   </head>
   <body>

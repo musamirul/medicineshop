@@ -28,7 +28,7 @@ $count_result = mysqli_fetch_object($count_query);
 <div class="container bg-white shadow bg-body rounded">
     <div class="row">
         <div class="col-5 mt-3 mb-4">
-            <center><img style="height: 24rem;" src="seller/<?php echo $product_result['Product_Image']; ?>"></center>
+            <center><img class="img-fluid" style="height: 25rem;" src="seller/<?php echo $product_result['Product_Image']; ?>"></center>
         </div>
         <div class="col-7 mt-3 mb-5">
             <div class="col">
@@ -90,6 +90,11 @@ $count_result = mysqli_fetch_object($count_query);
                 <span style="font-size: 18px;">Product Specification</span>
             </div>
         </div>
+        <div class="row ">
+            <div class="col ms-4 mb-3 pe-5" style="word-wrap: break-word;">
+                <?php echo $product_result['Product_Spec'] ?>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -102,8 +107,8 @@ $count_result = mysqli_fetch_object($count_query);
         </div>
     </div>
     <div class="row ">
-        <div class="col ms-4 mb-3">
-            <span style="font-size: 14px;"><?php echo $product_result['Product_Desc'] ?></span>
+        <div class="col ms-4 mb-3 pe-5" style="word-wrap: break-word;">
+            <?php echo $product_result['Product_Desc'] ?>
         </div>
     </div>
 </div>

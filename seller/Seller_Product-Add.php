@@ -31,9 +31,14 @@ height: 225px;
 
             <div class="col-12">
             <label for="inputDescription" class="form-label">Product Description</label>
-            <textarea class="form-control" rows="5" cols="50" name="description" placeholder="Enter Product Description"></textarea>
+            <textarea id="summernote" class="form-control" rows="5" cols="50" name="description" placeholder="Enter Product Description"></textarea>
             </div>
 
+            <div class="col-12">
+            <label for="inputSpecification" class="form-label">Product Specification</label>
+            <textarea id="summernote_spec" class="form-control" rows="5" cols="50" name="specification" placeholder="Enter Product Specification"></textarea>
+            </div>
+            
             
             <div class="col-md-6">
             <label for="inputQty" class="form-label">Stock Quantity</label>
@@ -108,7 +113,9 @@ echo '</div>';
 
 if(isset($_POST['createProduct'])){
     $name = $_POST['name'];
-    $description = $_POST['description'];
+    //remove all symbol from description
+    $description = str_replace("'", '', $_POST['description']) ;
+    $specification = str_replace("'", '', $_POST['specification']) ;
     $qty = $_POST['qty'];
     $prodType = $_POST['prodType'];
     $recordType = $_POST['RecordType'];
@@ -124,8 +131,8 @@ if(isset($_POST['createProduct'])){
 			
 			move_uploaded_file($_FILES["image"]["tmp_name"],"img/" . $_FILES["image"]["name"]);
             $location="img/" . $_FILES["image"]["name"];
-            $query_addProduct = mysqli_query($con,"INSERT INTO product (Product_Name, Product_Desc, Product_Image, Product_Qty, Product_Type, Product_RecordType, Product_ExpiracyDate, Product_ManufacturerName, Product_SellingPrice, Product_Tags, FK_Product_Seller_ID)
-            VALUES ('$name','$description','$location','$qty','$prodType','$recordType','$expiredDate','$manufacturer','$price','$tags','$sellerID')");
+            $query_addProduct = mysqli_query($con,"INSERT INTO product (Product_Name, Product_Desc, Product_Spec, Product_Image, Product_Qty, Product_Type, Product_RecordType, Product_ExpiracyDate, Product_ManufacturerName, Product_SellingPrice, Product_Tags, FK_Product_Seller_ID)
+            VALUES ('$name','$description','$specification','$location','$qty','$prodType','$recordType','$expiredDate','$manufacturer','$price','$tags','$sellerID')");
 
            
     
