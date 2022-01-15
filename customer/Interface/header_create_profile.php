@@ -11,7 +11,7 @@
     <link href="Interface/style/summernote/summernote-lite.css" rel="stylesheet">
     <!--<link rel="stylesheet" href="Interface/style/DataTables/dataTables.bootstrap5.min.css">-->
   </head>
-  <body style="background-color: azure;">
+  <body>
 
 <header>
 		<nav id="main-navbar" class="navbar navbar-expand-lg shadow-sm navbar-light bg-white fixed-top">
@@ -59,4 +59,4 @@
       </nav>
     </header>
     <main style="margin-top: 58px">
-  <div class="container-fluid pt-4">
+  <div class="container-fluid ps-5 pe-5 pt-4">

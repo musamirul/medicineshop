@@ -1,4 +1,4 @@
-<?php include("Interface/header.php");?>
+<?php include("Interface/header_create_profile.php");?>
 
 <?php
 session_start();
