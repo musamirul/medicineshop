@@ -35,9 +35,15 @@
                     <a href="" class="text-reset text-decoration-none">Change Password</a>
                   </li>
                 </ul>
-                <a class="list-group-item list-group-item-action py-2"  href="#collapseAccount">
+                <a class="list-group-item list-group-item-action py-2"  href="">
                     <i class="bi bi-journal-check fa-fw me-3"></i><span>My Purchase</span>
-                  </a>
+                </a>
+                <a class="list-group-item list-group-item-action py-2"  href="">
+                    <i class="bi bi-journal-check fa-fw me-3"></i><span>Medical History</span>
+                </a>
+                <a class="list-group-item list-group-item-action py-2"  href="">
+                    <i class="bi bi-journal-check fa-fw me-3"></i><span>Record Upload</span>
+                </a>
             </div>
             
         </div>

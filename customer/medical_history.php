@@ -1,3 +1,4 @@
+<!-- need to create creation date on database | create table on medical history page-->
 <?php
  session_start();
  include("../includes/config.php");

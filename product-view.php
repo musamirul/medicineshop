@@ -98,7 +98,7 @@ $count_result = mysqli_fetch_object($count_query);
     </div>
 </div>
 
-<div class="container mt-3 bg-white shadow bg-body rounded">
+<div class="container mt-3 bg-white shadow bg-body rounded mb-5">
     <div class="row">
         <div class="col m-3">
             <div class="col p-2 bg-light">
