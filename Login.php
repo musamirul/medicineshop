@@ -17,9 +17,15 @@
     session_start();
     include("includes/config.php");
     if(isset($_SESSION['message'])){
-        echo $_SESSION['message'];
+        $_SESSION['message'];
+        echo "<div class='alert alert-success mt-3 ms-5' role='alert' style='position : absolute; width:500px'>
+        <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"
+        . $_SESSION['message'] .
+        "</div>";
+
         unset($_SESSION['message']);
-    }
+    }   
+    
 ?>
 </header>
       <main>
@@ -29,7 +35,7 @@
                     <img class="img-fluid" width="100%" height="100%" src="Interface/style/image/phn.png">
                 </div>
                 <div class="col-6">
-                    
+                
                     <div class="row mt-4">
                         <div class="d-flex justify-content-center">
                             <div class="p-2 bd-highlight"><img src="Interface/style/image/logo.png" style="height: 30px;"></div>

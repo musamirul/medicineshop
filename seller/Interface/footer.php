@@ -29,6 +29,13 @@
     <script src="Interface/style/DataTables/js/dataTables.bootstrap5.min.js"></script>
     <script src="Interface/style/summernote/summernote-lite.js"></script>
     <script>
+      window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 2000);
+      </script>
+    <script>
     $(document).ready(function() {
         $('#example').DataTable();
     } );
