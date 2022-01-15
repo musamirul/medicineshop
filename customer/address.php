@@ -1,3 +1,4 @@
+<?php include("Interface/header.php")?>
 <?php
 session_start();
 include("../includes/config.php");
@@ -7,6 +8,41 @@ if($_SESSION['id']==""){
 $loginId = $_SESSION['Cust_Id'];
 
 ?>
+<div class="row">
+        <div class="col-2 background-color:black;"></div>
+        <!-- Left Navigation -->
+        <div class="col-2">
+            <div class="list-group list-group-flush mx-3 mt-4">
+                <!-- Collapse 1 -->
+                <a class="list-group-item list-group-item-action py-2" aria-current="true" data-bs-toggle="collapse" href="#collapseAccount" aria-expanded="true" aria-controls="collapseAccount">
+                  <i class="bi bi-person fa-fw me-3"></i><span>My Account</span>
+                </a>
+                <!-- Collapsed content -->
+                <ul id="collapseAccount" class="collapse list-group list-group-flush">
+                  <li class="list-group-item py-1">
+                    <a href="profile.php" class="text-reset text-decoration-none">Profile</a>
+                  </li>
+                  <li class="list-group-item py-1">
+                    <a href="" class="text-reset text-decoration-none">Banks</a>
+                  </li>
+                  <li class="list-group-item py-1">
+                    <a href="address.php" class="text-reset text-decoration-none">Addresses</a>
+                  </li>
+                  <li class="list-group-item py-1 ">
+                    <a href="" class="text-reset text-decoration-none">Change Password</a>
+                  </li>
+                </ul>
+                <a class="list-group-item list-group-item-action py-2"  href="#collapseAccount">
+                    <i class="bi bi-journal-check fa-fw me-3"></i><span>My Purchase</span>
+                  </a>
+            </div>
+            
+        </div>
+        <!-- Profile Account -->
+        <div class="col-6 bg-white"></div>
+        <div class="col-2"></div>
+</div>
+
 <h1>My Addresses</h1>
 <h2>Shipping Address</h2>
 <?php
@@ -140,3 +176,4 @@ if($result_bill>0){
 //end else if
 }
 ?>
+<?php include("Interface/footer.php")?>
