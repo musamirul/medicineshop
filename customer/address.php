@@ -12,7 +12,7 @@ $loginId = $_SESSION['Cust_Id'];
         <div class="col-2 background-color:black;"></div>
         <!-- Left Navigation -->
         <div class="col-2">
-            <div class="list-group list-group-flush mx-3 mt-4">
+        <div class="list-group list-group-flush mx-3 mt-4">
                 <!-- Collapse 1 -->
                 <a class="list-group-item list-group-item-action py-2" aria-current="true" data-bs-toggle="collapse" href="#collapseAccount" aria-expanded="true" aria-controls="collapseAccount">
                   <i class="bi bi-person fa-fw me-3"></i><span>My Account</span>
@@ -32,9 +32,15 @@ $loginId = $_SESSION['Cust_Id'];
                     <a href="" class="text-reset text-decoration-none">Change Password</a>
                   </li>
                 </ul>
-                <a class="list-group-item list-group-item-action py-2"  href="#collapseAccount">
+                <a class="list-group-item list-group-item-action py-2"  href="">
                     <i class="bi bi-journal-check fa-fw me-3"></i><span>My Purchase</span>
-                  </a>
+                </a>
+                <a class="list-group-item list-group-item-action py-2"  href="medical_history.php">
+                    <i class="bi bi-file-earmark-medical fa-fw me-3"></i><span>Medical History</span>
+                </a>
+                <a class="list-group-item list-group-item-action py-2"  href="">
+                    <i class="bi bi-folder fa-fw me-3"></i><span>Record Upload</span>
+                </a>
             </div>
             
         </div>

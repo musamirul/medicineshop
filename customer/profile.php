@@ -38,11 +38,11 @@
                 <a class="list-group-item list-group-item-action py-2"  href="">
                     <i class="bi bi-journal-check fa-fw me-3"></i><span>My Purchase</span>
                 </a>
-                <a class="list-group-item list-group-item-action py-2"  href="">
-                    <i class="bi bi-journal-check fa-fw me-3"></i><span>Medical History</span>
+                <a class="list-group-item list-group-item-action py-2"  href="medical_history.php">
+                    <i class="bi bi-file-earmark-medical fa-fw me-3"></i><span>Medical History</span>
                 </a>
                 <a class="list-group-item list-group-item-action py-2"  href="">
-                    <i class="bi bi-journal-check fa-fw me-3"></i><span>Record Upload</span>
+                    <i class="bi bi-folder fa-fw me-3"></i><span>Record Upload</span>
                 </a>
             </div>
             
