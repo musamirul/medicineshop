@@ -40,8 +40,11 @@
                 <a class="list-group-item list-group-item-action py-2"  href="medical_history.php">
                     <i class="bi bi-file-earmark-medical fa-fw me-3"></i><span>Medical History</span>
                 </a>
-                <a class="list-group-item list-group-item-action py-2"  href="">
+                <a class="list-group-item list-group-item-action py-2"  href="cust_record-upload.php">
                     <i class="bi bi-folder fa-fw me-3"></i><span>Record Upload</span>
+                </a>
+                <a class="list-group-item list-group-item-action py-2"  href="cust_declaration-upload.php">
+                    <i class="bi bi-folder fa-fw me-3"></i><span>Declaration Upload</span>
                 </a>
             </div>
             
