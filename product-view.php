@@ -1,6 +1,13 @@
 <?php
+session_start();
+
 include("includes/config.php");
 include("Interface/header.php");
+$_SESSION['id'];
+$_SESSION['username'];
+$_SESSION['role'];
+$_SESSION['Cust_Id'];
+
 //get id from link
 $id = intval($_GET['prodId']);
 ?>
@@ -26,6 +33,7 @@ $count_result = mysqli_fetch_object($count_query);
 
 ?>
 <div class="container bg-white shadow bg-body rounded">
+    <form method="post">
     <div class="row">
         <div class="col-5 mt-3 mb-4">
             <center><img class="img-fluid" style="height: 25rem;" src="seller/<?php echo $product_result['Product_Image']; ?>"></center>
@@ -44,17 +52,18 @@ $count_result = mysqli_fetch_object($count_query);
                 <div class="row">
                     <label class="col-sm-2 col-form-label">Quantity</label>
                     <div class="col-sm-2">
-                        <input type="number" class="form-control" placeholder="Number">
+                        <input type="number" name="quantity" class="form-control" placeholder="Number">
                     </div>
                     <label class="col-sm-3 col-form-label"><?php echo $product_result['Product_Qty'] ?> Pieces Available</label>
                 </div>
             </div>
             <div class="col mt-3">
-                <button type="submit" class="btn btn-secondary">Add To Cart</button>
+                <button type="submit" name="AddToCart" class="btn btn-secondary">Add To Cart</button>
                 <button type="submit" class="btn btn-dark">Buy Now</button>
             </div>
         </div>
     </div>
+    </form>
 </div>
 
 <div class="container mt-3 bg-white shadow bg-body rounded">
@@ -113,8 +122,66 @@ $count_result = mysqli_fetch_object($count_query);
     </div>
 </div>
 
-
-
 <?php
-include("Interface/footer.php")
+    if(isset($_POST['AddToCart'])){
+        $quantity = $_POST['quantity'];
+        $product_ID = $product_result['Product_ID'];
+        $product_Price = $product_result['Product_SellingPrice'];
+        $seller_ID = $product_result['FK_Product_Seller_ID'];
+        $cust_ID = $_SESSION['Cust_Id'];
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+        $timeStamp = date("Y-m-d h:i:sa");
+
+
+
+        $cart_check_query = mysqli_query($con,"SELECT * FROM cart WHERE FK_Cart_Cust_ID = '$cust_ID'");
+        $cart_check_result = mysqli_fetch_array($cart_check_query);
+        //New profile Account, never have cart
+        if($cart_check_result['FK_Cart_Cust_ID']==""){
+            //create cart
+           
+            $cart_create_query = mysqli_query($con,"INSERT INTO cart(Cart_TimeStamp, Cart_Status, FK_Cart_Cust_ID)
+            VALUES ('$timeStamp','pending','$cust_ID')");
+
+            //check newly created cart and get cart ID
+            $cart_check_query = mysqli_query($con,"SELECT * FROM cart WHERE FK_Cart_Cust_ID = '$cust_ID' AND Cart_Status = 'pending'");
+            $cart_check_result = mysqli_fetch_array($cart_check_query);
+            $cart_ID = $cart_check_result['Cart_ID'];
+
+            //add item into cart_item
+            $cartItem_query = mysqli_query($con,"INSERT INTO cart_item (Cart_Item_Qty, Cart_Item_Amount, FK_Cart_ID, FK_Item_Product_ID, FK_Item_Seller_ID) 
+            VALUES ('$quantity','$product_Price','$cart_ID','$product_ID','$seller_ID')");
+
+
+        //Pending Cart
+        }elseif($cart_check_result['FK_Cart_Cust_ID']=="$cust_ID" && $cart_check_result['Cart_Status']=="pending"){
+            //check pending cart and get cart ID
+            $cart_check_query = mysqli_query($con,"SELECT * FROM cart WHERE FK_Cart_Cust_ID = '$cust_ID' AND Cart_Status = 'pending'");
+            $cart_check_result = mysqli_fetch_array($cart_check_query);
+            $cart_ID = $cart_check_result['Cart_ID'];
+
+            //add item into cart_item
+            $cartItem_query = mysqli_query($con,"INSERT INTO cart_item (Cart_Item_Qty, Cart_Item_Amount, FK_Cart_ID, FK_Item_Product_ID, FK_Item_Seller_ID) 
+            VALUES ('$quantity','$product_Price','$cart_ID','$product_ID','$seller_ID')");
+           
+        
+        //Not pending Cart - create new cart
+        }elseif($cart_check_result['FK_Cart_Cust_ID']=='$cust_ID' && $cart_check_result['Cart_Status']!='pending'){
+            
+            //create cart
+            $cart_create_query = mysqli_query($con,"INSERT INTO cart(Cart_TimeStamp, Cart_Status, FK_Cart_Cust_ID)
+            VALUES ('$timeStamp','pending','$cust_ID')");
+
+            //check newly created cart and get cart ID
+            $cart_check_query = mysqli_query($con,"SELECT * FROM cart WHERE FK_Cart_Cust_ID = '$cust_ID' AND Cart_Status = 'pending'");
+            $cart_check_result = mysqli_fetch_array($cart_check_query);
+            $cart_ID = $cart_check_result['Cart_ID'];
+
+            //add item into cart_item
+            $cartItem_query = mysqli_query($con,"INSERT INTO cart_item (Cart_Item_Qty, Cart_Item_Amount, FK_Cart_ID, FK_Item_Product_ID, FK_Item_Seller_ID) 
+            VALUES ('$quantity','$product_Price','$cart_ID','$product_ID','$seller_ID')");
+        }
+    }
 ?>
+
+<?php include("Interface/footer.php")?>
