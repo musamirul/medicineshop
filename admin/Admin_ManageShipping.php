@@ -12,8 +12,9 @@
 ?>
 <h2>Manage Shipping Delivery Method</h2>
 <form method="post">
-    <input type="text" name="method" placeholder="Enter method"/><br/>
-    <input type="number" name="price" placeholder="Enter price"/><br/>
+    method <input type="text" name="method" placeholder="Enter method"/><br/>
+    price <input type="text" name="price" placeholder="Enter price"/><br/>
+    Number of days <input type="number" name="days" placeholder="Enter No of days"/><br/>
     <button type="submit" name="createShipping">New Shipping Method</button>
 </form>
 
@@ -21,13 +22,14 @@
     if(isset($_POST['createShipping'])){
         $method = $_POST['method'];
         $price = $_POST['price'];
+        $days = $_POST['days'];
 
         
         //insert into login table
-        $query_createAdmin = mysqli_query($con,"INSERT INTO login(username, password, role) VALUES ('$username','$password','administrator')");
+        $query_createAdmin = mysqli_query($con,"INSERT INTO shipping(Shipping_Method, Shipping_Price, shipping_day) VALUES ('$method','$price','$days')");
 
         //clear post request
-        $_SESSION['message']="successfully created account $username";
-        header('Location:Admin_Registration.php?msg=success');
+        $_SESSION['message']="successfully created $method shipping";
+        header('Location:Admin_ManageShipping.php?msg=success');
     }
 ?>

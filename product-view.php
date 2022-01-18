@@ -149,8 +149,8 @@ $count_result = mysqli_fetch_object($count_query);
             $cart_ID = $cart_check_result['Cart_ID'];
 
             //add item into cart_item
-            $cartItem_query = mysqli_query($con,"INSERT INTO cart_item (Cart_Item_Qty, Cart_Item_Amount, FK_Cart_ID, FK_Item_Product_ID, FK_Item_Seller_ID) 
-            VALUES ('$quantity','$product_Price','$cart_ID','$product_ID','$seller_ID')");
+            $cartItem_query = mysqli_query($con,"INSERT INTO cart_item (Cart_Item_Qty, Cart_Item_Amount, FK_Cart_ID, FK_Item_Product_ID, FK_Item_Seller_ID, FK_Item_Shipping_ID) 
+            VALUES ('$quantity','$product_Price','$cart_ID','$product_ID','$seller_ID','1')");
 
 
         //Pending Cart
@@ -161,8 +161,8 @@ $count_result = mysqli_fetch_object($count_query);
             $cart_ID = $cart_check_result['Cart_ID'];
 
             //add item into cart_item
-            $cartItem_query = mysqli_query($con,"INSERT INTO cart_item (Cart_Item_Qty, Cart_Item_Amount, FK_Cart_ID, FK_Item_Product_ID, FK_Item_Seller_ID) 
-            VALUES ('$quantity','$product_Price','$cart_ID','$product_ID','$seller_ID')");
+            $cartItem_query = mysqli_query($con,"INSERT INTO cart_item (Cart_Item_Qty, Cart_Item_Amount, FK_Cart_ID, FK_Item_Product_ID, FK_Item_Seller_ID, FK_Item_Shipping_ID) 
+            VALUES ('$quantity','$product_Price','$cart_ID','$product_ID','$seller_ID','1')");
            
         
         //Not pending Cart - create new cart
@@ -178,8 +178,8 @@ $count_result = mysqli_fetch_object($count_query);
             $cart_ID = $cart_check_result['Cart_ID'];
 
             //add item into cart_item
-            $cartItem_query = mysqli_query($con,"INSERT INTO cart_item (Cart_Item_Qty, Cart_Item_Amount, FK_Cart_ID, FK_Item_Product_ID, FK_Item_Seller_ID) 
-            VALUES ('$quantity','$product_Price','$cart_ID','$product_ID','$seller_ID')");
+            $cartItem_query = mysqli_query($con,"INSERT INTO cart_item (Cart_Item_Qty, Cart_Item_Amount, FK_Cart_ID, FK_Item_Product_ID, FK_Item_Seller_ID, FK_Item_Shipping_ID) 
+            VALUES ('$quantity','$product_Price','$cart_ID','$product_ID','$seller_ID','1')");
         }
     }
 ?>
