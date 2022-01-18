@@ -98,17 +98,30 @@
 
 <div class="row mb-5"></div>
 <div class="row mb-5"></div>
+<!--
+    1)check cart status pending -> get cart_ID
+    2)cart_item -> FK_cart_item_cart_id;
 
+-->
+<?php
+    $total_quantity = 0;
+    $total_amount = 0;
+    $query_total = mysqli_query($con,"SELECT * FROM cart_item WHERE FK_Cart_ID = '$Cart_ID'");
+    while($result_total = mysqli_fetch_array($query_total)){
+        $total_quantity = $total_quantity+$result_total['Cart_Item_Qty'];
+        $total_amount = $total_amount+($result_total['Cart_Item_Qty']*$result_total['Cart_Item_Amount']);
+    }
+?>
 <div class="text-center fixed-bottom">
    <div class="container">
        <div style="height: 90px; background-color: white;" class="col-12 shadow pt-4 ps-3 pe-3">
             <div class="row">
-                <div class="col-6"></div>
-                <div class="col-1">total( item):</div>
-                <div class="col-2">RM</div>
-                <div class="col-3">
+                <div class="col-7"></div>
+                <div style="font-size: 19px;" class="col-2 text-end mt-2">total (<?php echo $total_quantity; ?> item):</div>
+                <div style="font-size: 30px;" class="col-1 text-danger">RM<?php echo $total_amount; ?></div>
+                <div class="col-2">
                     <div class="d-grid gap-1">
-                        <button class="btn btn-primary" name="checkout" type="submit">Checkout</button>
+                        </a><button class="btn btn-primary" name="checkout" type="submit"><a class="text-reset text-decoration-none" href="cust_checkout.php">Checkout</a></button>
                     </div>
                 </div>
             </div>
