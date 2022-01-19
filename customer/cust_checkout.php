@@ -183,7 +183,11 @@ $temp_CartID;
                 <div class="col-9"></div>
                 <div class="col-3">
                     <div class="d-grid gap-2 col-12 mx-auto">
-                        <button class="btn btn-primary" type="button">Place Order</button>
+                        <form method="post" action="online_banking.php">
+                            <input type="hidden" name="Totalpayment" value="<?php echo $TotalShipping_count+$TotalPrice_count; ?>">
+                            <button class="btn btn-primary" type="submit">Place Order</button>
+                        </form>
+                        <!--Insert data to order table ('Order_Status - pending payment',) seperate order by seller_ID-->
                     </div>
                 </div>
             </div>

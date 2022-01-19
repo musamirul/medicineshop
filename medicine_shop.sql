@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 18, 2022 at 05:41 PM
+-- Generation Time: Jan 19, 2022 at 05:46 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -283,16 +283,18 @@ INSERT INTO `medical_history` (`Medical_ID`, `Blood_Group`, `Weight`, `Height`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order`
+-- Table structure for table `orders`
 --
 
-DROP TABLE IF EXISTS `order`;
-CREATE TABLE IF NOT EXISTS `order` (
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE IF NOT EXISTS `orders` (
   `Order_ID` int(45) NOT NULL AUTO_INCREMENT,
   `Order_Status` varchar(45) NOT NULL,
+  `Order_Amount` double NOT NULL,
   `FK_Order_ShipAdd_ID` int(45) NOT NULL,
   `FK_Order_BillAdd_ID` int(45) NOT NULL,
   `FK_Order_Cust_ID` int(45) NOT NULL,
+  `FK_Order_Seller_ID` int(45) NOT NULL,
   `FK_Order_Cart_ID` int(45) NOT NULL,
   PRIMARY KEY (`Order_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
