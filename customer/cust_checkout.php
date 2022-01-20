@@ -69,6 +69,7 @@ $temp_CartID;
         <?php
             $TotalShipping = array();
             $TotalPrice = array();
+            $TotalShippingAndPrice = array();
             $count = 0;
             while($count < $tempSize) {
 
@@ -141,6 +142,7 @@ $temp_CartID;
                     //push total amount and quantity to array()
                     $TotalPrice[] = $total_amount;
                     $TotalShipping[] = $result_shipping_method['Shipping_Price'];
+                    $TotalShippingAndPrice[] = $total_amount + $result_shipping_method['Shipping_Price'];
                 ?>
             </div>
         <?php
@@ -183,11 +185,11 @@ $temp_CartID;
                 <div class="col-9"></div>
                 <div class="col-3">
                     <div class="d-grid gap-2 col-12 mx-auto">
-                        <form method="post" action="online_banking.php">
-                            <input type="hidden" name="Totalpayment" value="<?php echo $TotalShipping_count+$TotalPrice_count; ?>">
-                            <button class="btn btn-primary" type="submit">Place Order</button>
+                        <form method="post">
+                            <input type="hidden" name="Order_Amount" value="<?php echo htmlspecialchars(serialize($TotalShippingAndPrice)); ?>">
+                            <input type="hidden" name="FK_Order_Seller_ID" value="<?php echo htmlspecialchars(serialize($FK_Seller_ID)); ?>">
+                            <button class="btn btn-primary" name="Order_button" type="submit">Place Order</button>
                         </form>
-                        <!--Insert data to order table ('Order_Status - pending payment',) seperate order by seller_ID-->
                     </div>
                 </div>
             </div>
@@ -197,4 +199,40 @@ $temp_CartID;
     <div class="col-2"></div>
 </div>
 
+<?php
+    if(isset($_POST['Order_button'])){
+        $ArrayTotalShippingAndPrice = unserialize($_POST['Order_Amount']);
+        $ArrayFK_Seller_ID = unserialize($_POST['FK_Order_Seller_ID']);
+        $Order_Cust_ID = $_SESSION['Cust_Id'];
+
+        //Find Cust ShipAddress
+        $query_shipadd = mysqli_query($con,"SELECT ShipAdd_ID FROM shipping_address WHERE FK_ShipAdd_Cust_ID = '$Order_Cust_ID'");
+        $result_shipadd = mysqli_fetch_array($query_shipadd);
+        $ShipAdd_ID =  $result_shipadd['ShipAdd_ID'];
+
+        //FInd Cust BillAddress
+        $query_billadd = mysqli_query($con,"SELECT BillAdd_ID FROM billing_address WHERE FK_BillAdd_Cust_ID = '$Order_Cust_ID'");
+        $result_billadd = mysqli_fetch_array($query_billadd);
+        $BillAdd_ID =  $result_billadd['BillAdd_ID'];
+
+        //Create Order Number
+        $query_OrderNum = mysqli_query($con,"SELECT Order_No FROM orders ORDER BY Order_ID LIMIT 1");
+        $result_OrderNum = mysqli_fetch_array($query_OrderNum);
+        $Order_Number = $result_OrderNum['Order_No']+1;
+
+        $z = 0;
+        while($z<count($ArrayFK_Seller_ID)){
+            $ArrayFK_Seller_ID[$z];
+            $ArrayTotalShippingAndPrice[$z];
+
+            $query_Order_Add = mysqli_query($con,"INSERT INTO orders(Order_No, Order_Status, Order_Amount, FK_Order_ShipAdd_ID, FK_Order_BillAdd_ID, FK_Order_Cust_ID, FK_Order_Seller_ID, FK_Order_Cart_ID) 
+            VALUES ('$Order_Number','payment_pending','$ArrayTotalShippingAndPrice[$z]','$ShipAdd_ID','$BillAdd_ID','$Order_Cust_ID','$ArrayFK_Seller_ID[$z]','$Cart_ID')");
+            $z++;
+        }
+        
+        
+
+
+    }
+?>
 <?php include("Interface/footer.php")?>

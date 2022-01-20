@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 19, 2022 at 05:46 PM
+-- Generation Time: Jan 20, 2022 at 05:42 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -289,6 +289,7 @@ INSERT INTO `medical_history` (`Medical_ID`, `Blood_Group`, `Weight`, `Height`, 
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE IF NOT EXISTS `orders` (
   `Order_ID` int(45) NOT NULL AUTO_INCREMENT,
+  `Order_No` int(254) NOT NULL,
   `Order_Status` varchar(45) NOT NULL,
   `Order_Amount` double NOT NULL,
   `FK_Order_ShipAdd_ID` int(45) NOT NULL,
@@ -296,8 +297,17 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `FK_Order_Cust_ID` int(45) NOT NULL,
   `FK_Order_Seller_ID` int(45) NOT NULL,
   `FK_Order_Cart_ID` int(45) NOT NULL,
+  `FK_Order_Ship_ID` int(45) NOT NULL,
   PRIMARY KEY (`Order_ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`Order_ID`, `Order_No`, `Order_Status`, `Order_Amount`, `FK_Order_ShipAdd_ID`, `FK_Order_BillAdd_ID`, `FK_Order_Cust_ID`, `FK_Order_Seller_ID`, `FK_Order_Cart_ID`, `FK_Order_Ship_ID`) VALUES
+(2, 1, 'payment_pending', 219.5, 6, 3, 3, 1, 10, 1),
+(3, 1, 'payment_pending', 754.5, 6, 3, 3, 3, 10, 1);
 
 -- --------------------------------------------------------
 
