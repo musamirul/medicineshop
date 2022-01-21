@@ -118,7 +118,63 @@ $temp_CartID;
             ?>
                 <div class="col-6"></div>
                 <div class="col-2 text-end"><?php echo $result_shipping_method['Shipping_Method']; ?></div>
-                <div class="col-2 text-end">Change</div>
+                <div class="col-2 text-end">
+                    <a href="#" class="text-decoration-none text-primary" data-bs-toggle="modal" data-bs-target="#changeShipping">Change</a>
+                </div>
+                <div class="modal fade" id="changeShipping" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="staticBackdropLabel">Select Shipping Option</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="col">
+                                    <div class="row">Medicine Shopping Supported Logistics</div>
+                                    <div style="font-size: 12px; color: grey;" class="row">Medicine Shopping Logistics allow you to track your order within the system web</div>
+                                    <div class="row">
+                                        <div class="form-check">
+                                            <?php 
+                                                $query_shipping = mysqli_query($con,"SELECT * FROM shipping");
+                                                while($result_shipping = mysqli_fetch_array($query_shipping)){
+                                                
+                                                $shipping_id_radio = $result_shipping['Shipping_ID'];
+                                                $shipping_method_radio = $result_shipping['Shipping_Method'];
+                                                $shipping_price_radio = $result_shipping['Shipping_Price'];
+                                                $shipping_day_radio = $result_shipping['shipping_day'];
+                                            ?>
+                                            <div class="row p-2">
+                                                <div style="background-color: rgb(245, 245, 245);" class="row  border-start border-danger border-5">
+                                                    <div style="height: 80px;" class="col-2">
+                                                        <input class="mt-4 p-5" type="radio" name="shipping_id" value="<?php echo $shipping_id_radio ?>">
+                                                    </div>
+                                                    <div style="height: 80px;" class="col-10 p-3">
+                                                        <div class="row">
+                                                            <div class="col-7"><b><?php echo $shipping_method_radio; ?></b></div>
+                                                            <div class="col-5"><span class="text-danger">RM<?php echo $shipping_price_radio; ?></span></div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col"><span style="font-size: 13px;color: grey;">Received by <?php echo $shipping_day_radio; ?></span></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <?php
+                                                }
+                                            ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Submit</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 <div class="col-2 text-end">RM <?php echo $result_shipping_method['Shipping_Price']; ?></div>
             </div>
             <div style="background-color: rgb(235, 251, 255);" class="row p-3 mb-3 shadow-sm">
