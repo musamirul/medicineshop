@@ -32,6 +32,7 @@ $Cart_ID = $query_cart_CartID_result['Cart_ID'];
 $tempSize = 0;
 $FK_Seller_ID = array();
 $temp_CartID = "";
+$TotalShippingID = array();
 //loop div based on FK_ITEM_Seller_ID on cart_item
 $query_cart_item = mysqli_query($con,"SELECT * FROM cart_item WHERE FK_Cart_ID = '$Cart_ID'");
 while($result_cart_item = mysqli_fetch_array($query_cart_item)){
@@ -39,6 +40,7 @@ while($result_cart_item = mysqli_fetch_array($query_cart_item)){
     if($result_cart_item['FK_Item_Seller_ID'] != $temp_CartID){
         $temp_CartID = $result_cart_item['FK_Item_Seller_ID'];
         $FK_Seller_ID[] = $result_cart_item['FK_Item_Seller_ID'];
+        $TotalShippingID[] = $result_cart_item['FK_Item_Shipping_ID'];
         $tempSize++;
     }
 }
@@ -85,7 +87,7 @@ $temp_CartID;
                 $query_cart_item_select = mysqli_query($con,"SELECT * FROM cart_item WHERE FK_Item_Seller_ID = '$sellerID'");
                 while($result_cart_item_select = mysqli_fetch_array($query_cart_item_select)){
                 $product_ID = $result_cart_item_select['FK_Item_Product_ID'];
-
+                
                 //Find product name
                 $query_product_name = mysqli_query($con,"SELECT * FROM product WHERE Product_ID = '$product_ID'");
                 $result_product_name = mysqli_fetch_array($query_product_name);
@@ -119,15 +121,16 @@ $temp_CartID;
                 <div class="col-6"></div>
                 <div class="col-2 text-end"><?php echo $result_shipping_method['Shipping_Method']; ?></div>
                 <div class="col-2 text-end">
-                    <a href="#" class="text-decoration-none text-primary" data-bs-toggle="modal" data-bs-target="#changeShipping">Change</a>
+                    <a href="#" class="text-decoration-none text-primary" data-bs-toggle="modal" data-bs-target="#changeShipping<?php echo $sellerID; ?>">Change</a>
                 </div>
-                <div class="modal fade" id="changeShipping" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal fade" id="changeShipping<?php echo $sellerID; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="staticBackdropLabel">Select Shipping Option</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
+                        <form method="post">
                         <div class="modal-body">
                             <div class="container">
                                 <div class="col">
@@ -147,7 +150,7 @@ $temp_CartID;
                                             <div class="row p-2">
                                                 <div style="background-color: rgb(245, 245, 245);" class="row  border-start border-danger border-5">
                                                     <div style="height: 80px;" class="col-2">
-                                                        <input class="mt-4 p-5" type="radio" name="shipping_id" value="<?php echo $shipping_id_radio ?>">
+                                                        <input class="mt-4 p-5" type="radio" name="change_shipping_id" value="<?php echo $shipping_id_radio ?>">
                                                     </div>
                                                     <div style="height: 80px;" class="col-10 p-3">
                                                         <div class="row">
@@ -155,7 +158,18 @@ $temp_CartID;
                                                             <div class="col-5"><span class="text-danger">RM<?php echo $shipping_price_radio; ?></span></div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col"><span style="font-size: 13px;color: grey;">Received by <?php echo $shipping_day_radio; ?></span></div>
+                                                            <div class="col">
+                                                                <input type="hidden" name="change_seller_id" value="<?php echo $sellerID; ?>">
+                                                                <span style="font-size: 13px;color: grey;">Received by 
+                                                                    <?php 
+                                                                        if($shipping_day_radio == '0'){
+                                                                            echo date("d M h:i a", strtotime('+24 hours'));
+                                                                        }else{
+                                                                            echo date("d",strtotime('+1 day')).' - '.date("d M",strtotime("+$shipping_day_radio day"));
+                                                                        }
+                                                                    ?>
+                                                                </span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -170,7 +184,8 @@ $temp_CartID;
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Submit</button>
+                          <button type="submit" name="changeDeliveryBtn" class="btn btn-primary">Submit</button>
+                        </form>
                         </div>
                       </div>
                     </div>
@@ -199,6 +214,7 @@ $temp_CartID;
                     $TotalPrice[] = $total_amount;
                     $TotalShipping[] = $result_shipping_method['Shipping_Price'];
                     $TotalShippingAndPrice[] = $total_amount + $result_shipping_method['Shipping_Price'];
+
                 ?>
             </div>
         <?php
@@ -254,13 +270,11 @@ $temp_CartID;
     </div>
     <div class="col-2"></div>
 </div>
-
 <?php
     if(isset($_POST['Order_button'])){
         $ArrayTotalShippingAndPrice = unserialize($_POST['Order_Amount']);
         $ArrayFK_Seller_ID = unserialize($_POST['FK_Order_Seller_ID']);
         $Order_Cust_ID = $_SESSION['Cust_Id'];
-
         //Find Cust ShipAddress
         $query_shipadd = mysqli_query($con,"SELECT ShipAdd_ID FROM shipping_address WHERE FK_ShipAdd_Cust_ID = '$Order_Cust_ID'");
         $result_shipadd = mysqli_fetch_array($query_shipadd);
@@ -280,15 +294,41 @@ $temp_CartID;
         while($z<count($ArrayFK_Seller_ID)){
             $ArrayFK_Seller_ID[$z];
             $ArrayTotalShippingAndPrice[$z];
+            $TotalShippingID[$z];
 
-            $query_Order_Add = mysqli_query($con,"INSERT INTO orders(Order_No, Order_Status, Order_Amount, FK_Order_ShipAdd_ID, FK_Order_BillAdd_ID, FK_Order_Cust_ID, FK_Order_Seller_ID, FK_Order_Cart_ID) 
-            VALUES ('$Order_Number','payment_pending','$ArrayTotalShippingAndPrice[$z]','$ShipAdd_ID','$BillAdd_ID','$Order_Cust_ID','$ArrayFK_Seller_ID[$z]','$Cart_ID')");
+
+            $queery_Order_Add = mysqli_query($con,"INSERT INTO orders(Order_No, Order_Status, Order_Amount, FK_Order_ShipAdd_ID, FK_Order_BillAdd_ID, FK_Order_Cust_ID, FK_Order_Seller_ID, FK_Order_Cart_ID, FK_Order_Ship_ID) 
+            VALUES ('$Order_Number','payment_pending','$ArrayTotalShippingAndPrice[$z]','$ShipAdd_ID','$BillAdd_ID','$Order_Cust_ID','$ArrayFK_Seller_ID[$z]','$Cart_ID','$TotalShippingID[$z]')");
+            
             $z++;
         }
-        
-        
 
+        //change cart status
+        echo "<script>window.location.href='online_banking.php?orderId=$Order_Number'</script>";
 
     }
 ?>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<?php
+    if(isset($_POST['changeDeliveryBtn'])){
+            $change_Cart_ID = $Cart_ID;
+            $change_Seller_ID = $_POST['change_seller_id'];
+
+            $change_shipping_id = $_POST['change_shipping_id'];
+
+        //Update Delivery
+        $query_updateDelivery = mysqli_query($con,"UPDATE cart_item SET FK_Item_Shipping_ID='$change_shipping_id' WHERE FK_Cart_ID = '$change_Cart_ID' AND FK_Item_Seller_ID = '$change_Seller_ID'");        
+        echo '<script>window.location.href="cust_checkout.php"</script>';
+    }
+?>
+
+
 <?php include("Interface/footer.php")?>

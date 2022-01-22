@@ -10,7 +10,13 @@
     $_SESSION['role'];
     $_SESSION['Cust_Id'];
 
-    $Totalpayment = $_POST['Totalpayment'];
+    //ORDER ID
+    $id = intval($_GET['orderId']);
+    $Totalpayment=0;
+    $query_order = mysqli_query($con,"SELECT * FROM orders WHERE Order_No='$id'");
+    while($result_order = mysqli_fetch_array($query_order)){
+        $Totalpayment = $Totalpayment+$result_order['Order_Amount'];
+    }
 ?>
 
 <div class="row mb-5">
@@ -35,7 +41,9 @@
                     </div>
                     <span class="d-grid mx-auto mt-3 mb-3" style="border-bottom:0.5px solid rgb(241, 240, 240);"></span>
                     <div class="row mb-5">
-                        <button class="btn btn-primary mt-3">Pay</button>
+                    <form method="post">
+                        <button type="submit" name="payBtn" class="btn btn-primary mt-3">Pay</button>
+                    </form>
                     </div>
                     <div class="row mb-5"></div>
                 </div>
@@ -45,5 +53,17 @@
     </div>
     <div class="col-2"></div>
 </div>
+
+<?php
+if(isset($_POST['payBtn'])){
+    $todayDate = date('d-m-Y');
+    $todayTime = date('h:i:s a');
+    $ReferenceNo = rand(10,100);
+    $custID = $_SESSION['Cust_Id'];
+    $query_billing = mysqli_query($con,"INSERT INTO billing(Billing_Date, Billing_Time, Billing_PaymentStatus, Billing_PaymentMethod, Billing_ReferenceNo, FK_Billing_Cust_ID, FK_Billing_Order_ID) 
+    VALUES ('$todayDate','$todayTime','completed','Online Banking','$ReferenceNo','$custID','$id')");
+}
+
+?>
 
 <?php include("Interface/footer.php")?>
