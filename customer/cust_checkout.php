@@ -308,15 +308,7 @@ $temp_CartID;
 
     }
 ?>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
+
 <?php
     if(isset($_POST['changeDeliveryBtn'])){
             $change_Cart_ID = $Cart_ID;
