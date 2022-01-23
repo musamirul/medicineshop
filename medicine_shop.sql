@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 20, 2022 at 05:42 PM
+-- Generation Time: Jan 23, 2022 at 04:48 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `cart` (
 --
 
 INSERT INTO `cart` (`Cart_ID`, `Cart_TimeStamp`, `Cart_Status`, `FK_Cart_Cust_ID`) VALUES
-(10, '2022-01-17 03:32:53pm', 'pending', 3);
+(10, '2022-01-17 03:32:53pm', 'payment_completed', 3);
 
 -- --------------------------------------------------------
 
@@ -135,11 +135,11 @@ CREATE TABLE IF NOT EXISTS `cart_item` (
 --
 
 INSERT INTO `cart_item` (`Cart_Item_ID`, `Cart_Item_Qty`, `Cart_Item_Amount`, `FK_Cart_ID`, `FK_Item_Product_ID`, `FK_Item_Seller_ID`, `FK_Item_Shipping_ID`) VALUES
-(6, 1, 30, 10, 50, 1, 1),
-(7, 3, 30, 10, 50, 1, 1),
-(8, 3, 19, 10, 49, 1, 1),
-(9, 2, 19, 10, 49, 1, 1),
-(10, 5, 150, 10, 51, 3, 1);
+(6, 1, 30, 10, 50, 1, 2),
+(7, 3, 30, 10, 50, 1, 2),
+(8, 3, 19, 10, 49, 1, 2),
+(9, 2, 19, 10, 49, 1, 2),
+(10, 5, 150, 10, 51, 3, 3);
 
 -- --------------------------------------------------------
 
@@ -299,15 +299,15 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `FK_Order_Cart_ID` int(45) NOT NULL,
   `FK_Order_Ship_ID` int(45) NOT NULL,
   PRIMARY KEY (`Order_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `orders`
 --
 
 INSERT INTO `orders` (`Order_ID`, `Order_No`, `Order_Status`, `Order_Amount`, `FK_Order_ShipAdd_ID`, `FK_Order_BillAdd_ID`, `FK_Order_Cust_ID`, `FK_Order_Seller_ID`, `FK_Order_Cart_ID`, `FK_Order_Ship_ID`) VALUES
-(2, 1, 'payment_pending', 219.5, 6, 3, 3, 1, 10, 1),
-(3, 1, 'payment_pending', 754.5, 6, 3, 3, 3, 10, 1);
+(17, 1, 'payment_completed', 765, 6, 3, 3, 3, 10, 3),
+(16, 1, 'payment_completed', 265, 6, 3, 3, 1, 10, 2);
 
 -- --------------------------------------------------------
 
@@ -458,15 +458,26 @@ INSERT INTO `shipping_address` (`ShipAdd_ID`, `address`, `city`, `state`, `zipco
 DROP TABLE IF EXISTS `tracking`;
 CREATE TABLE IF NOT EXISTS `tracking` (
   `Tracking_ID` int(45) NOT NULL AUTO_INCREMENT,
-  `Tracking_Date` date NOT NULL,
-  `Tracking_Time` time NOT NULL,
+  `Tracking_Date` varchar(245) NOT NULL,
+  `Tracking_Time` varchar(254) NOT NULL,
   `Tracking_Status` varchar(45) NOT NULL,
   `Tracking_EstimateDate` varchar(45) NOT NULL,
   `Tracking_EstimateTime` varchar(45) NOT NULL,
   `FK_Tracking_Order_ID` int(45) NOT NULL,
+  `FK_Tracking_Ship_ID` int(45) NOT NULL,
   `FK_Tracking_Cust_ID` int(45) NOT NULL,
+  `FK_Tracking_Seller_ID` int(45) NOT NULL,
+  `FK_Tracking_Cart_ID` int(45) NOT NULL,
   PRIMARY KEY (`Tracking_ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tracking`
+--
+
+INSERT INTO `tracking` (`Tracking_ID`, `Tracking_Date`, `Tracking_Time`, `Tracking_Status`, `Tracking_EstimateDate`, `Tracking_EstimateTime`, `FK_Tracking_Order_ID`, `FK_Tracking_Ship_ID`, `FK_Tracking_Cust_ID`, `FK_Tracking_Seller_ID`, `FK_Tracking_Cart_ID`) VALUES
+(4, '23-01-2022', '12:09:23 pm', 'preparing', '24-01-2022', '12:09:23 pm', 16, 2, 3, 1, 10),
+(3, '23-01-2022', '12:09:23 pm', 'preparing', '25-01-2022', '12:09:23 pm', 17, 3, 3, 3, 10);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

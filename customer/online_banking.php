@@ -92,8 +92,8 @@ if(isset($_POST['payBtn'])){
         }
 
         //Insert data to tracking table
-        $query_tracking = mysqli_query($con,"INSERT INTO tracking(Tracking_Date, Tracking_Time, Tracking_Status, Tracking_EstimateDate, Tracking_EstimateTime, FK_Tracking_Order_ID, FK_Tracking_Ship_ID, FK_Tracking_Cust_ID, FK_Tracking_Seller_ID) 
-        VALUES ('$todayDate','$todayTime','preparing','$estDate','$estTime','$Order_ID','$Order_Ship_ID','$custID','$Order_Seller_ID')");
+        $query_tracking = mysqli_query($con,"INSERT INTO tracking(Tracking_Date, Tracking_Time, Tracking_Status, Tracking_EstimateDate, Tracking_EstimateTime, FK_Tracking_Order_ID, FK_Tracking_Ship_ID, FK_Tracking_Cust_ID, FK_Tracking_Seller_ID, FK_Tracking_Cart_ID) 
+        VALUES ('$todayDate','$todayTime','preparing','$estDate','$estTime','$Order_ID','$Order_Ship_ID','$custID','$Order_Seller_ID','$Order_Cart_ID')");
     }
 
     //update cart status = payment completed
