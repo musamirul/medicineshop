@@ -47,6 +47,7 @@
                     while($result_tracking = mysqli_fetch_array($query_tracking)){
                         $Seller_ID = $result_tracking['FK_Tracking_Seller_ID'];
                         $Cart_ID = $result_tracking['FK_Tracking_Cart_ID'];
+                        $Order_ID = $result_tracking['FK_Tracking_Order_ID'];
                 ?>
                     <div class="row">
                         <div class="row p-2">
@@ -84,6 +85,16 @@
                         </div>
                         <div class="row">
                             <!-- Total Item purchase -->
+                            <?php
+                                $query_order = mysqli_query($con,"SELECT * FROM orders WHERE Order_ID = '$Order_ID'");
+                                $result_order = mysqli_fetch_array($query_order);
+                            ?>
+                            <div class="col">
+                                
+                            </div>
+                            <div class="col">
+                                <span class=" float-end">Order Total: <span class="text-danger" style="font-size: 22px;">RM<?php echo $result_order['Order_Amount']; ?></span></span>
+                            </div>
                         </div>
                     </div>
                 <?php
