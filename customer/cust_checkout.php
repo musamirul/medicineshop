@@ -84,7 +84,7 @@ $temp_CartID;
             <div class="row bg-white p-3 shadow-sm"><span><?php echo $result_seller['Seller_Name']?></span></div>
             <?php
                 //Find cart_item data
-                $query_cart_item_select = mysqli_query($con,"SELECT * FROM cart_item WHERE FK_Item_Seller_ID = '$sellerID'");
+                $query_cart_item_select = mysqli_query($con,"SELECT * FROM cart_item WHERE FK_Item_Seller_ID = '$sellerID' AND FK_Cart_ID = '$Cart_ID'");
                 while($result_cart_item_select = mysqli_fetch_array($query_cart_item_select)){
                 $product_ID = $result_cart_item_select['FK_Item_Product_ID'];
                 

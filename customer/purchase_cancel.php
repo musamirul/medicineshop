@@ -29,25 +29,25 @@
                         <a class="nav-link text-reset" href="purchase_topay.php">To Pay</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="purchase_toreceive.php">To Receive</a>
+                        <a class="nav-link text-reset" href="purchase_toreceive.php">To Receive</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-reset" href="purchase_completed.php">Completed</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-reset" href="purchase_cancel.php">Cancelled</a>
+                        <a class="nav-link active" aria-current="page" href="purchase_cancel.php">Cancelled</a>
                     </li>
                 </ul>
             </div>
             <div class="row p-3 mb-5">
                 <?php 
-                    //select from tracking where tracking status is not delivered
+                    //select from order where order status is pending_payment
                     $custID = $_SESSION['Cust_Id'];
-                    $query_tracking = mysqli_query($con,"SELECT * FROM tracking WHERE FK_Tracking_Cust_ID = '$custID' AND Tracking_Status <> 'delivered'");
-                    while($result_tracking = mysqli_fetch_array($query_tracking)){
-                        $Seller_ID = $result_tracking['FK_Tracking_Seller_ID'];
-                        $Cart_ID = $result_tracking['FK_Tracking_Cart_ID'];
-                        $Order_ID = $result_tracking['FK_Tracking_Order_ID'];
+                    $query_order = mysqli_query($con,"SELECT * FROM orders WHERE FK_Order_Cust_ID = '$custID' AND Order_Status = 'cancel'");
+                    while($result_order = mysqli_fetch_array($query_order)){
+                        $Seller_ID = $result_order['FK_Order_Seller_ID'];
+                        $Cart_ID = $result_order['FK_Order_Cart_ID'];
+                        $Order_ID = $result_order['Order_ID'];
                 ?>
                     <div class="row bg-white">
                         <div class="col">
@@ -61,7 +61,7 @@
                                 ?>
                                 </div>
                                 <div class="col-4 text-end text-danger">
-                                    <?php echo $result_tracking['Tracking_Status']; ?>
+                                    Pending Payment
                                 </div>
                             <span class="d-grid mx-auto mt-3 mb-3" style="border-bottom:0.5px solid rgb(241, 240, 240);"></span>
                             </div>

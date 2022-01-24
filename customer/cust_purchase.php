@@ -23,19 +23,19 @@
             <div class="row bg-white mb-3 p-3">
                 <ul class="nav nav-pills d-flex justify-content-evenly">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="cust_purchase.php">To Pay</a>
+                        <a class="nav-link active" aria-current="page"  href="cust_purchase">All</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-reset" href="#">To Ship</a>
+                        <a class="nav-link text-reset" href="purchase_topay.php">To Pay</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-reset" href="purchase_toreceive.php">To Receive</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-reset" href="#">Completed</a>
+                        <a class="nav-link text-reset" href="purchase_completed.php">Completed</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-reset" href="#">Cancelled</a>
+                        <a class="nav-link text-reset" href="purchase_cancel.php">Cancelled</a>
                     </li>
                 </ul>
             </div>

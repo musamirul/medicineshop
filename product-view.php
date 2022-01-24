@@ -166,8 +166,8 @@ $count_result = mysqli_fetch_object($count_query);
            
         
         //Not pending Cart - create new cart
-        }elseif($cart_check_result['FK_Cart_Cust_ID']=='$cust_ID' && $cart_check_result['Cart_Status']!='pending'){
-            
+        }elseif($cart_check_result['FK_Cart_Cust_ID']=="$cust_ID" && $cart_check_result['Cart_Status']!="pending"){
+
             //create cart
             $cart_create_query = mysqli_query($con,"INSERT INTO cart(Cart_TimeStamp, Cart_Status, FK_Cart_Cust_ID)
             VALUES ('$timeStamp','pending','$cust_ID')");
@@ -180,6 +180,8 @@ $count_result = mysqli_fetch_object($count_query);
             //add item into cart_item
             $cartItem_query = mysqli_query($con,"INSERT INTO cart_item (Cart_Item_Qty, Cart_Item_Amount, FK_Cart_ID, FK_Item_Product_ID, FK_Item_Seller_ID, FK_Item_Shipping_ID) 
             VALUES ('$quantity','$product_Price','$cart_ID','$product_ID','$seller_ID','1')");
+
+            
         }
     }
 ?>

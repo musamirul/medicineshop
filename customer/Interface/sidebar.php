@@ -18,7 +18,7 @@
                     <a href="cust_change-password.php" class="text-reset text-decoration-none">Change Password</a>
                   </li>
                 </ul>
-                <a class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "cust_purchase.php") echo "active"?>"  href="cust_purchase.php">
+                <a class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "cust_purchase.php" || $current_file_name=="purchase_toreceive.php" || $current_file_name=="purchase_completed.php" || $current_file_name=="purchase_topay.php" || $current_file_name=="purchase_cancel.php")echo "active"?>"  href="cust_purchase.php">
                     <i class="bi bi-journal-check fa-fw me-3"></i><span>My Purchase</span>
                 </a>
                 <a class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "medical_history.php") echo "active"?>"  href="medical_history.php">

@@ -23,16 +23,16 @@
             <div class="row bg-white mb-3 p-3">
                 <ul class="nav nav-pills d-flex justify-content-evenly">
                     <li class="nav-item">
-                        <a class="nav-link text-reset" href="cust_purchase">All</a>
+                        <a class="nav-link text-reset" href="cust_purchase.php">All</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-reset" href="purchase_topay.php">To Pay</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="purchase_toreceive.php">To Receive</a>
+                        <a class="nav-link text-reset" href="purchase_toreceive.php">To Receive</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-reset" href="purchase_completed.php">Completed</a>
+                        <a class="nav-link active" aria-current="page" href="purchase_completed">Completed</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-reset" href="purchase_cancel.php">Cancelled</a>
@@ -43,7 +43,7 @@
                 <?php 
                     //select from tracking where tracking status is not delivered
                     $custID = $_SESSION['Cust_Id'];
-                    $query_tracking = mysqli_query($con,"SELECT * FROM tracking WHERE FK_Tracking_Cust_ID = '$custID' AND Tracking_Status <> 'delivered'");
+                    $query_tracking = mysqli_query($con,"SELECT * FROM tracking WHERE FK_Tracking_Cust_ID = '$custID' AND Tracking_Status = 'delivered'");
                     while($result_tracking = mysqli_fetch_array($query_tracking)){
                         $Seller_ID = $result_tracking['FK_Tracking_Seller_ID'];
                         $Cart_ID = $result_tracking['FK_Tracking_Cart_ID'];
@@ -53,15 +53,19 @@
                         <div class="col">
                             <div class="row p-2">
                                 <!-- Seller Store Name and status -->
-                                <div class="col-8">
+                                <div class="col-6">
                                 <?php
                                     $query_seller = mysqli_query($con,"SELECT * FROM seller WHERE Seller_ID ='$Seller_ID'");
                                     $result_seller = mysqli_fetch_array($query_seller);
                                     echo $result_seller['Seller_Name'];
                                 ?>
                                 </div>
-                                <div class="col-4 text-end text-danger">
-                                    <?php echo $result_tracking['Tracking_Status']; ?>
+                                <div class="col-6 text-end">
+                                    <div style="font-size: 14px;" class="row">
+                                        <div class="d-flex justify-content-end">
+                                        <span class="text-success"><i class="bi bi-envelope-check"></i> Parcel has been <?php echo $result_tracking['Tracking_Status']; ?></span>&nbsp;<span style="color: rgb(201, 201, 201);">|</span> &nbsp;<span class="text-danger">COMPLETED</span>
+                                        </div>
+                                    </div>
                                 </div>
                             <span class="d-grid mx-auto mt-3 mb-3" style="border-bottom:0.5px solid rgb(241, 240, 240);"></span>
                             </div>
@@ -97,7 +101,8 @@
                                     $result_order = mysqli_fetch_array($query_order);
                                 ?>
                                 <div class="col pt-4 pb-4">
-                                    <span class="float-end">Order Total: <span class="text-danger" style="font-size: 22px;">RM<?php echo $result_order['Order_Amount']; ?></span></span>
+                                    <span class="float-end">Order Total: <span class="text-danger" style="font-size: 22px;">RM<?php echo $result_order['Order_Amount']; ?></span></span><br/>
+                                    
                                 </div>
                             </div>
                         </div>

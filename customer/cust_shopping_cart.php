@@ -68,7 +68,7 @@
         <span class="d-grid mx-auto mt-3 mb-4" style="border-bottom:0.5px solid rgb(241, 240, 240);"></span>
             <?php 
                 //Find cart_item data
-                $query_cart_item_select = mysqli_query($con,"SELECT * FROM cart_item WHERE FK_Item_Seller_ID = '$sellerID'");
+                $query_cart_item_select = mysqli_query($con,"SELECT * FROM cart_item WHERE FK_Item_Seller_ID = '$sellerID' AND FK_Cart_ID = '$Cart_ID'");
                 while($result_cart_item_select = mysqli_fetch_array($query_cart_item_select)){
                 $product_ID = $result_cart_item_select['FK_Item_Product_ID'];
 
