@@ -1,4 +1,9 @@
 <?php include("Interface/header.php"); ?>
+<?php
+$Seller_ID = $_SESSION['Seller_Id'];
+$query_shop = mysqli_query($con,"SELECT * FROM seller_shop WHERE FK_Shop_Seller_ID='$Seller_ID'");
+$result_shop = mysqli_fetch_array($query_shop);
+?>
 <div class="row">
     <div class="col-12 bg-white shadow-sm p-3 mb-5 bg-body rounded me-5">
         <div class="row p-3">
@@ -16,8 +21,17 @@
                 <span style="font-weight: bold; font-size: 14px;">Basic Information</span>
             </div>
             <div class="row position-relative">
-                <input type="image" data-bs-toggle="modal" data-bs-target="#editProfile" src="tempProfile.png" class="rounded-circle position-absolute top-50 start-0" style="height: 125px; width: 145px;">                   
-                <input type="image" data-bs-toggle="modal" data-bs-target="#editCover" src="temp.jpg" class="img-fluid" style="height: 200px;">
+                <?php if($result_shop['Shop_Img']==""){ ?>
+                    <input type="image" data-bs-toggle="modal" data-bs-target="#editProfile" src="tempProfile.png" class="rounded-circle position-absolute top-50 start-0" style="height: 125px; width: 145px;">                   
+                <?php }else{ ?>
+                    <input type="image" data-bs-toggle="modal" data-bs-target="#editProfile" src="shop_img/<?php echo $result_shop['Shop_Img'] ?>" class="rounded-circle position-absolute top-50 start-0" style="height: 125px; width: 145px;">                   
+                <?php } ?>
+                
+                <?php if($result_shop['Shop_Cover']==""){ ?>
+                    <input type="image" data-bs-toggle="modal" data-bs-target="#editCover" src="temp.jpg" class="img-fluid" style="height: 200px;">
+                <?php }else{ ?>
+                    <input type="image" data-bs-toggle="modal" data-bs-target="#editCover" src="shop_img/<?php echo $result_shop['Shop_Cover'] ?>" class="img-fluid" style="height: 200px;">
+                <?php } ?>
             </div>
         </div>
         <div class="row p-5">
@@ -44,19 +58,18 @@
           <h5 class="modal-title" id="editModalLabel">Edit <strong>Profile Image</strong></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-          <form method="post">
+          <form enctype="multipart/form-data" method="post">
           <div class="modal-body">
             <div class="form-group row">
               <div class="col-sm-12">
               <label>Image Location :</label>
-                  <input class="form-control" placeholder="Enter Name" name="nameEdit" value="" required autofocus="autofocus" />
+                    <div class="col"><input class="form-control" type="file" name="Profilefile"/></div>
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <input type="hidden" value="" name="idEdit" />
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" name="editProduct" class="btn btn-primary">Edit</button>
+            <button type="submit" name="editProfileBtn" class="btn btn-primary">Edit</button>
           </form>
           </div>   
       </div>
@@ -71,23 +84,60 @@
           <h5 class="modal-title" id="editModalLabel">Edit <strong>Cover Image</strong></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-          <form method="post">
+          <form enctype="multipart/form-data" method="post">
           <div class="modal-body">
             <div class="form-group row">
               <div class="col-sm-12">
               <label>Image Location :</label>
-                  <input class="form-control" placeholder="Enter Name" name="nameEdit" value="" required autofocus="autofocus" />
+                    <div class="col"><input class="form-control" type="file" name="Coverfile"/></div>
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <input type="hidden" value="" name="idEdit" />
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" name="editProduct" class="btn btn-primary">Edit</button>
+            <button type="submit" name="editCoverBtn" class="btn btn-primary">Edit</button>
           </form>
           </div>   
       </div>
     </div>
   </div>
+<?php
+    if(isset($_POST['editProfileBtn'])){
+       
+        $name=$_FILES['Profilefile']['name'];
+        $size=$_FILES['Profilefile']['size'];
+        $type=$_FILES['Profilefile']['type'];
+        $temp=$_FILES['Profilefile']['tmp_name'];
 
+        //get date and time
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+        $date = date("Y-m-d h:i:sa");
+
+        $fname = date("YmdHis").'_'.$name;
+        $move = move_uploaded_file($temp,"shop_img/".$fname);
+
+        $query_updateShop = mysqli_query($con,"UPDATE seller_shop SET Shop_Img='$fname',Shop_Img_File='$name' WHERE FK_Shop_Seller_ID = '$Seller_ID'");
+        echo '<script>window.location.href="Seller_Shop_Profile?msg=success"</script>';
+    
+    }
+
+
+    if(isset($_POST['editCoverBtn'])){
+        
+        $name=$_FILES['Coverfile']['name'];
+        $size=$_FILES['Coverfile']['size'];
+        $type=$_FILES['Coverfile']['type'];
+        $temp=$_FILES['Coverfile']['tmp_name'];
+
+        //get date and time
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+        $date = date("Y-m-d h:i:sa");
+
+        $fname = date("YmdHis").'_'.$name;
+        $move = move_uploaded_file($temp,"shop_img/".$fname);
+
+        $query_updateShop = mysqli_query($con,"UPDATE seller_shop SET Shop_Cover='$fname',Shop_Cover_File='$name' WHERE FK_Shop_Seller_ID = '$Seller_ID'");
+        echo '<script>window.location.href="Seller_Shop_Profile?msg=success"</script>';
+    }
+?>
 <?php include("Interface/footer.php"); ?>

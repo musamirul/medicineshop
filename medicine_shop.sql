@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 28, 2022 at 04:51 PM
+-- Generation Time: Jan 28, 2022 at 05:36 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -423,7 +423,7 @@ CREATE TABLE IF NOT EXISTS `seller_shop` (
 --
 
 INSERT INTO `seller_shop` (`Shop_ID`, `Shop_Desc`, `Shop_Img`, `Shop_Img_File`, `Shop_Cover`, `Shop_Cover_File`, `FK_Shop_Seller_ID`) VALUES
-(1, '', '', '', '', '', 1);
+(1, '', '20220129013408_sog order no.PNG', 'sog order no.PNG', '20220129013557_70619506_107291520659786_8722772007705378816_n.jpg', '70619506_107291520659786_8722772007705378816_n.jpg', 1);
 
 -- --------------------------------------------------------
 
