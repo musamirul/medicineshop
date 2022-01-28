@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 23, 2022 at 04:48 PM
+-- Generation Time: Jan 28, 2022 at 04:51 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -53,8 +53,8 @@ INSERT INTO `administrator` (`Admin_ID`, `Admin_Email`, `Admin_EmpNo`, `Admin_De
 DROP TABLE IF EXISTS `billing`;
 CREATE TABLE IF NOT EXISTS `billing` (
   `Billing_ID` int(45) NOT NULL AUTO_INCREMENT,
-  `Billing_Date` date NOT NULL,
-  `Billing_Time` time NOT NULL,
+  `Billing_Date` varchar(254) NOT NULL,
+  `Billing_Time` varchar(254) NOT NULL,
   `Billing_PaymentStatus` varchar(45) NOT NULL,
   `Billing_PaymentMethod` varchar(45) NOT NULL,
   `Billing_ReferenceNo` varchar(45) NOT NULL,
@@ -103,14 +103,15 @@ CREATE TABLE IF NOT EXISTS `cart` (
   `Cart_Status` varchar(45) NOT NULL,
   `FK_Cart_Cust_ID` int(45) NOT NULL,
   PRIMARY KEY (`Cart_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `cart`
 --
 
 INSERT INTO `cart` (`Cart_ID`, `Cart_TimeStamp`, `Cart_Status`, `FK_Cart_Cust_ID`) VALUES
-(10, '2022-01-17 03:32:53pm', 'payment_completed', 3);
+(10, '2022-01-17 03:32:53pm', 'payment_completed', 3),
+(11, '2022-01-24 11:58:02pm', 'pending', 3);
 
 -- --------------------------------------------------------
 
@@ -128,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `cart_item` (
   `FK_Item_Seller_ID` int(45) NOT NULL,
   `FK_Item_Shipping_ID` int(45) NOT NULL,
   PRIMARY KEY (`Cart_Item_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `cart_item`
@@ -139,7 +140,8 @@ INSERT INTO `cart_item` (`Cart_Item_ID`, `Cart_Item_Qty`, `Cart_Item_Amount`, `F
 (7, 3, 30, 10, 50, 1, 2),
 (8, 3, 19, 10, 49, 1, 2),
 (9, 2, 19, 10, 49, 1, 2),
-(10, 5, 150, 10, 51, 3, 3);
+(10, 5, 150, 10, 51, 3, 3),
+(11, 2, 30, 11, 50, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -299,13 +301,14 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `FK_Order_Cart_ID` int(45) NOT NULL,
   `FK_Order_Ship_ID` int(45) NOT NULL,
   PRIMARY KEY (`Order_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `orders`
 --
 
 INSERT INTO `orders` (`Order_ID`, `Order_No`, `Order_Status`, `Order_Amount`, `FK_Order_ShipAdd_ID`, `FK_Order_BillAdd_ID`, `FK_Order_Cust_ID`, `FK_Order_Seller_ID`, `FK_Order_Cart_ID`, `FK_Order_Ship_ID`) VALUES
+(18, 2, 'payment_pending', 110, 6, 3, 3, 1, 11, 1),
 (17, 1, 'payment_completed', 765, 6, 3, 3, 3, 10, 3),
 (16, 1, 'payment_completed', 265, 6, 3, 3, 1, 10, 2);
 
@@ -396,6 +399,31 @@ INSERT INTO `seller` (`Seller_ID`, `Seller_Name`, `Seller_RegistrationNo`, `Sell
 (1, 'pharma niaga', 123342323, '0193224748', 'lorong 5343 jalan 123', 'maybank', '123558437', 'Active', 11),
 (2, 'big pharmacy', 53234252, '012834737', 'lorong pharmacy', 'rhb', '1234889123489', 'reqApproval', 21),
 (3, 'seller sdn bhd', 1234444, '01233338747', 'lorong mohd tahir', 'cimb', '123334057487', 'Active', 42);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `seller_shop`
+--
+
+DROP TABLE IF EXISTS `seller_shop`;
+CREATE TABLE IF NOT EXISTS `seller_shop` (
+  `Shop_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Shop_Desc` varchar(254) NOT NULL,
+  `Shop_Img` varchar(254) NOT NULL,
+  `Shop_Img_File` varchar(254) NOT NULL,
+  `Shop_Cover` varchar(254) NOT NULL,
+  `Shop_Cover_File` varchar(254) NOT NULL,
+  `FK_Shop_Seller_ID` int(254) NOT NULL,
+  PRIMARY KEY (`Shop_ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `seller_shop`
+--
+
+INSERT INTO `seller_shop` (`Shop_ID`, `Shop_Desc`, `Shop_Img`, `Shop_Img_File`, `Shop_Cover`, `Shop_Cover_File`, `FK_Shop_Seller_ID`) VALUES
+(1, '', '', '', '', '', 1);
 
 -- --------------------------------------------------------
 
