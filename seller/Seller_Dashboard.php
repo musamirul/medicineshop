@@ -47,7 +47,7 @@
                         <li class="list-group-item py-1 <?php if($current_file_name== "Seller_Product-View.php") echo "active"?>"><a href="Seller_Product-View.php" class="text-decoration-none text-reset"><i style="font-size:14px" class="bi bi-bag-check-fill me-3"></i>List product</a></li>
                     </ul>
                     
-                    
+                    <a href="Seller_Shipment.php" class="list-group-item list-group-item-action py-2" aria-current="true"><i class="bi bi-truck me-3"></i><span>Shipment</span></a>
                     <a href="#" class="list-group-item list-group-item-action py-2" aria-current="true"><i class="bi bi-cart-fill me-3"></i><span>Order</span></a>
                     <a href="#" class="list-group-item list-group-item-action py-2" aria-current="true"><i class="bi bi-people-fill me-3"></i><span>Customer</span></a>
                     <a href="#" class="list-group-item list-group-item-action py-2" aria-current="true"><i class="bi bi-bar-chart-fill me-3"></i><span>Statistics</span></a>
