@@ -3,6 +3,12 @@
 $Seller_ID = $_SESSION['Seller_Id'];
 $query_shop = mysqli_query($con,"SELECT * FROM seller_shop WHERE FK_Shop_Seller_ID='$Seller_ID'");
 $result_shop = mysqli_fetch_array($query_shop);
+
+$query_seller = mysqli_query($con,"SELECT * FROM seller WHERE Seller_ID = '$Seller_ID'");
+$result_seller = mysqli_fetch_array($query_seller);
+
+$query_product = mysqli_query($con,"SELECT * FROM product WHERE FK_Product_Seller_ID = '$Seller_ID'");
+$result_row = mysqli_num_rows($query_product);
 ?>
 <div class="row">
     <div class="col-12 bg-white shadow-sm p-3 mb-5 bg-body rounded me-5">
@@ -36,15 +42,32 @@ $result_shop = mysqli_fetch_array($query_shop);
         </div>
         <div class="row p-5">
             <div class="col">
-                <div class="row mb-3">
-                    <label class="form-label">Shop Name</label>
-                    <input type="text" class="form-control" id="inputProduct" placeholder="Enter Product Name" name="name"/>
+              <div class="row">
+                <div class="col-4">
+                  <div class="card">
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">
+                        <h5 class="card-title">Shop Name</h5>
+                        <input type="text" class="form-control" value="<?php echo $result_seller['Seller_Name']; ?>" name="name" disabled/>
+                      </li>
+                      <li class="list-group-item ms-2 me-2">
+                        <i class="bi bi-gift-fill"></i>  Products <span class="float-end text-danger"><?php echo $result_row; ?></span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-
-                <div class="row">
-                    <label class="form-label">Shop Description</label>
-                    <textarea id="summernote_spec" class="form-control" rows="5" cols="50" name="description" placeholder="Enter Product Specification"></textarea>
+                <div class="col-8">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Shop Description</h5>
+                      <form method="post">
+                        <textarea id="summernote_spec" class="form-control" rows="5" cols="50" name="description" placeholder="Enter Product Specification"><?php echo $result_shop['Shop_Desc'] ?></textarea>
+                        <button type="submit" name="editDescBtn" class="btn btn-primary mt-2">Save</button>
+                      </form>
+                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
         </div>
     </div>
@@ -138,6 +161,13 @@ $result_shop = mysqli_fetch_array($query_shop);
 
         $query_updateShop = mysqli_query($con,"UPDATE seller_shop SET Shop_Cover='$fname',Shop_Cover_File='$name' WHERE FK_Shop_Seller_ID = '$Seller_ID'");
         echo '<script>window.location.href="Seller_Shop_Profile?msg=success"</script>';
+    }
+
+    if(isset($_POST['editDescBtn'])){
+      $shop_desc = $_POST['description'];
+      
+      $query_updateDesc = mysqli_query($con,"UPDATE seller_shop SET Shop_Desc='$shop_desc' WHERE FK_Shop_Seller_ID = '$Seller_ID'");
+      echo '<script>window.location.href="Seller_Shop_Profile?msg=success"</script>';
     }
 ?>
 <?php include("Interface/footer.php"); ?>

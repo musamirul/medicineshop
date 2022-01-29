@@ -41,7 +41,8 @@
         </thead>
         <tbody>
         <?php
-          $query_image = mysqli_query($con,"SELECT * FROM product");
+          $sellerID = $_SESSION['Seller_Id'];
+          $query_image = mysqli_query($con,"SELECT * FROM product WHERE FK_Product_Seller_ID = '$sellerID'");
           while($result_image = mysqli_fetch_array($query_image))
           {
             $id = $result_image['Product_ID'];
