@@ -32,7 +32,7 @@
                 <li class="nav-item dropdown">
                   <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
                     <i class="fas fa-bell"></i>
-                    <span class="badge rounded-pill badge-notification bg-danger">1</span>
+                    <span class="position-absolute top-20 start-70 translate-middle badge rounded-pill bg-danger">1</span>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                     <li><a class="dropdown-item" href="#">Some news</a></li>
@@ -40,7 +40,7 @@
                     <li><a class="dropdown-item" href="#">Something else here</a></li>
                   </ul>
                 </li>
-                
+
                 <!-- Avatar -->
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
@@ -48,7 +48,7 @@
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink" >
                     <li><a class="dropdown-item" href="#"></a></li>
-                    <li><a class="dropdown-item" href="#">My profile</a></li>
+                    <li><a class="dropdown-item" href="profile.php">My profile</a></li>
                     <li><a class="dropdown-item" href="#">Settings</a></li>
                     <li><a class="dropdown-item" href="#">Logout</a></li>
                   </ul>
