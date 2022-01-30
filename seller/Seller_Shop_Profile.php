@@ -160,14 +160,14 @@ $result_row = mysqli_num_rows($query_product);
         $move = move_uploaded_file($temp,"shop_img/".$fname);
 
         $query_updateShop = mysqli_query($con,"UPDATE seller_shop SET Shop_Cover='$fname',Shop_Cover_File='$name' WHERE FK_Shop_Seller_ID = '$Seller_ID'");
-        echo '<script>window.location.href="Seller_Shop_Profile?msg=success"</script>';
+        echo '<script>window.location.href="Seller_Shop_Profile.php?msg=success"</script>';
     }
 
     if(isset($_POST['editDescBtn'])){
       $shop_desc = $_POST['description'];
       
       $query_updateDesc = mysqli_query($con,"UPDATE seller_shop SET Shop_Desc='$shop_desc' WHERE FK_Shop_Seller_ID = '$Seller_ID'");
-      echo '<script>window.location.href="Seller_Shop_Profile?msg=success"</script>';
+      echo '<script>window.location.href="Seller_Shop_Profile.php?msg=success"</script>';
     }
 ?>
 <?php include("Interface/footer.php"); ?>
