@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 28, 2022 at 05:36 PM
+-- Generation Time: Jan 30, 2022 at 04:59 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -396,7 +396,7 @@ CREATE TABLE IF NOT EXISTS `seller` (
 --
 
 INSERT INTO `seller` (`Seller_ID`, `Seller_Name`, `Seller_RegistrationNo`, `Seller_Phone`, `Seller_Address`, `Seller_BankAccName`, `Seller_BankAccNo`, `Seller_Registration_Status`, `FK_Seller_Login_ID`) VALUES
-(1, 'pharma niaga', 123342323, '0193224748', 'lorong 5343 jalan 123', 'maybank', '123558437', 'Active', 11),
+(1, 'pharma niaga', 123342328, '0193224748', 'lorong 5343 jalan 123', 'cimb', '123558435', 'Active', 11),
 (2, 'big pharmacy', 53234252, '012834737', 'lorong pharmacy', 'rhb', '1234889123489', 'reqApproval', 21),
 (3, 'seller sdn bhd', 1234444, '01233338747', 'lorong mohd tahir', 'cimb', '123334057487', 'Active', 42);
 
@@ -423,7 +423,7 @@ CREATE TABLE IF NOT EXISTS `seller_shop` (
 --
 
 INSERT INTO `seller_shop` (`Shop_ID`, `Shop_Desc`, `Shop_Img`, `Shop_Img_File`, `Shop_Cover`, `Shop_Cover_File`, `FK_Shop_Seller_ID`) VALUES
-(1, '', '20220129013408_sog order no.PNG', 'sog order no.PNG', '20220129013557_70619506_107291520659786_8722772007705378816_n.jpg', '70619506_107291520659786_8722772007705378816_n.jpg', 1);
+(1, '<p>yeke test</p>', '20220129013408_sog order no.PNG', 'sog order no.PNG', '20220129013557_70619506_107291520659786_8722772007705378816_n.jpg', '70619506_107291520659786_8722772007705378816_n.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -489,6 +489,7 @@ CREATE TABLE IF NOT EXISTS `tracking` (
   `Tracking_Date` varchar(245) NOT NULL,
   `Tracking_Time` varchar(254) NOT NULL,
   `Tracking_Status` varchar(45) NOT NULL,
+  `Tracking_Channel` varchar(254) NOT NULL,
   `Tracking_EstimateDate` varchar(45) NOT NULL,
   `Tracking_EstimateTime` varchar(45) NOT NULL,
   `FK_Tracking_Order_ID` int(45) NOT NULL,
@@ -503,9 +504,33 @@ CREATE TABLE IF NOT EXISTS `tracking` (
 -- Dumping data for table `tracking`
 --
 
-INSERT INTO `tracking` (`Tracking_ID`, `Tracking_Date`, `Tracking_Time`, `Tracking_Status`, `Tracking_EstimateDate`, `Tracking_EstimateTime`, `FK_Tracking_Order_ID`, `FK_Tracking_Ship_ID`, `FK_Tracking_Cust_ID`, `FK_Tracking_Seller_ID`, `FK_Tracking_Cart_ID`) VALUES
-(4, '23-01-2022', '12:09:23 pm', 'preparing', '24-01-2022', '12:09:23 pm', 16, 2, 3, 1, 10),
-(3, '23-01-2022', '12:09:23 pm', 'preparing', '25-01-2022', '12:09:23 pm', 17, 3, 3, 3, 10);
+INSERT INTO `tracking` (`Tracking_ID`, `Tracking_Date`, `Tracking_Time`, `Tracking_Status`, `Tracking_Channel`, `Tracking_EstimateDate`, `Tracking_EstimateTime`, `FK_Tracking_Order_ID`, `FK_Tracking_Ship_ID`, `FK_Tracking_Cust_ID`, `FK_Tracking_Seller_ID`, `FK_Tracking_Cart_ID`) VALUES
+(4, '23-01-2022', '12:09:23 pm', 'collected', 'citylink', '24-01-2022', '12:09:23 pm', 16, 2, 3, 1, 10),
+(3, '23-01-2022', '12:09:23 pm', 'preparing', '', '25-01-2022', '12:09:23 pm', 17, 3, 3, 3, 10);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tracking_shipment`
+--
+
+DROP TABLE IF EXISTS `tracking_shipment`;
+CREATE TABLE IF NOT EXISTS `tracking_shipment` (
+  `Track_Ship_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Track_Ship_Status` varchar(254) NOT NULL,
+  `Track_Ship_Date` varchar(254) NOT NULL,
+  `Track_Ship_Time` varchar(254) NOT NULL,
+  `FK_Tracking_ID` int(11) NOT NULL,
+  PRIMARY KEY (`Track_Ship_ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tracking_shipment`
+--
+
+INSERT INTO `tracking_shipment` (`Track_Ship_ID`, `Track_Ship_Status`, `Track_Ship_Date`, `Track_Ship_Time`, `FK_Tracking_ID`) VALUES
+(1, 'shipmentArranged', '30-01-2022', '12:05:00 pm', 4),
+(2, 'collected', '30-01-2022', '04:58:21 pm', 4);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

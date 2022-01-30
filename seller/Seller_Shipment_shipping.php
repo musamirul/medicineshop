@@ -106,6 +106,7 @@
                         <td>RM<?php echo $result_order['Order_Amount'];?></td>
                         <td><?php echo $result_tracking['Tracking_Status'] ?></td>
                         <td><?php echo $result_tracking['Tracking_Channel'] ?></td>
+                        <form method="post">
                             <input type="hidden" name="tracking_ID" value="<?php echo $result_tracking['Tracking_ID']; ?>">
                             <td><button class="btn btn-primary" type="submit" name="shipmentBtn"><i class="bi bi-truck"> </i> Shipment Collected</button></td>
                         </form>
