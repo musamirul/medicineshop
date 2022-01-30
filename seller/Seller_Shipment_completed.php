@@ -50,7 +50,7 @@
                 <div class="row bg-white p-3">
                     <ul class="nav nav-pills d-flex justify-content-start">
                         <li style="width: 150px;" class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="Seller_Shipment.php"><center>All<span class="shadow badge bg-secondary ms-3"><?php echo $allcount ?></span></center></a>
+                            <a class="nav-link text-reset" href="Seller_Shipment.php"><center>All<span class="shadow badge bg-secondary ms-3"><?php echo $allcount ?></span></center></a>
                         </li>
                         <li style="width: 150px;" class="nav-item">
                             <a class="nav-link text-reset" href="Seller_Shipment_unpaid.php"><center>Unpaid<span class="shadow badge bg-secondary ms-3"><?php echo $unpaidcount ?></span></center></a>
@@ -62,7 +62,7 @@
                             <a class="nav-link text-reset" href="Seller_Shipment_shipping.php"><center>Shipping<span class="shadow badge bg-secondary ms-3"><?php echo $shippingcount ?></span></center></a>
                         </li>
                         <li style="width: 150px;" class="nav-item">
-                            <a class="nav-link text-reset" href="Seller_Shipment_completed.php"><center>Completed<span class="shadow badge bg-secondary ms-3"><?php echo $completedcount ?></span></center></a>
+                            <a class="nav-link active" aria-current="page" href="Seller_Shipment_completed.php"><center>Completed<span class="shadow badge bg-secondary ms-3"><?php echo $completedcount ?></span></center></a>
                         </li>
                         <li style="width: 200px;" class="nav-item">
                             <a class="nav-link text-reset" href="Seller_Shipment_cancel.php"><center>Cancellation<span class="shadow badge bg-secondary ms-3"><?php echo $cancelcount ?></span></center></a>
@@ -81,14 +81,14 @@
                         <th>Total Price</th>
                         <th>Status</th>
                         <th>All Channel</th>
-
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                         
 
-                        $query_tracking = mysqli_query($con,"SELECT * FROM tracking WHERE FK_Tracking_Seller_ID = '$Seller_ID'");
+                        $query_tracking = mysqli_query($con,"SELECT * FROM tracking WHERE Tracking_Status ='delivered' AND FK_Tracking_Seller_ID = '$Seller_ID'");
                         while($result_tracking = mysqli_fetch_array($query_tracking)){
                             
                             $Order_ID = $result_tracking['FK_Tracking_Order_ID'];
@@ -106,9 +106,12 @@
                         <td>RM<?php echo $result_order['Order_Amount'];?></td>
                         <td><?php echo $result_tracking['Tracking_Status'] ?></td>
                         <td><?php echo $result_tracking['Tracking_Channel'] ?></td>
+                            <input type="hidden" name="tracking_ID" value="<?php echo $result_tracking['Tracking_ID']; ?>">
+                            <td><button class="btn btn-primary" type="submit" name="shipmentBtn"><i class="bi bi-truck"> </i> Shipment Delivered</button></td>
+                        </form>
                     </tr>
                     <?php
-                        
+                        $shippingcount++;
                         }
                     ?>
                 </tbody>
@@ -116,7 +119,23 @@
         </div>
     </div>
 </div>
+<?php
+    if(isset($_POST['shipmentBtn'])){
+        $todayDate = date('d-m-Y');
+        $todayTime = date('h:i:s a');
+        $shipOption = $_POST['shipOption'];
+        $trackingID = $_POST['tracking_ID'];
+        $Order_ID;
 
+        //update tracking table to shipment Arranged
+        $query_updateTracking = mysqli_query($con,"UPDATE tracking SET Tracking_Status='completed' WHERE Tracking_ID = '$trackingID'");
+
+        $query_shipmentTracking = mysqli_query($con,"INSERT INTO tracking_shipment(Track_Ship_Status, Track_Ship_Date, Track_Ship_Time,FK_Tracking_ID)
+         VALUES ('completed','$todayDate','$todayTime','$trackingID')");
+
+        echo '<script>window.location.href="Seller_Shipment_completed.php?msg=success"</script>';
+    }
+?>
 <!-- View Product list -->
 <div class="modal fade" id="productView<?php echo $Cart_ID ?>" tabindex="-1" aria-labelledby="editModalLabel" class="modal fade" role="dialog">
     <div class="modal-dialog modal-fullscreen">

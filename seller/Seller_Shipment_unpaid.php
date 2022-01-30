@@ -50,10 +50,10 @@
                 <div class="row bg-white p-3">
                     <ul class="nav nav-pills d-flex justify-content-start">
                         <li style="width: 150px;" class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="Seller_Shipment.php"><center>All<span class="shadow badge bg-secondary ms-3"><?php echo $allcount ?></span></center></a>
+                            <a class="nav-link text-reset" href="Seller_Shipment.php"><center>All<span class="shadow badge bg-secondary ms-3"><?php echo $allcount ?></span></center></a>
                         </li>
                         <li style="width: 150px;" class="nav-item">
-                            <a class="nav-link text-reset" href="Seller_Shipment_unpaid.php"><center>Unpaid<span class="shadow badge bg-secondary ms-3"><?php echo $unpaidcount ?></span></center></a>
+                            <a class="nav-link active" aria-current="page" href="Seller_Shipment_unpaid.php"><center>Unpaid<span class="shadow badge bg-secondary ms-3"><?php echo $unpaidcount ?></span></center></a>
                         </li>
                         <li style="width: 150px;" class="nav-item">
                             <a class="nav-link text-reset" href="Seller_Shipment_toShip.php"><center>To ship<span class="shadow badge bg-secondary ms-3"><?php echo $toshipcount ?></span></center></a>
