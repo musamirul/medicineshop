@@ -2,28 +2,15 @@
 <?php 
     $Seller_ID = $_SESSION['Seller_Id'];
 
-    //Array of Cust_ID
-    $Cust_ID = array();
-    $count = 0;
-    $Temp_Cust_ID ="";
-    $query_Order = mysqli_query($con,"SELECT * FROM orders WHERE FK_Order_Seller_ID = '$Seller_ID'");
-    while($result_Order = mysqli_fetch_array($query_Order)){
-        if($Temp_Cust_ID != $result_Order['FK_Order_Cust_ID']){
-            $Temp_Cust_ID = $result_Order['FK_Order_Cust_ID'];
-            $Cust_ID[$count] = $result_Order['FK_Order_Cust_ID'];
-        }
-        $count++;
-    }
-
 ?>
 <div class="row">
     <div class="col-12 bg-white shadow-sm p-3 mb-5 bg-body rounded me-5">
         <div class="row p-3">
             <div class="d-flex flex-row">
-                <div class=""><center><i style="font-size: 40px; color: rgb(99, 157, 243);" class="bi bi-people-fill"></i></center></div>
+                <div class=""><center><i style="font-size: 40px; color: rgb(99, 157, 243);" class="bi bi-cart-fill"></i></center></div>
                 <div class="text-start ms-3">
-                    <span style="font-size: 23px;font-weight: bold;">Customer List</span> <br/>
-                    <span style="font-size: 14px; color: grey;">View your list of customer</span>
+                    <span style="font-size: 23px;font-weight: bold;">Order List</span> <br/>
+                    <span style="font-size: 14px; color: grey;">View list of customer order</span>
                 </div>
             </div>
         </div>
@@ -32,35 +19,46 @@
             <table id="example" class="display center" style="width: 100%; text-align: center;">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>DOB</th>
-                        <th>Gender</th>
-                        <th>Contact No</th>
-                        <th>Email</th>
-                        <th>Address</th>
+                        <th>Order ID</th>
+                        <th>Order Status</th>
+                        <th>Order Amount</th>
+                        <th>Customer Name</th>
+                        <th>Customer Contact</th>
+                        <th>Customer Email</th>
+                        <th>Shipping Address</th>
+                        <th>Shipping Method</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php 
-                        for($x = 0; $x <count($Cust_ID); $x++){
-                        $ArrayCust = $Cust_ID[$x];
+                    <?php
+                        //Get ID,Status & Amount from Order Table
+                        $query_order = mysqli_query($con,"SELECT * FROM orders WHERE FK_Order_Seller_ID='$Seller_ID'");
+                        while($result_order = mysqli_fetch_array($query_order)){
 
-                        //Customer Table
-                        $query_cust = mysqli_query($con,"SELECT * FROM customer WHERE Cust_ID='$ArrayCust'");
-                        $result_cust = mysqli_fetch_array($query_cust);
+                            $Cust_ID = $result_order['FK_Order_Cust_ID'];
+                            //Get name,contact,email from customer table
+                            $query_cust = mysqli_query($con,"SELECT * FROM customer WHERE Cust_ID='$Cust_ID'");
+                            $result_cust = mysqli_fetch_array($query_cust);
 
-                        //Customer Shipping table
-                        $query_shipping = mysqli_query($con,"SELECT * FROM shipping_address WHERE FK_ShipAdd_Cust_ID = '$ArrayCust'");
-                        $query_shipping = mysqli_fetch_array($query_shipping);
-                        
+                            //Customer Shipping_address table
+                            $query_shipping = mysqli_query($con,"SELECT * FROM shipping_address WHERE FK_ShipAdd_Cust_ID = '$Cust_ID'");
+                            $result_shipping = mysqli_fetch_array($query_shipping);
+
+                            $ship_id = $result_order['FK_Order_Ship_ID'];
+                            //Get Shipping method from shipping table
+                            $query_ship_method = mysqli_query($con,"SELECT * FROM shipping WHERE Shipping_ID='$ship_id'");
+                            $result_ship_method = mysqli_fetch_array($query_ship_method);
+
                     ?>
                     <tr>
-                        <td><?php echo $result_cust['Cust_Name'] ?></td>
-                        <td><?php echo $result_cust['Cust_DOB'] ?></td>
-                        <td><?php echo $result_cust['Cust_Gender'] ?></td>
-                        <td><?php echo $result_cust['Cust_Phone'] ?></td>
-                        <td><?php echo $result_cust['Cust_Email'] ?></td>
-                        <td><?php echo $query_shipping['address'].','.$query_shipping['city'].','.$query_shipping['state'].','.$query_shipping['zipcode'].' '.$query_shipping['country']?></td>
+                        <td>#<?php echo $result_order['Order_ID']; ?></td>
+                        <td><?php echo $result_order['Order_Status']; ?></td>
+                        <td>RM<?php echo $result_order['Order_Amount']; ?></td>
+                        <td><?php echo $result_cust['Cust_Name']; ?></td>
+                        <td><?php echo $result_cust['Cust_Phone']; ?></td>
+                        <td><?php echo $result_cust['Cust_Email']; ?></td>
+                        <td><?php echo $result_shipping['address'].','.$result_shipping['city'].','.$result_shipping['state'].','.$result_shipping['zipcode'].' '.$result_shipping['country']?></td>
+                        <td><?php echo $result_ship_method['Shipping_Method'] ?></td>
                     </tr>
                     <?php
                         }
