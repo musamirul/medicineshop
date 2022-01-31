@@ -51,7 +51,7 @@ $result_row = mysqli_num_rows($query_product);
                         <input type="text" class="form-control" value="<?php echo $result_seller['Seller_Name']; ?>" name="name" disabled/>
                       </li>
                       <li class="list-group-item ms-2 me-2">
-                        <i class="bi bi-gift-fill"></i>  Products <span class="float-end text-danger"><?php echo $result_row; ?></span>
+                        <i class="bi bi-gift-fill"></i>  Products <span class="float-end text-danger"><a class="text-decoration-none text-danger" href="Seller_Product-View.php"><?php echo $result_row; ?></a></span>
                       </li>
                     </ul>
                   </div>

@@ -50,7 +50,7 @@
                     <!-- <a href="#" class="list-group-item list-group-item-action py-2" aria-current="true"><i class="bi bi-bar-chart-fill me-3"></i><span>Statistics</span></a>
                     <a href="#" class="list-group-item list-group-item-action py-2" aria-current="true"><i class="bi bi-chat-left-dots-fill me-3"></i><span>Reviews</span></a>-->
                     <a href="#" class="list-group-item list-group-item-action py-2" aria-current="true"><i class="bi bi-wallet-fill me-3"></i><span>Transaction</span></a>
-                    <a href="#" class="list-group-item list-group-item-action py-2" aria-current="true"><i class="bi bi-mailbox2 me-3"></i><span>Tracking</span></a>
+                    <a href="Seller_Tracking.php" class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "Seller_Tracking.php") echo "active"?>" aria-current="true"><i class="bi bi-mailbox2 me-3"></i><span>Tracking</span></a>
 
                     <a href="#ShopCollapse" aria-current="true" aria-controls="ShopCollapse" data-bs-toggle="collapse" aria-expanded="true" class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "Seller_Shop_Profile.php"||$current_file_name== "Seller_Information.php") echo "active"?>"><i class="bi bi-shop me-3"></i><span>Shop</span></a>
                     <ul class="collapse list-group list-group-flush ps-4" id="ShopCollapse">

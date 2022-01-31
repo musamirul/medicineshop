@@ -13,7 +13,7 @@
     $unpaidcount = $result_countunpaid[0];
 
     //Count Shipping
-    $query_countship = mysqli_query($con,"SELECT count(*) FROM tracking WHERE Tracking_Status = 'shipmentArranged' AND FK_Tracking_Seller_ID ='$Seller_ID'");
+    $query_countship = mysqli_query($con,"SELECT count(*) FROM tracking WHERE Tracking_Status = 'ship' AND FK_Tracking_Seller_ID ='$Seller_ID'");
     $result_countship = mysqli_fetch_array($query_countship);
     $shippingcount = $result_countship[0];
 
@@ -129,10 +129,10 @@
         $Order_ID;
 
         //update tracking table to shipment Arranged
-        $query_updateTracking = mysqli_query($con,"UPDATE tracking SET Tracking_Status='collected' WHERE Tracking_ID = '$trackingID'");
+        $query_updateTracking = mysqli_query($con,"UPDATE tracking SET Tracking_Status='delivered' WHERE Tracking_ID = '$trackingID'");
 
         $query_shipmentTracking = mysqli_query($con,"INSERT INTO tracking_shipment(Track_Ship_Status, Track_Ship_Date, Track_Ship_Time,FK_Tracking_ID)
-         VALUES ('collected','$todayDate','$todayTime','$trackingID')");
+         VALUES ('delivered','$todayDate','$todayTime','$trackingID')");
 
         echo '<script>window.location.href="Seller_Shipment_shipping.php?msg=success"</script>';
     }

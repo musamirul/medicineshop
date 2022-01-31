@@ -13,7 +13,7 @@
     $unpaidcount = $result_countunpaid[0];
 
     //Count Shipping
-    $query_countship = mysqli_query($con,"SELECT count(*) FROM tracking WHERE Tracking_Status = 'shipmentArranged' AND FK_Tracking_Seller_ID ='$Seller_ID'");
+    $query_countship = mysqli_query($con,"SELECT count(*) FROM tracking WHERE Tracking_Status = 'ship' AND FK_Tracking_Seller_ID ='$Seller_ID'");
     $result_countship = mysqli_fetch_array($query_countship);
     $shippingcount = $result_countship[0];
 
