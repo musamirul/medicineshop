@@ -39,13 +39,13 @@
                 <div class="row bg-white p-3">
                     <ul class="nav nav-pills d-flex justify-content-start">
                         <li style="width: 170px;" class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="Admin_ManageCust.php"><center>All<span class="shadow badge bg-secondary ms-3"><?php echo $allcount ?></span></center></a>
+                            <a class="nav-link text-reset"  href="Admin_ManageCust.php"><center>All<span class="shadow badge bg-secondary ms-3"><?php echo $allcount ?></span></center></a>
                         </li>
                         <li style="width: 170px;" class="nav-item">
                             <a class="nav-link text-reset" href="Admin_ManageCust_Active.php"><center>Active<span class="shadow badge bg-secondary ms-3"><?php echo $activecount ?></span></center></a>
                         </li>
                         <li style="width: 170px;" class="nav-item">
-                            <a class="nav-link text-reset" href="Admin_ManageCust_Deactive.php"><center>Deactive<span class="shadow badge bg-secondary ms-3"><?php echo $deactivecount ?></span></center></a>
+                            <a class="nav-link active" aria-current="page" href="Admin_ManageCust_Deactive.php"><center>Deactive<span class="shadow badge bg-secondary ms-3"><?php echo $deactivecount ?></span></center></a>
                         </li>
                         <li style="width: 170px;" class="nav-item">
                             <a class="nav-link text-reset" href="Admin_ManageCust_Suspend.php"><center>Suspend<span class="shadow badge bg-secondary ms-3"><?php echo $suspendcount ?></span></center></a>
@@ -70,7 +70,7 @@
                 <tbody>
                     <?php
                         //display all table data
-                        $query_showData = mysqli_query($con,"SELECT * FROM customer");
+                        $query_showData = mysqli_query($con,"SELECT * FROM customer WHERE Cust_Status = 'deactive'");
                         while($result_showData = mysqli_fetch_array($query_showData)){
                         $Cust_ID = $result_showData['Cust_ID'] 
                     ?>
@@ -79,46 +79,19 @@
                         <td><?php echo $result_showData['Cust_Name']; ?></td>
                         <td><?php echo $result_showData['Cust_Phone']; ?></td>
                         <td><?php echo $result_showData['Cust_Email']; ?></td>
-                        <td><?php echo $result_showData['Cust_Status']; ?></td>
+                        <form method ="post">
                         <td>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CustModal<?php echo $Cust_ID ?>">Edit</button>
+                            <select class="form-select form-select-sm mb-3" name="status">
+                                <option value="Active" <?php if($result_showData['Cust_Status']=='Active'){echo 'selected';} ?>>Active</option>
+                                <option value="deactive" <?php if($result_showData['Cust_Status']=='deactive'){echo 'selected';}  ?>>Deactive</option>
+                                <option value="suspend" <?php if($result_showData['Cust_Status']=='suspend'){echo 'selected';}  ?>>Suspend</option>
+                            </select>
+                        <td>
+                            <input type="hidden" value="<?php echo $result_showData['Cust_ID']; ?>" name="cust_ID">
+                            <button class="btn btn-primary" name="saveDetail" type="submit">Update</button>
                         </td>
+                        </form>
                     </tr>
-                        <!-- View Seller -->
-                        <div class="modal fade" id="CustModal<?php echo $Cust_ID ?>" tabindex="-1" aria-labelledby="editModalLabel" class="modal fade" role="dialog">
-                            <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                <h5 class="modal-title" id="editModalLabel">Edit profile <strong>#<?php echo $result_showData['Cust_Name']; ?></strong></h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                <form method="POST">
-                                    <div class="row mb-3 mt-4">
-                                        <input type="text" class="form-control" name="name" value ="<?php echo $result_showData['Cust_Name']; ?>" required/>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <input type="number" class="form-control" name="phone" value ="<?php echo $result_showData['Cust_Phone']; ?>" required/>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <input type="text" class="form-control" name="email" value ="<?php echo $result_showData['Cust_Email']; ?>" required/>    
-                                    </div>
-                                    <div class="row mb-3">
-                                        <select class="form-select form-select-sm mb-3" name="status">
-                                            <option value="Active" <?php if($result_showData['Cust_Status']=='Active'){echo 'selected';} ?>>Active</option>
-                                            <option value="deactive" <?php if($result_showData['Cust_Status']=='deactive'){echo 'selected';}  ?>>Deactive</option>
-                                            <option value="suspend" <?php if($result_showData['Cust_Status']=='suspend'){echo 'selected';}  ?>>Suspend</option>
-                                        </select>
-                                    </div>
-                                <div class="modal-footer">
-                                    <input type="hidden" value="<?php echo $result_showData['Cust_ID']; ?>" name="cust_ID">
-                                    <button class="btn btn-primary" name="saveDetail" type="submit">Save</button>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                </div>
-                                </form>   
-                            </div>
-                            </div>
-                        </div>
-                        <!-- End Seller -->
                     <?php
                         }
                     ?>
@@ -130,15 +103,11 @@
 <?php
     if(isset($_POST['saveDetail'])){
         $hcust_id = $_POST['cust_ID'];
-        $name = $_POST['name'];
-        $phone = $_POST['phone'];
-        $email = $_POST['email'];
         $status = $_POST['status'];
 
-        $query_updateSeller = mysqli_query($con,"UPDATE customer SET Cust_Name='$name',Cust_Phone='$phone',
-        Cust_Email='$email',Cust_Status='$status' WHERE Cust_ID = '$hcust_id'");
+        $query_updateSeller = mysqli_query($con,"UPDATE customer SET Cust_Status='$status' WHERE Cust_ID = '$hcust_id'");
         
-        echo '<script>window.location.href="Admin_ManageCust.php"</script>';
+        echo '<script>window.location.href="Admin_ManageCust_Deactive.php"</script>';
     }
 ?>
 
