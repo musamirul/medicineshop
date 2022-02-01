@@ -140,7 +140,7 @@ if(isset($_POST['login'])){
                 echo 'false';
                 $_SESSION['Cust_Id'] = "";
                 //go to profile page to update user account
-                echo '<script>window.location.href="customer/profile.php"</script>';
+                echo '<script>window.location.href="customer/create_profile.php"</script>';
                 //header("location:http://localhost/medicineshop/customer/profile.php");
                 exit();
             }

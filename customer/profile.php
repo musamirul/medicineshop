@@ -199,8 +199,8 @@
         $gender = $_POST['gender'];
         $phone = $_POST['phone'];
         $email = $_POST['email'];
-        $query_save = mysqli_query($con,"INSERT INTO customer(Cust_Name, Cust_DOB, Cust_Gender, Cust_Phone, Cust_Email, FK_Cust_Login_ID) 
-                                    VALUES ('$name','$dob','$gender','$phone','$email','$loginID')");
+        $query_save = mysqli_query($con,"INSERT INTO customer(Cust_Name, Cust_DOB, Cust_Gender, Cust_Phone, Cust_Email, Cust_Status, FK_Cust_Login_ID) 
+                                    VALUES ('$name','$dob','$gender','$phone','$email','Active','$loginID')");
         echo '<script>window.location.href="profile.php"</script>';
     }
     
