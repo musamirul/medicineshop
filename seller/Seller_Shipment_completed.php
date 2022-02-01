@@ -101,13 +101,14 @@
                             $result_cust = mysqli_fetch_array($query_cust);
                     ?>
                     <tr>
+                        <form method="post">
                         <td><a data-bs-toggle="modal" data-bs-target="#productView<?php echo $Cart_ID ?>" href="">#<?php echo $result_tracking['FK_Tracking_Order_ID'] ?></a></td>
                         <td><?php echo $result_cust['Cust_Name'] ?></td>
                         <td>RM<?php echo $result_order['Order_Amount'];?></td>
                         <td><?php echo $result_tracking['Tracking_Status'] ?></td>
                         <td><?php echo $result_tracking['Tracking_Channel'] ?></td>
                             <input type="hidden" name="tracking_ID" value="<?php echo $result_tracking['Tracking_ID']; ?>">
-                            <td><button class="btn btn-primary" type="submit" name="shipmentBtn"><i class="bi bi-truck"> </i> Shipment Delivered</button></td>
+                            <td><button class="btn btn-primary" type="submit" name="shipmentBtn"><i class="bi bi-truck"> </i> Shipment Completed</button></td>
                         </form>
                     </tr>
                     <?php

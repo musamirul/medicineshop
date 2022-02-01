@@ -88,7 +88,7 @@
                     <?php
                         
 
-                        $query_tracking = mysqli_query($con,"SELECT * FROM tracking WHERE Tracking_Status ='shipmentArranged' AND FK_Tracking_Seller_ID = '$Seller_ID'");
+                        $query_tracking = mysqli_query($con,"SELECT * FROM tracking WHERE Tracking_Status ='ship' AND FK_Tracking_Seller_ID = '$Seller_ID'");
                         while($result_tracking = mysqli_fetch_array($query_tracking)){
                             
                             $Order_ID = $result_tracking['FK_Tracking_Order_ID'];
@@ -108,7 +108,7 @@
                         <td><?php echo $result_tracking['Tracking_Channel'] ?></td>
                         <form method="post">
                             <input type="hidden" name="tracking_ID" value="<?php echo $result_tracking['Tracking_ID']; ?>">
-                            <td><button class="btn btn-primary" type="submit" name="shipmentBtn"><i class="bi bi-truck"> </i> Shipment Collected</button></td>
+                            <td><button class="btn btn-primary" type="submit" name="shipmentBtn"><i class="bi bi-truck"> </i> Shipment Delivered</button></td>
                         </form>
                     </tr>
                     <?php
