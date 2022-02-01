@@ -31,7 +31,7 @@
             <div class="row m-5 shadow bg-body rounded" style="height: 700px; background-image: url('Interface/style/image/phn2.png'); background-repeat: no-repeat;background-size: cover;">
                 <div class="col-3">
                 </div>
-                <div style="height: 70%;" class="col-6 mt-5 bg-white shadow bg-body rounded">
+                <div style="height: 70%;" class="col-6 mt-5 bg-white shadow-lg bg-body rounded-3">
                     <div class="row pt-5">
                         <div class="d-flex justify-content-center">
                             <div class="p-2 bd-highlight"><img src="Interface/style/image/logo.png" style="height: 30px;"></div>

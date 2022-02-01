@@ -29,7 +29,7 @@
                             <option value="maybank" <?php if($result_seller['Seller_BankAccName']=='maybank')echo 'selected' ?>>Maybank</option>
                             <option value="cimb" <?php if($result_seller['Seller_BankAccName']=='cimb')echo 'selected' ?>>CIMB</option>
                             <option value="public" <?php if($result_seller['Seller_BankAccName']=='public')echo 'selected' ?>>Public Bank Bhd</option>
-                            <option value="hongleong <?php if($result_seller['Seller_BankAccName']=='hongleong')echo 'selected' ?>">Hong Leong</option>
+                            <option value="hongleong" <?php if($result_seller['Seller_BankAccName']=='hongleong')echo 'selected' ?>>Hong Leong</option>
                             <option value="ambank" <?php if($result_seller['Seller_BankAccName']=='ambank')echo 'selected' ?>>Ambank Group</option>
                             <option value="uob" <?php if($result_seller['Seller_BankAccName']=='uob')echo 'selected' ?>>United Overseas Bank</option>
                             <option value="rakyat" <?php if($result_seller['Seller_BankAccName']=='rakyat')echo 'selected' ?>>Bank Rakyat</option>

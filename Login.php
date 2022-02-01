@@ -117,7 +117,7 @@ if(isset($_POST['login'])){
             $_SESSION['id'] = $result['Login_ID'];
             $_SESSION['username'] = $result['username'];
             $_SESSION['role'] = $result['role'];
-            echo 'administrator';
+            echo '<script>window.location.href="admin/Admin_Dashboard.php"</script>';
         
         //CUSTOMER
         }elseif($result['role']=='customer'){
