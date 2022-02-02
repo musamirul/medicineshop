@@ -165,7 +165,7 @@ $result_row = mysqli_num_rows($query_product);
     }
 
     if(isset($_POST['editDescBtn'])){
-      $shop_desc = $_POST['description'];
+      $shop_desc = str_replace("'", '', $_POST['description']) ;
       
       $query_updateDesc = mysqli_query($con,"UPDATE seller_shop SET Shop_Desc='$shop_desc' WHERE FK_Shop_Seller_ID = '$Seller_ID'");
       $_SESSION['message'] = 'Successfully update shop description';

@@ -121,6 +121,12 @@
         $result_selectSellerID = mysqli_fetch_array($query_selectSellerID);
         $seller_id = $result_selectSellerID['Seller_ID'];
 
+        //Create Shop Profile
+        $query_createShop = mysqli_query($con,"INSERT INTO seller_shop(Shop_Desc, Shop_Img, Shop_Img_File, Shop_Cover, Shop_Cover_File, FK_Shop_Seller_ID) 
+        VALUES ('','','','','','$seller_id')");
+
+
+
         //Create Wallet
         $amount = 0;
         $query_wallet = mysqli_query($con,"INSERT INTO wallet(Wallet_Amount, FK_Wallet_Seller_ID) VALUES ('$amount','$seller_id')");
