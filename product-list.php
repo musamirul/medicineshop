@@ -39,9 +39,8 @@ height: 100px;
                     WHERE Product_Tags LIKE '%$productSearch%'");
                     
                     while($searchResult = mysqli_fetch_array($searchQuery))
-                    {
-            ?>
-            
+                {
+            ?>           
                 <div class="col-2 mb-3">
                     <a class="text-decoration-none text-reset" href="product-view.php?prodId=<?php echo $searchResult['Product_ID']?>">
                         <div class="card" style="width: 11rem;">
