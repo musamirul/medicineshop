@@ -10,6 +10,7 @@ $result_seller = mysqli_fetch_array($query_seller);
 $query_product = mysqli_query($con,"SELECT * FROM product WHERE FK_Product_Seller_ID = '$Seller_ID'");
 $result_row = mysqli_num_rows($query_product);
 ?>
+<?php include("Message_Notification.php")?>
 <div class="row">
     <div class="col-12 bg-white shadow-sm p-3 mb-5 bg-body rounded me-5">
         <div class="row p-3">
@@ -167,6 +168,7 @@ $result_row = mysqli_num_rows($query_product);
       $shop_desc = $_POST['description'];
       
       $query_updateDesc = mysqli_query($con,"UPDATE seller_shop SET Shop_Desc='$shop_desc' WHERE FK_Shop_Seller_ID = '$Seller_ID'");
+      $_SESSION['message'] = 'Successfully update shop description';
       echo '<script>window.location.href="Seller_Shop_Profile.php?msg=success"</script>';
     }
 ?>

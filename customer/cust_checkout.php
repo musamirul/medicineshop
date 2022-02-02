@@ -20,6 +20,7 @@ $query_cart_CartID_result = mysqli_fetch_array($query_cart_CartID);
 $Cart_ID = $query_cart_CartID_result['Cart_ID'];
 
 
+
 $tempSize = 0;
 $FK_Seller_ID = array();
 $temp_CartID = "";
@@ -50,7 +51,19 @@ $temp_CartID;
             <div class="row p-2 ms-3">
                 <div style="font-weight: bold;" class="col-2 text-start"><?php echo $result_customerDetail['Cust_Name'] ?></div>
                 <div style="font-weight: bold;" class="col-2 text-start"><?php echo $result_customerDetail['Cust_Phone'] ?></div>
-                <div class="col-7"><?php echo $address; ?></div>
+                <div class="col-7">
+                    <?php 
+                        if($result_shippingAddress['ShipAdd_ID']==''){
+                    ?>
+                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#AddressModal"><i class="bi bi-info-square-fill"></i> Add Shipping Address</button>
+                        <span style="font-size: 14px;" class="text-danger">*Please Add Shipping Address to proceed checkout</span>
+                    <?php
+                        }else{
+                            echo $address; 
+                        }
+                        
+                    ?>
+                </div>
             </div>
         </div>
         <div class="row bg-white mt-3 pt-3 ps-3 pe-3 shadow-sm">
@@ -251,7 +264,7 @@ $temp_CartID;
                         <form method="post">
                             <input type="hidden" name="Order_Amount" value="<?php echo htmlspecialchars(serialize($TotalShippingAndPrice)); ?>">
                             <input type="hidden" name="FK_Order_Seller_ID" value="<?php echo htmlspecialchars(serialize($FK_Seller_ID)); ?>">
-                            <button class="btn btn-primary" name="Order_button" type="submit">Place Order</button>
+                            <button class="btn btn-primary" name="Order_button" type="submit" <?php if($result_shippingAddress['ShipAdd_ID']==''){echo 'disabled';} ?>>Place Order</button>
                         </form>
                     </div>
                 </div>
@@ -261,6 +274,59 @@ $temp_CartID;
     </div>
     <div class="col-2"></div>
 </div>
+
+ <!-- Add Shipping -->
+ <div class="modal fade" id="AddressModal" tabindex="-1" aria-labelledby="editModalLabel" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">Add Shipping Address <strong> <?php echo $result_customerDetail['Cust_Name'] ?></strong></h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        <form method="POST">
+            <div class="row mb-3 mt-4">
+                <input type="text" class="form-control" name="address" placeholder="Address" required/>
+            </div>
+            <div class="row mb-3">
+                <input type="text" class="form-control" name="city" placeholder="City" required/>
+            </div>
+            <div class="row mb-3">
+                <input type="text" class="form-control" name="state" placeholder="State"  required/>    
+            </div>
+            <div class="row mb-3">
+                <input type="text" class="form-control" name="zipcode" placeholder="Zipcode"  required/>    
+            </div>
+            <div class="row mb-3">
+                <input type="text" class="form-control" name="country" placeholder="Country"  required/>    
+            </div>
+        <div class="modal-footer">
+            <input type="hidden" value="<?php echo $custID; ?>" name="cust_ID">
+            <button class="btn btn-primary" name="saveDetailShip" type="submit">Save</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+        </form>   
+    </div>
+    </div>
+</div>
+<!-- Add Shipping -->
+<?php
+    if(isset($_POST['saveDetailShip'])){
+        $address = $_POST['address'];
+        $city = $_POST['city'];
+        $state = $_POST['state'];
+        $zipcode = $_POST['zipcode'];
+        $country = $_POST['country'];
+        $shipCust_ID = $_POST['cust_ID'];
+
+        $query_AddShip = mysqli_query($con,"INSERT INTO shipping_address(address, city, state, zipcode, country, FK_ShipAdd_Cust_ID) 
+        VALUES ('$address','$city','$state','$zipcode','$country','$shipCust_ID')");
+
+        $query_AddBill = mysqli_query($con,"INSERT INTO billing_address(address, city, state, zipcode, country, FK_BillAdd_Cust_ID) 
+        VALUES ('$address','$city','$state','$zipcode','$country','$shipCust_ID')");
+        echo "<script>window.location.href='cust_checkout.php'</script>";
+    }
+?>
+
 <?php
     if(isset($_POST['Order_button'])){
         $ArrayTotalShippingAndPrice = unserialize($_POST['Order_Amount']);
@@ -277,9 +343,9 @@ $temp_CartID;
         $BillAdd_ID =  $result_billadd['BillAdd_ID'];
 
         //Create Order Number
-        $query_OrderNum = mysqli_query($con,"SELECT Order_No FROM orders ORDER BY Order_ID LIMIT 1");
+        $query_OrderNum = mysqli_query($con,"SELECT * FROM orders ORDER BY Order_ID DESC LIMIT 1 ");
         $result_OrderNum = mysqli_fetch_array($query_OrderNum);
-        $Order_Number = $result_OrderNum['Order_No']+1;
+        echo $Order_Number = $result_OrderNum['Order_No']+1;
 
         $z = 0;
         while($z<count($ArrayFK_Seller_ID)){
@@ -296,6 +362,7 @@ $temp_CartID;
 
         //change cart status
         echo "<script>window.location.href='online_banking.php?orderId=$Order_Number'</script>";
+        
 
     }
 ?>
@@ -312,6 +379,5 @@ $temp_CartID;
         echo '<script>window.location.href="cust_checkout.php"</script>';
     }
 ?>
-
 
 <?php include("Interface/footer.php")?>

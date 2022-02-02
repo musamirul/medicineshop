@@ -25,6 +25,7 @@
     $_SESSION['username'];
     $_SESSION['role'];
     $_SESSION['Cust_Id'];
+    date_default_timezone_set("Asia/Kuala_Lumpur");
 ?>
 		<nav id="main-navbar" class="navbar navbar-expand-lg shadow-sm navbar-light bg-white fixed-top">
             <!-- Container wrapper -->
@@ -34,7 +35,7 @@
                   <div class="col">
                     <!-- Brand -->
                     <a class="navbar-brand" href="#">
-                      <img class="ms-3" src="Interface/style/image/logo.png" height="20" alt="" loading="lazy" />
+                      
                     </a>
                     <a style="font-size: 14px; color: rgb(20, 10, 109);" class="text-decoration-none pe-2" href="../seller/Seller_Registration.php">Seller Center</a>
 
@@ -45,8 +46,8 @@
                         <!-- Notification dropdown -->
                         <li class="nav-item dropdown">
                           <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
-                            <i class="fas fa-bell"></i>
-                            <span class="position-absolute top-20 start-70 translate-middle badge rounded-pill bg-danger">1</span>
+                            <span style="font-size: 14px;">notification</span>
+                            <span class="position-absolute top-30 start-90 translate-middle badge rounded-pill bg-danger">1</span>
                           </a>
                           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item" href="#">Some news</a></li>
@@ -57,7 +58,7 @@
                         <!-- Avatar -->
                         <li class="nav-item dropdown">
                           <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
-                            <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle" height="22" alt="" loading="lazy" />
+                            <?php echo $_SESSION['username'];?>
                           </a>
                           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink" >
                             <li><a class="dropdown-item" href="#"></a></li>
@@ -70,9 +71,12 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-10 mt-1">
+                <div class="col-2">
+                  <img class="ms-3" src="Interface/style/image/logo.png" height="48px" width="130px" alt="" loading="lazy" />
+                </div>
+                  <div class="col-8 mt-1">
                     <div class="input-group mb-3">
-                      <input type="text" class="form-control" placeholder="Recipient's username">
+                      <input type="text" class="form-control" placeholder="Search Medicine">
                       <button class="btn btn-primary" type="button"><i class="bi bi-search ps-3 pe-3"></i></button>
                     </div>
                   </div>

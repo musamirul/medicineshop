@@ -1,4 +1,5 @@
 <?php include("Interface/header.php"); ?>
+<?php include("Message_Notification.php")?>
 <?php 
     $Seller_ID = $_SESSION['Seller_Id'];
 
@@ -122,9 +123,9 @@
 </div>
 <?php
     if(isset($_POST['shipmentBtn'])){
+        date_default_timezone_set("Asia/Kuala_Lumpur");
         $todayDate = date('d-m-Y');
         $todayTime = date('h:i:s a');
-        $shipOption = $_POST['shipOption'];
         $trackingID = $_POST['tracking_ID'];
         $Order_ID;
 
@@ -133,7 +134,7 @@
 
         $query_shipmentTracking = mysqli_query($con,"INSERT INTO tracking_shipment(Track_Ship_Status, Track_Ship_Date, Track_Ship_Time,FK_Tracking_ID)
          VALUES ('delivered','$todayDate','$todayTime','$trackingID')");
-
+        $_SESSION['message'] = 'Successfully update shipment';
         echo '<script>window.location.href="Seller_Shipment_shipping.php?msg=success"</script>';
     }
 ?>

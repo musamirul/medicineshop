@@ -15,6 +15,7 @@ height: 225px;
 
 }
 </style>
+<?php include("Message_Notification.php"); ?>
 <h4>Add Product</h4>
 <small><b>Here you can add product to your store</b></small>
 
@@ -133,6 +134,8 @@ if(isset($_POST['createProduct'])){
             $location="img/" . $_FILES["image"]["name"];
             $query_addProduct = mysqli_query($con,"INSERT INTO product (Product_Name, Product_Desc, Product_Spec, Product_Image, Product_Qty, Product_Type, Product_RecordType, Product_ExpiracyDate, Product_ManufacturerName, Product_SellingPrice, Product_Tags, FK_Product_Seller_ID)
             VALUES ('$name','$description','$specification','$location','$qty','$prodType','$recordType','$expiredDate','$manufacturer','$price','$tags','$sellerID')");
+            $_SESSION['message'] = 'Successfully Add Product '.$name;
+            echo '<script>window.location.href="Seller_Product-Add.php"</script>';
 
            
     

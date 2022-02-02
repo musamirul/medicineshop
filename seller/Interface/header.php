@@ -13,7 +13,7 @@
   $_SESSION['Seller_Id'];
   //Get Current File Name for Navbar active button
   $current_file_name = basename($_SERVER['PHP_SELF']); 
-
+  date_default_timezone_set("Asia/Kuala_Lumpur");
 ?>
 <!doctype html>
 <html lang="en">
@@ -40,7 +40,7 @@
                   <a href="#productCollapse" aria-current="true" aria-controls="productCollapse" data-bs-toggle="collapse" aria-expanded="true" class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "Seller_Product-Add.php"||$current_file_name== "Seller_Product-View.php") echo "active"?>"><i class="bi bi-bag-fill me-3"></i><span>Product</span></a>
                     <ul class="collapse list-group list-group-flush ps-4" id="productCollapse">
                     	<li class="list-group-item py-1 <?php if($current_file_name== "Seller_Product-Add.php") echo "active"?>"><a href="Seller_Product-Add.php" class="text-decoration-none text-reset"><i style="font-size:14px" class="bi bi-bag-plus-fill me-3"></i>Add product</a></li>
-                        <li class="list-group-item py-1"><a href="#" class="text-decoration-none text-reset"><i style="font-size:14px" class="bi bi-bag-dash-fill me-3"></i>Update product</a></li>
+                        <!--<li class="list-group-item py-1"><a href="#" class="text-decoration-none text-reset"><i style="font-size:14px" class="bi bi-bag-dash-fill me-3"></i>Update product</a></li>-->
                         <li class="list-group-item py-1 <?php if($current_file_name== "Seller_Product-View.php") echo "active"?>"><a href="Seller_Product-View.php" class="text-decoration-none text-reset"><i style="font-size:14px" class="bi bi-bag-check-fill me-3"></i>List product</a></li>
                     </ul>
                     
@@ -52,9 +52,8 @@
                     
                     <a href="#FinanceCollapse" aria-current="true" aria-controls="FinanceCollapse" data-bs-toggle="collapse" aria-expanded="true" class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "Seller_Finance_Income.php"||$current_file_name== "Seller_Finance_Balance.php"||$current_file_name== "Seller_Finance_Bank.php") echo "active"?>"><i class="bi bi-wallet2 me-3"></i><span>Finance</span></a>
                     <ul class="collapse list-group list-group-flush ps-4" id="FinanceCollapse">
-                    	<li class="list-group-item py-1"><a href="Seller_Finance_Income.php" class="text-decoration-none text-reset"><i style="font-size:14px" class="bi bi-collection me-3"></i>My Income</a></li>
-                      <li class="list-group-item py-1"><a href="Seller_Finance_Balance.php" class="text-decoration-none text-reset"><i style="font-size:14px" class="bi bi-wallet me-3"></i>My Balance</a></li>
-                      <li class="list-group-item py-1"><a href="Seller_Finance_Bank.php" class="text-decoration-none text-reset"><i style="font-size:14px" class="bi bi-bank me-3"></i>Bank Account</a></li>
+                      <li class="list-group-item py-1 <?php if($current_file_name== "Seller_Finance_Balance.php") echo "active"?>"><a href="Seller_Finance_Balance.php" class="text-decoration-none text-reset"><i style="font-size:14px" class="bi bi-wallet me-3"></i>My Income</a></li>
+                      <li class="list-group-item py-1 <?php if($current_file_name== "Seller_Finance_Bank.php") echo "active"?>"><a href="Seller_Finance_Bank.php" class="text-decoration-none text-reset"><i style="font-size:14px" class="bi bi-bank me-3"></i>Bank Account</a></li>
                     </ul>
 
                     <a href="Seller_Tracking.php" class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "Seller_Tracking.php") echo "active"?>" aria-current="true"><i class="bi bi-mailbox2 me-3"></i><span>Tracking</span></a>

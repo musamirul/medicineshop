@@ -4,6 +4,7 @@
     $query_seller = mysqli_query($con,"SELECT * FROM seller WHERE Seller_ID = '$SellerID'");
     $result_seller = mysqli_fetch_array($query_seller);
 ?>
+<?php include("Message_Notification.php")?>
 <div class="row">
     <div class="col-12 bg-white shadow-sm p-3 mb-5 bg-body rounded me-5">
         <div class="row p-3">
@@ -87,7 +88,7 @@
 
         $query_updateSeller = mysqli_query($con,"UPDATE seller SET Seller_Name='$name',Seller_RegistrationNo='$regNo',Seller_Phone='$phone',
         Seller_Address='$address',Seller_BankAccName='$bankName',Seller_BankAccNo='$bankNo' WHERE Seller_ID = '$SellerID'");
-
+        $_SESSION['message'] = 'Successfully update information';
         echo '<script>window.location.href="Seller_Information.php?msg=success"</script>';
 
     }

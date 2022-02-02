@@ -5,6 +5,7 @@
     $result_seller = mysqli_fetch_array($query_seller);
 
 ?>
+<?php include("Message_Notification.php")?>
 <div class="row">
     <div class="col-12 bg-white shadow-sm p-3 mb-5 bg-body rounded me-5">
         <div class="row p-3">
@@ -62,7 +63,7 @@
         $bankAcc = $_POST['bank_Account'];
 
         $query_updateBank = mysqli_query($con,"UPDATE seller SET Seller_BankAccName='$bankName',Seller_BankAccNo='$bankAcc' WHERE Seller_ID = '$Seller_ID'");
-
+        $_SESSION['message'] = 'Successfully update bank account';
         echo '<script>window.location.href="Seller_Finance_Bank.php?msg=success"</script>';
     }
 ?>

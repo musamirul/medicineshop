@@ -18,7 +18,7 @@
     include("../includes/config.php");
     if(isset($_SESSION['message'])){
         $_SESSION['message'];
-        echo "<div class='alert alert-success mt-3 ms-5' role='alert' style='position : absolute; width:500px'>
+        echo "<div class='alert alert-success' role='alert' style='position : absolute; width:500px'>
         <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"
         . $_SESSION['message'] .
         "</div>";

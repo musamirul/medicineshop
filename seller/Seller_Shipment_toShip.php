@@ -1,4 +1,5 @@
 <?php include("Interface/header.php"); ?>
+<?php include("Message_Notification.php")?>
 <?php 
     $Seller_ID = $_SESSION['Seller_Id'];
 
@@ -129,6 +130,7 @@
 </div>
 <?php
     if(isset($_POST['shipmentBtn'])){
+        date_default_timezone_set("Asia/Kuala_Lumpur");
         $todayDate = date('d-m-Y');
         $todayTime = date('h:i:s a');
         $shipOption = $_POST['shipOption'];
@@ -140,7 +142,7 @@
 
         $query_shipmentTracking = mysqli_query($con,"INSERT INTO tracking_shipment(Track_Ship_Status, Track_Ship_Date, Track_Ship_Time,FK_Tracking_ID)
          VALUES ('ship','$todayDate','$todayTime','$trackingID')");
-
+        $_SESSION['message'] = 'Successfully update bank account';
         echo '<script>window.location.href="Seller_Shipment_toShip.php?msg=success"</script>';
     }
 ?>

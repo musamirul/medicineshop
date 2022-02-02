@@ -49,7 +49,7 @@
 if(isset($_POST['payBtn'])){
     $todayDate = date('d-m-Y');
     $todayTime = date('h:i:s a');
-    $ReferenceNo = rand(10,100);
+    $ReferenceNo = rand(10,100000000);
     $custID = $_SESSION['Cust_Id'];
     $Order_Cart_ID;
     //Add payment to billing table
@@ -66,6 +66,7 @@ if(isset($_POST['payBtn'])){
         $Order_ID = $result_order_data['Order_ID'];
         $Order_Seller_ID = $result_order_data['FK_Order_Seller_ID'];
         $Order_Ship_ID = $result_order_data['FK_Order_Ship_ID'];
+        $Order_Amount = $result_order_data['Order_Amount'];
 
         //get data from shipping table
         $query_shipping = mysqli_query($con,"SELECT * FROM shipping WHERE Shipping_ID='$Order_Ship_ID' ");
@@ -82,9 +83,21 @@ if(isset($_POST['payBtn'])){
             $estTime = $todayTime;
         }
 
+        //Get Wallet ID & Update Wallet
+        $query_GetWalletID = mysqli_query($con,"SELECT * FROM wallet WHERE FK_Wallet_Seller_ID = '$Order_Seller_ID'");
+        $result_GetWalletID = mysqli_fetch_array($query_GetWalletID);
+        $wallet_ID = $result_GetWalletID['Wallet_ID'];
+        //Update Wallet Amount
+        $total_wallet = $result_GetWalletID['Wallet_Amount']+$Order_Amount;
+        $query_updateWallet = mysqli_query($con,"UPDATE wallet SET Wallet_Amount='$total_wallet' WHERE FK_Wallet_Seller_ID = '$Order_Seller_ID'");
+
+        //Add transaction
+        $query_trans = mysqli_query($con,"INSERT INTO transaction(Transaction_Date, Transaction_Time, Transaction_Type, Transaction_Amount, Transaction_Status, FK_Transaction_Wallet_ID, FK_Transaction_Seller_ID, FK_Transaction_Order_ID) 
+        VALUES ('$todayDate','$todayTime','income','$Order_Amount','completed','$wallet_ID','$Order_Seller_ID','$Order_ID')");
+
         //Insert data to tracking table
-        $query_tracking = mysqli_query($con,"INSERT INTO tracking(Tracking_Date, Tracking_Time, Tracking_Status, Tracking_EstimateDate, Tracking_EstimateTime, FK_Tracking_Order_ID, FK_Tracking_Ship_ID, FK_Tracking_Cust_ID, FK_Tracking_Seller_ID, FK_Tracking_Cart_ID) 
-        VALUES ('$todayDate','$todayTime','preparing','$estDate','$estTime','$Order_ID','$Order_Ship_ID','$custID','$Order_Seller_ID','$Order_Cart_ID')");
+        $query_tracking = mysqli_query($con,"INSERT INTO tracking(Tracking_Date, Tracking_Time, Tracking_Status, Tracking_Channel, Tracking_EstimateDate, Tracking_EstimateTime, FK_Tracking_Order_ID, FK_Tracking_Ship_ID, FK_Tracking_Cust_ID, FK_Tracking_Seller_ID, FK_Tracking_Cart_ID) 
+        VALUES ('$todayDate','$todayTime','preparing','','$estDate','$estTime','$Order_ID','$Order_Ship_ID','$custID','$Order_Seller_ID','$Order_Cart_ID')");
     }
 
     //update cart status = payment completed

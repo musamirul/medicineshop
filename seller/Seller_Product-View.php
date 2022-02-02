@@ -13,6 +13,7 @@
   
   }
   </style>
+  <?php include("Message_Notification.php")?>
   <div class="row">
     <div class="col-6">
       <h4>All Product</h4>
@@ -152,6 +153,7 @@
           
           $editQuery = mysqli_query($con,"UPDATE product SET Product_Name='$nameEdit',Product_Desc='$descriptionEdit',Product_Qty='$quantityEdit',Product_ManufacturerName='$manufacturerEdit',
           Product_SellingPrice='$priceEdit' WHERE Product_ID ='$idEdit'");
+          $_SESSION['message'] = 'Successfully edit product';
           echo '<script>window.location.href="Seller_Product-View.php"</script>';
 
         }
@@ -162,6 +164,7 @@
           if(isset($_POST['deleteProduct'])){
             $idDelete = $_POST['idDelete'];
             $deleteQuery = mysqli_query($con,"DELETE FROM product WHERE Product_ID = '$idDelete'");
+            $_SESSION['message'] = 'Successfully delete product';
             echo '<script>window.location.href="Seller_Product-View.php"</script>';
           }
        ?>

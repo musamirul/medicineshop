@@ -121,9 +121,9 @@
 </div>
 <?php
     if(isset($_POST['shipmentBtn'])){
+        date_default_timezone_set("Asia/Kuala_Lumpur");
         $todayDate = date('d-m-Y');
         $todayTime = date('h:i:s a');
-        $shipOption = $_POST['shipOption'];
         $trackingID = $_POST['tracking_ID'];
         $Order_ID;
 
