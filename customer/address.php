@@ -1,14 +1,12 @@
+
 <?php include("Interface/header.php")?>
 <?php
-session_start();
-include("../includes/config.php");
-if($_SESSION['id']==""){
-    echo '<script>window.location.href="../Login.php"</script>';
-}
+
 $loginId = $_SESSION['Cust_Id'];
 $current_file_name = basename($_SERVER['PHP_SELF']); 
 ?>
-<div class="row">
+
+<div class="row mt-5">
         <div class="col-2 background-color:black;"></div>
         <!-- Left Navigation -->
         <div class="col-2">

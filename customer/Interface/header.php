@@ -14,50 +14,91 @@
   <body style="background-color: azure;">
 
 <header>
+  <?php
+    session_start();
+    include("../includes/config.php");
+    if($_SESSION['id']==""||$_SESSION['username']=="" || $_SESSION['role']!="customer"){
+        session_unset();
+        "<script>window.location.href='../login.php'</script>";
+    }
+    $_SESSION['id'];
+    $_SESSION['username'];
+    $_SESSION['role'];
+    $_SESSION['Cust_Id'];
+?>
 		<nav id="main-navbar" class="navbar navbar-expand-lg shadow-sm navbar-light bg-white fixed-top">
             <!-- Container wrapper -->
-            <div class="container-fluid">
-              <!-- Toggle button -->
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fas fa-bars"></i>
-              </button>
+            <div class="container">
+              <div class="col">
+                <div class="row">
+                  <div class="col">
+                    <!-- Brand -->
+                    <a class="navbar-brand" href="#">
+                      <img class="ms-3" src="Interface/style/image/logo.png" height="20" alt="" loading="lazy" />
+                    </a>
+                    <a style="font-size: 14px; color: rgb(20, 10, 109);" class="text-decoration-none pe-2" href="../seller/Seller_Registration.php">Seller Center</a>
 
-                  <!-- Brand -->
-                  <a class="navbar-brand" href="#">
-                    <img class="ms-3" src="Interface/style/image/logo.png" height="30" alt="" loading="lazy" />
-                  </a>
-              <!-- Right links -->
-              <ul class="navbar-nav ms-auto d-flex flex-row">
-                <!-- Notification dropdown -->
-                <li class="nav-item dropdown">
-                  <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
-                    <i class="fas fa-bell"></i>
-                    <span class="position-absolute top-20 start-70 translate-middle badge rounded-pill bg-danger">1</span>
-                  </a>
-                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                    <li><a class="dropdown-item" href="#">Some news</a></li>
-                    <li><a class="dropdown-item" href="#">Another news</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                  </ul>
-                </li>
-
-                <!-- Avatar -->
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
-                    <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle" height="22" alt="" loading="lazy" />
-                  </a>
-                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink" >
-                    <li><a class="dropdown-item" href="#"></a></li>
-                    <li><a class="dropdown-item" href="profile.php">My profile</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Logout</a></li>
-                  </ul>
-                </li>
-              </ul>
+                  </div>
+                  <div class="col">
+                      <!-- Right links -->
+                      <ul class="navbar-nav ms-auto float-end">
+                        <!-- Notification dropdown -->
+                        <li class="nav-item dropdown">
+                          <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
+                            <i class="fas fa-bell"></i>
+                            <span class="position-absolute top-20 start-70 translate-middle badge rounded-pill bg-danger">1</span>
+                          </a>
+                          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="#">Some news</a></li>
+                            <li><a class="dropdown-item" href="#">Another news</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                          </ul>
+                        </li>
+                        <!-- Avatar -->
+                        <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
+                            <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle" height="22" alt="" loading="lazy" />
+                          </a>
+                          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink" >
+                            <li><a class="dropdown-item" href="#"></a></li>
+                            <li><a class="dropdown-item" href="profile.php">My profile</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                          </ul>
+                        </li>
+                      </ul>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-10 mt-1">
+                    <div class="input-group mb-3">
+                      <input type="text" class="form-control" placeholder="Recipient's username">
+                      <button class="btn btn-primary" type="button"><i class="bi bi-search ps-3 pe-3"></i></button>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <?php
+                          //count suspend
+                          $count_Cust_ID = $_SESSION['Cust_Id'];
+                          $query_countCart = mysqli_query($con,"SELECT count(*) FROM cart WHERE Cart_Status = 'pending' AND FK_Cart_Cust_ID = '$count_Cust_ID'");
+                          $result_countCart = mysqli_fetch_array($query_countCart);
+                          $cartcount = $result_countCart[0];
+                    ?>
+                    <a style="font-size: 14px; color: rgb(20, 10, 109);" class="text-decoration-none position-relative" href="cust_shopping_cart.php">
+                    <i style="font-size: 30px;" class="bi bi-cart"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        <?php echo $cartcount; ?>
+                        <span class="visually-hidden">on cart</span>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
-        <!-- Container wrapper -->
-      </nav>
-    </header>
+            <!-- Container wrapper -->
+    </nav>
+</header>
     <main style="margin-top: 58px">
   <div class="container-fluid pt-4">
+
     

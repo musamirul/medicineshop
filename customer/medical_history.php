@@ -1,17 +1,10 @@
+
 <?php include("Interface/header.php")?>
 <?php
- session_start();
- include("../includes/config.php");
- if($_SESSION['id']==""){
-    header("location:../login.php");
- }
- $_SESSION['id'];
- $_SESSION['username'];
- $_SESSION['role'];
  $Cust_ID =  $_SESSION['Cust_Id'];
  $current_file_name = basename($_SERVER['PHP_SELF']); 
 ?>
-<div class="row">
+<div class="row mt-5">
         <div class="col-2 background-color:black;"></div>
         <!-- Left Navigation -->
         <div class="col-2">

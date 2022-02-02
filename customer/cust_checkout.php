@@ -1,15 +1,6 @@
+
 <?php include("Interface/header.php")?>
-<?php
-    session_start();
-    include("../includes/config.php");
-    if($_SESSION['id']==""){
-        header("location:http://localhost/medicineshop/login.php");
-    }
-    $_SESSION['id'];
-    $_SESSION['username'];
-    $_SESSION['role'];
-    $_SESSION['Cust_Id'];
-?>
+
 
 <?php
 //get customer name and phone number
@@ -49,7 +40,7 @@ $temp_CartID;
 
 ?>
 
-<div class="row mb-5">
+<div class="row mt-5 mb-5">
     <div class="col-2"></div>
     <div class="col-8">
         <div class="row bg-white mt-3 mb-3 p-3 shadow-sm">
