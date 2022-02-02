@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 30, 2022 at 04:59 PM
+-- Generation Time: Feb 02, 2022 at 04:52 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -61,7 +61,15 @@ CREATE TABLE IF NOT EXISTS `billing` (
   `FK_Billing_Cust_ID` int(45) NOT NULL,
   `FK_Billing_Order_ID` int(45) NOT NULL,
   PRIMARY KEY (`Billing_ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `billing`
+--
+
+INSERT INTO `billing` (`Billing_ID`, `Billing_Date`, `Billing_Time`, `Billing_PaymentStatus`, `Billing_PaymentMethod`, `Billing_ReferenceNo`, `FK_Billing_Cust_ID`, `FK_Billing_Order_ID`) VALUES
+(1, '02-02-2022', '01:34:05 pm', 'completed', 'Online Banking', '79496350', 16, 3),
+(2, '02-02-2022', '01:43:01 pm', 'completed', 'Online Banking', '94044939', 16, 3);
 
 -- --------------------------------------------------------
 
@@ -79,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `billing_address` (
   `country` varchar(45) NOT NULL,
   `FK_BillAdd_Cust_ID` int(45) NOT NULL,
   PRIMARY KEY (`BillAdd_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `billing_address`
@@ -88,7 +96,8 @@ CREATE TABLE IF NOT EXISTS `billing_address` (
 INSERT INTO `billing_address` (`BillAdd_ID`, `address`, `city`, `state`, `zipcode`, `country`, `FK_BillAdd_Cust_ID`) VALUES
 (1, 'no 34455', 'klang', 'Kedah', 41222, 'Malaysia', 1),
 (2, 'no 79 lorong ali', 'bandar baru klang', 'Selangor', 47000, 'Malaysia', 4),
-(3, 'no 89', 'bandar baru', 'Selangor', 123455, 'Malaysia', 3);
+(3, 'no 89', 'bandar baru', 'Selangor', 123455, 'Malaysia', 3),
+(4, 'kg jawa', 'klang', 'selangor', 413000, 'malaysia', 16);
 
 -- --------------------------------------------------------
 
@@ -103,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `cart` (
   `Cart_Status` varchar(45) NOT NULL,
   `FK_Cart_Cust_ID` int(45) NOT NULL,
   PRIMARY KEY (`Cart_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `cart`
@@ -111,7 +120,8 @@ CREATE TABLE IF NOT EXISTS `cart` (
 
 INSERT INTO `cart` (`Cart_ID`, `Cart_TimeStamp`, `Cart_Status`, `FK_Cart_Cust_ID`) VALUES
 (10, '2022-01-17 03:32:53pm', 'payment_completed', 3),
-(11, '2022-01-24 11:58:02pm', 'pending', 3);
+(11, '2022-01-24 11:58:02pm', 'pending', 3),
+(12, '2022-02-02 01:52:26am', 'payment_completed', 16);
 
 -- --------------------------------------------------------
 
@@ -129,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `cart_item` (
   `FK_Item_Seller_ID` int(45) NOT NULL,
   `FK_Item_Shipping_ID` int(45) NOT NULL,
   PRIMARY KEY (`Cart_Item_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `cart_item`
@@ -141,7 +151,8 @@ INSERT INTO `cart_item` (`Cart_Item_ID`, `Cart_Item_Qty`, `Cart_Item_Amount`, `F
 (8, 3, 19, 10, 49, 1, 2),
 (9, 2, 19, 10, 49, 1, 2),
 (10, 5, 150, 10, 51, 3, 3),
-(11, 2, 30, 11, 50, 1, 1);
+(11, 2, 30, 11, 50, 1, 1),
+(12, 5, 500, 12, 52, 5, 2);
 
 -- --------------------------------------------------------
 
@@ -157,19 +168,21 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `Cust_Gender` varchar(45) NOT NULL,
   `Cust_Phone` varchar(45) NOT NULL,
   `Cust_Email` varchar(45) NOT NULL,
+  `Cust_Status` varchar(254) NOT NULL,
   `FK_Cust_Login_ID` int(45) NOT NULL,
   PRIMARY KEY (`Cust_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`Cust_ID`, `Cust_Name`, `Cust_DOB`, `Cust_Gender`, `Cust_Phone`, `Cust_Email`, `FK_Cust_Login_ID`) VALUES
-(1, 'Ameirul Mustaqim bin omar', '2021-12-14', 'male', '0193071720', 'musamirul.kpj@gmail.com', 1),
-(2, 'test', '2021-12-16', 'male', '0193071722', 'musamirul.kpj@gmail.com', 5),
-(3, 'ameirul mustaqim', '2021-11-30', 'male', '0123456789', 'muss@kpjklang.com', 7),
-(4, 'ali bin abu', '2022-01-06', 'male', '0193071722', 'mus@kpjklang.com', 12);
+INSERT INTO `customer` (`Cust_ID`, `Cust_Name`, `Cust_DOB`, `Cust_Gender`, `Cust_Phone`, `Cust_Email`, `Cust_Status`, `FK_Cust_Login_ID`) VALUES
+(1, 'Ameirul Mustaqim bin omar', '2021-12-14', 'male', '0193071720', 'musamirul.kpj@gmail.com', 'Active', 1),
+(2, 'test', '2021-12-16', 'male', '0193071722', 'musamirul.kpj@gmail.com', 'Active', 5),
+(3, 'ameirul mustaqim', '2021-11-30', 'male', '0123456789', 'muss@kpjklang.com', 'Active', 7),
+(4, 'ali bin abu', '2022-01-06', 'male', '0193071722', 'mus@kpjklang.com', 'Active', 12),
+(16, 'Dato ameirul musa', '2022-02-01', 'male', '0123456465421', 'mussaa@kpjklang.com', 'Active', 45);
 
 -- --------------------------------------------------------
 
@@ -231,7 +244,7 @@ CREATE TABLE IF NOT EXISTS `login` (
   `password` varchar(45) NOT NULL,
   `role` varchar(45) NOT NULL,
   PRIMARY KEY (`Login_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=46 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `login`
@@ -250,6 +263,8 @@ INSERT INTO `login` (`Login_ID`, `username`, `password`, `role`) VALUES
 (18, 'administrator', '123', 'administrator'),
 (20, 'admin2', '123', 'administrator'),
 (21, 'bigpharma', '123', 'seller'),
+(45, 'musa', '123', 'customer'),
+(44, 'sterling', '123', 'seller'),
 (42, 'seller', '123', 'seller');
 
 -- --------------------------------------------------------
@@ -272,7 +287,7 @@ CREATE TABLE IF NOT EXISTS `medical_history` (
   `Surgery` varchar(45) NOT NULL,
   `FK_Med_Cust_ID` int(45) NOT NULL,
   PRIMARY KEY (`Medical_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `medical_history`
@@ -280,7 +295,8 @@ CREATE TABLE IF NOT EXISTS `medical_history` (
 
 INSERT INTO `medical_history` (`Medical_ID`, `Blood_Group`, `Weight`, `Height`, `Alcohol`, `Smoking`, `Exercise`, `Illness`, `BMI`, `Surgery`, `FK_Med_Cust_ID`) VALUES
 (1, 'A+', 41, 150, 'no', 'yes', 'yes', 'illness saya adalah', 18.22, 'surgery saya adalah', 3),
-(3, 'AB-', 60, 190, 'yes', 'yes', 'yes', 'sakit ke tak sakit kan untung la', 16.62, 'surgery tak macamna untung', 1);
+(3, 'AB-', 60, 190, 'yes', 'yes', 'yes', 'sakit ke tak sakit kan untung la', 16.62, 'surgery tak macamna untung', 1),
+(4, 'A-', 85, 100, 'yes', 'no', 'no', 'sakit puan ke', 85, 'cucuk bibir', 16);
 
 -- --------------------------------------------------------
 
@@ -301,7 +317,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `FK_Order_Cart_ID` int(45) NOT NULL,
   `FK_Order_Ship_ID` int(45) NOT NULL,
   PRIMARY KEY (`Order_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `orders`
@@ -309,6 +325,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
 
 INSERT INTO `orders` (`Order_ID`, `Order_No`, `Order_Status`, `Order_Amount`, `FK_Order_ShipAdd_ID`, `FK_Order_BillAdd_ID`, `FK_Order_Cust_ID`, `FK_Order_Seller_ID`, `FK_Order_Cart_ID`, `FK_Order_Ship_ID`) VALUES
 (18, 2, 'payment_pending', 110, 6, 3, 3, 1, 11, 1),
+(22, 3, 'payment_completed', 2550, 8, 4, 16, 5, 12, 2),
 (17, 1, 'payment_completed', 765, 6, 3, 3, 3, 10, 3),
 (16, 1, 'payment_completed', 265, 6, 3, 3, 1, 10, 2);
 
@@ -334,7 +351,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   `Product_Tags` varchar(254) NOT NULL,
   `FK_Product_Seller_ID` int(45) NOT NULL,
   PRIMARY KEY (`Product_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=52 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=54 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `product`
@@ -343,7 +360,9 @@ CREATE TABLE IF NOT EXISTS `product` (
 INSERT INTO `product` (`Product_ID`, `Product_Name`, `Product_Desc`, `Product_Spec`, `Product_Image`, `Product_Qty`, `Product_Type`, `Product_RecordType`, `Product_ExpiracyDate`, `Product_ManufacturerName`, `Product_SellingPrice`, `Product_Tags`, `FK_Product_Seller_ID`) VALUES
 (50, 'product 2', '<p><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\"><span style=\"background-color: rgb(255, 255, 0);\">is simply dummy text of the printing </span>and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuri<b>es, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset shee</b>ts containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span><br></p>', '<ol><li><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">is simply dummy text of the printing and typesetting industry. </span></li><li><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,</span></li><li><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\"> when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></li><li><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\"> It has survived not only five centuries, but also the leap into electronic typesetting, </span></li><li><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software </span></li><li><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">like Aldus PageMaker including versions of Lorem Ipsum.</span><br></li></ol>', 'img/1111.png', 19, 'control', 'yes', '2022-01-14', 'product 2', 30, 'panadol', 1),
 (49, 'product 1', '<p><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span><br></p>', '<p><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span><br></p>', 'img/123.PNG', 12, 'control', 'yes', '2022-01-14', 'product 1', 19, 'panadol', 1),
-(51, 'fever pill', '<p>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>', '<p>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>', 'img/hits2hang.PNG', 15, 'control', 'yes', '2022-01-19', 'fever manu', 150, 'fever', 3);
+(51, 'fever pill', '<p>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>', '<p>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>', 'img/hits2hang.PNG', 15, 'control', 'yes', '2022-01-19', 'fever manu', 150, 'fever', 3),
+(52, 'Oral Chemotherapy pills', '<p>Chemotherapy can be used at different points during cancer treatment. Some patients are solely treated with chemotherapy, while others may receive chemotherapy before and/or after surgery to remove a cancerous tumor, or as an adjuvant treatment to another therapy. Some cancers are treated with newer therapies, and do not involve chemotherapy at all.<br></p>', '<p>Chemotherapy can be used at different points during cancer treatment. Some patients are solely treated with chemotherapy, while others may receive chemotherapy before and/or after surgery to remove a cancerous tumor, or as an adjuvant treatment to another therapy. Some cancers are treated with newer therapies, and do not involve chemotherapy at all.<br></p>', 'img/OralChemo.jpg', 20, 'control', 'yes', '2022-02-01', 'dana farber', 500, 'chemo, chemotherapy, oral', 5),
+(53, 'Prospan Cough Syrup 200ML', '<p>Cough Syrup 200ml (*MAL Item)<br></p>', '<ul><li>Place of Origin</li></ul><p>Germany</p><ul><li>Direction</li></ul><p>Children (6 - 11 years) - 1 stick pack 2 times daily,&nbsp;<span style=\"background-color: rgba(var(--bs-body-bg-rgb),var(--bs-bg-opacity)); font-size: var(--bs-body-font-size); font-weight: var(--bs-body-font-weight); text-align: var(--bs-body-text-align);\">Adolescents &amp; Adults (&gt;12 years old) - 1 stick pack 3 times daily</span></p><ul><li>Ingredients</li></ul><p>5ml of liquid contains 35mg of hedera helix extract from leaf (5-7.5:1), 6.7mg of potassium sorbate (Ph. Eur)(preservative). 5ml of liquid contains 1.926g of sorbitol (Ph. Eur)(sweetener)=0.16BU.</p>', 'img/prospan.jpg', 15, 'noncontrol', 'no', '2022-02-10', 'Germany Med', 39, 'cough, syrup, prospan', 5);
 
 -- --------------------------------------------------------
 
@@ -389,16 +408,16 @@ CREATE TABLE IF NOT EXISTS `seller` (
   `Seller_Registration_Status` varchar(45) NOT NULL,
   `FK_Seller_Login_ID` int(45) NOT NULL,
   PRIMARY KEY (`Seller_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `seller`
 --
 
 INSERT INTO `seller` (`Seller_ID`, `Seller_Name`, `Seller_RegistrationNo`, `Seller_Phone`, `Seller_Address`, `Seller_BankAccName`, `Seller_BankAccNo`, `Seller_Registration_Status`, `FK_Seller_Login_ID`) VALUES
-(1, 'pharma niaga', 123342328, '0193224748', 'lorong 5343 jalan 123', 'cimb', '123558435', 'Active', 11),
-(2, 'big pharmacy', 53234252, '012834737', 'lorong pharmacy', 'rhb', '1234889123489', 'reqApproval', 21),
-(3, 'seller sdn bhd', 1234444, '01233338747', 'lorong mohd tahir', 'cimb', '123334057487', 'Active', 42);
+(1, 'pharma niaga', 123342328, '0135466555', 'lorong 5343 jalan 123 Klang', 'cimb', '123558435', 'Active', 11),
+(2, 'big pharmacy', 53234252, '012834737', 'lorong pharmacy', 'rhb', '1234889123489', 'Active', 21),
+(5, 'sterling pharmacy', 124551254, '032458775', 'Aeon Bukit Tinggi Shopping Centre, S21, Persiaran Batu Nilam 1/ks6, Bandar Bukit Tinggi 2, 41200 Klang', 'maybank', '215444125546', 'Active', 44);
 
 -- --------------------------------------------------------
 
@@ -409,21 +428,22 @@ INSERT INTO `seller` (`Seller_ID`, `Seller_Name`, `Seller_RegistrationNo`, `Sell
 DROP TABLE IF EXISTS `seller_shop`;
 CREATE TABLE IF NOT EXISTS `seller_shop` (
   `Shop_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Shop_Desc` varchar(254) NOT NULL,
+  `Shop_Desc` text NOT NULL,
   `Shop_Img` varchar(254) NOT NULL,
   `Shop_Img_File` varchar(254) NOT NULL,
   `Shop_Cover` varchar(254) NOT NULL,
   `Shop_Cover_File` varchar(254) NOT NULL,
   `FK_Shop_Seller_ID` int(254) NOT NULL,
   PRIMARY KEY (`Shop_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `seller_shop`
 --
 
 INSERT INTO `seller_shop` (`Shop_ID`, `Shop_Desc`, `Shop_Img`, `Shop_Img_File`, `Shop_Cover`, `Shop_Cover_File`, `FK_Shop_Seller_ID`) VALUES
-(1, '<p>yeke test</p>', '20220129013408_sog order no.PNG', 'sog order no.PNG', '20220129013557_70619506_107291520659786_8722772007705378816_n.jpg', '70619506_107291520659786_8722772007705378816_n.jpg', 1);
+(1, '<p>yeke test</p>', '20220129013408_sog order no.PNG', 'sog order no.PNG', '20220129013557_70619506_107291520659786_8722772007705378816_n.jpg', '70619506_107291520659786_8722772007705378816_n.jpg', 1),
+(2, '<p>Worried about some capsules found in your teenagerâ€™s room? Not sure about those leftover pills still in the bathroom cabinet? Thereâ€™s a good chance that our Pill Identification can help you match the imprint, size, shape, or color and lead you to the detailed description in our drug database.</p><p>Anytime you take more than one medication, or even mix it with certain foods, beverages, or over-the-counter medicines, you are at risk of a drug interaction. Most are not serious, but because a few are, it is important to understand the possible outcome before you take your medications.<br></p>', '20220203003606_sterling.png', 'sterling.png', '20220203003717_sterlingbanner.jpg', 'sterlingbanner.jpg', 5);
 
 -- --------------------------------------------------------
 
@@ -465,7 +485,7 @@ CREATE TABLE IF NOT EXISTS `shipping_address` (
   `country` varchar(45) NOT NULL,
   `FK_ShipAdd_Cust_ID` int(45) NOT NULL,
   PRIMARY KEY (`ShipAdd_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `shipping_address`
@@ -475,7 +495,8 @@ INSERT INTO `shipping_address` (`ShipAdd_ID`, `address`, `city`, `state`, `zipco
 (3, 'no 39', 'klang', 'Selangor', 41222, 'Malaysia', 1),
 (4, 'no 39', 'klang', 'Selangor', 41222, 'Malaysia', 1),
 (5, 'no 39 lorong tahir', 'klang', 'Selangor', 41222, 'Malaysia', 4),
-(6, 'no 70', 'klang', 'Selangor', 412555, 'Malaysia', 3);
+(6, 'no 70', 'klang', 'Selangor', 412555, 'Malaysia', 3),
+(8, 'kg jawa', 'klang', 'selangor', 413000, 'malaysia', 16);
 
 -- --------------------------------------------------------
 
@@ -498,15 +519,16 @@ CREATE TABLE IF NOT EXISTS `tracking` (
   `FK_Tracking_Seller_ID` int(45) NOT NULL,
   `FK_Tracking_Cart_ID` int(45) NOT NULL,
   PRIMARY KEY (`Tracking_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tracking`
 --
 
 INSERT INTO `tracking` (`Tracking_ID`, `Tracking_Date`, `Tracking_Time`, `Tracking_Status`, `Tracking_Channel`, `Tracking_EstimateDate`, `Tracking_EstimateTime`, `FK_Tracking_Order_ID`, `FK_Tracking_Ship_ID`, `FK_Tracking_Cust_ID`, `FK_Tracking_Seller_ID`, `FK_Tracking_Cart_ID`) VALUES
-(4, '23-01-2022', '12:09:23 pm', 'collected', 'citylink', '24-01-2022', '12:09:23 pm', 16, 2, 3, 1, 10),
-(3, '23-01-2022', '12:09:23 pm', 'preparing', '', '25-01-2022', '12:09:23 pm', 17, 3, 3, 3, 10);
+(4, '23-01-2022', '12:09:23 pm', 'delivered', 'citylink', '24-01-2022', '12:09:23 pm', 16, 2, 3, 1, 10),
+(3, '23-01-2022', '12:09:23 pm', 'completed', 'citylink', '25-01-2022', '12:09:23 pm', 17, 3, 3, 3, 10),
+(5, '02-02-2022', '01:43:01 pm', 'completed', 'skynet', '03-02-2022', '01:43:01 pm', 22, 2, 16, 5, 12);
 
 -- --------------------------------------------------------
 
@@ -522,15 +544,70 @@ CREATE TABLE IF NOT EXISTS `tracking_shipment` (
   `Track_Ship_Time` varchar(254) NOT NULL,
   `FK_Tracking_ID` int(11) NOT NULL,
   PRIMARY KEY (`Track_Ship_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tracking_shipment`
 --
 
 INSERT INTO `tracking_shipment` (`Track_Ship_ID`, `Track_Ship_Status`, `Track_Ship_Date`, `Track_Ship_Time`, `FK_Tracking_ID`) VALUES
-(1, 'shipmentArranged', '30-01-2022', '12:05:00 pm', 4),
-(2, 'collected', '30-01-2022', '04:58:21 pm', 4);
+(1, 'ship', '30-01-2022', '12:05:00 pm', 4),
+(2, 'delivered', '30-01-2022', '04:58:21 pm', 4),
+(3, 'ship', '01-02-2022', '06:07:53 am', 3),
+(4, 'delivered', '01-02-2022', '06:10:08 am', 3),
+(5, 'completed', '01-02-2022', '06:12:18 am', 3),
+(6, 'ship', '02-02-2022', '01:49:59 pm', 5),
+(10, 'completed', '03-02-2022', '12:05:09 am', 5),
+(9, 'delivered', '03-02-2022', '12:04:18 am', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transaction`
+--
+
+DROP TABLE IF EXISTS `transaction`;
+CREATE TABLE IF NOT EXISTS `transaction` (
+  `Transaction_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Transaction_Date` varchar(50) NOT NULL,
+  `Transaction_Time` varchar(50) NOT NULL,
+  `Transaction_Type` varchar(50) NOT NULL,
+  `Transaction_Amount` double NOT NULL,
+  `Transaction_Status` varchar(50) NOT NULL,
+  `FK_Transaction_Wallet_ID` int(11) NOT NULL,
+  `FK_Transaction_Seller_ID` int(11) NOT NULL,
+  `FK_Transaction_Order_ID` int(11) NOT NULL,
+  PRIMARY KEY (`Transaction_ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `transaction`
+--
+
+INSERT INTO `transaction` (`Transaction_ID`, `Transaction_Date`, `Transaction_Time`, `Transaction_Type`, `Transaction_Amount`, `Transaction_Status`, `FK_Transaction_Wallet_ID`, `FK_Transaction_Seller_ID`, `FK_Transaction_Order_ID`) VALUES
+(2, '02-02-2022', '01:43:01 pm', 'income', 2550, 'completed', 1, 5, 22),
+(3, '02-02-2022', '11:43:24 pm', 'withdraw', 500, 'completed', 1, 5, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wallet`
+--
+
+DROP TABLE IF EXISTS `wallet`;
+CREATE TABLE IF NOT EXISTS `wallet` (
+  `Wallet_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Wallet_Amount` double NOT NULL,
+  `FK_Wallet_Seller_ID` int(11) NOT NULL,
+  PRIMARY KEY (`Wallet_ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `wallet`
+--
+
+INSERT INTO `wallet` (`Wallet_ID`, `Wallet_Amount`, `FK_Wallet_Seller_ID`) VALUES
+(1, 2050, 5);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
