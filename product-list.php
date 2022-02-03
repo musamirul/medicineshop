@@ -1,5 +1,5 @@
 <?php
-    include("includes/config.php");
+
     include("Interface/header.php");
 ?>
 <style type="text/css">
@@ -41,10 +41,17 @@ height: 100px;
                     while($searchResult = mysqli_fetch_array($searchQuery))
                 {
             ?>           
-                <div class="col-2 mb-3">
+                <div style="position:relative" class="col-2 mb-3">
                     <a class="text-decoration-none text-reset" href="product-view.php?prodId=<?php echo $searchResult['Product_ID']?>">
                         <div class="card" style="width: 11rem;">
                             <img style="height: 10rem;" src="seller/<?php echo $searchResult['Product_Image']; ?>" class="card-img-top">
+                            <?php
+                                if($searchResult['Product_RecordType']=='yes'){ 
+                            ?>
+                            <div style="position:absolute; top:0px; left:-4px;color: white;" class="bg-danger p-1">Prescribed medicine</div>
+                            <?php
+                                }
+                            ?>
                             <div class="card-body">
                                 <p class="card-title" style="font-size: 13px;"><?php echo $searchResult['Product_Name'] ?></p>
                                 <p class="card-text" style="font-size: 15px;color:red;">RM <?php echo $searchResult['Product_SellingPrice'] ?></p>

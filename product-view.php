@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include("includes/config.php");
+//include("includes/config.php");
 include("Interface/header.php");
 $_SESSION['id'];
 $_SESSION['username'];
@@ -24,6 +24,11 @@ $FK_Seller_ID = $product_result['FK_Product_Seller_ID'];
 $seller_query = mysqli_query($con,"SELECT * FROM seller WHERE Seller_ID = '$FK_Seller_ID'");
 $seller_result = mysqli_fetch_array($seller_query);
 
+//Select shop
+$shop_query = mysqli_query($con,"SELECT * FROM seller_shop WHERE FK_Shop_Seller_ID = '$FK_Seller_ID'");
+$shop_result = mysqli_fetch_array($shop_query);
+$shop_img = $shop_result['Shop_Img'];
+
 ?>
 
 <?php
@@ -32,11 +37,19 @@ $count_query = mysqli_query($con,"SELECT count('Product_ID') AS total_id FROM pr
 $count_result = mysqli_fetch_object($count_query);
 
 ?>
+
 <div class="container bg-white shadow bg-body rounded">
     <form method="post">
     <div class="row">
-        <div class="col-5 mt-3 mb-4">
+        <div style="position:relative" class="col-5 mt-3 mb-4">
             <center><img class="img-fluid" style="height: 25rem;" src="seller/<?php echo $product_result['Product_Image']; ?>"></center>
+            <?php
+                if($product_result['Product_RecordType']=='yes'){ 
+            ?>
+            <div style="position:absolute; top:-5px; left:-4px;color: white;" class="bg-danger p-1">Prescribed medicine</div>
+            <?php
+                }
+            ?>
         </div>
         <div class="col-7 mt-3 mb-5">
             <div class="col">
@@ -45,16 +58,31 @@ $count_result = mysqli_fetch_object($count_query);
             <div class="col p-2 bg-light">
                 <span class="text-danger fs-4"><b>RM<?php echo $product_result['Product_SellingPrice'] ?></b></span>
             </div>
-            <div class="col">
+            <div class="col p-3">
                 <span>Shipping</span>
             </div>
-            <div class="col">
+            <div class="col p-3">
                 <div class="row">
                     <label class="col-sm-2 col-form-label">Quantity</label>
                     <div class="col-sm-2">
                         <input type="number" name="quantity" class="form-control" placeholder="Number">
                     </div>
                     <label class="col-sm-3 col-form-label"><?php echo $product_result['Product_Qty'] ?> Pieces Available</label>
+                </div>
+            </div>
+            <div class="col bg-warning p-3">
+                <div class="row">
+                    <label class="col-sm-2 col-form-label">Pres Doc :</label>
+                    <div style="position:relative" class="col-sm-4">
+                        <select class="form-select" size="3" aria-label="size 3 select example">
+                            <option selected>Open this select menu</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select>
+                          <div style="position:absolute; top:-20px;left:-4px"><a href="" class="text-decoration-none text-reset"><i style="font-size: 30px;"  data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top" class="bi bi-plus-circle-fill text-primary"></i></a></div>
+                    </div>
+                        <label style="font-size:14px" class="col col-form-label"> Please select/add prescription document to proceed Add to Cart</label>
                 </div>
             </div>
             <div class="col mt-3">
@@ -69,12 +97,12 @@ $count_result = mysqli_fetch_object($count_query);
 <div class="container mt-3 bg-white shadow bg-body rounded">
     <div class="row">
         <div class="col-1 m-3">
-            <img src="" class="rounded-circle img-thumbnail"/>
+            <img src="seller/shop_img/<?php echo $shop_img; ?>" class="rounded-circle img-thumbnail"/>
         </div>
         <div class="col-3 m-3">
             <div class="d-flex flex-column bd-highlight">
                 <div class="p-2 bd-highlight"><?php echo $seller_result['Seller_Name']; ?></div>
-                <div class="p-2 bd-highlight"><button>View Shop</button></div>
+                <div class="p-2 bd-highlight"><button class="btn btn-primary">View Shop</button></div>
             </div>
         </div>
         <div class="col-7 m-3">
