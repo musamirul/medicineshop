@@ -21,7 +21,9 @@
       
     </div>
     <div class="col-6">
-      <button type="button" class="btn btn-primary float-end"><i class="bi bi-plus-lg">&nbsp;</i><a class="text-reset text-decoration-none" href="Seller_Product-Add.php">Add Product</a></button>
+      <form action="Seller_Product-Add.php">
+        <button type="submit" class="btn btn-primary float-end"><a class="text-reset text-decoration-none" href="Seller_Product-Add.php"><i class="bi bi-plus-lg">&nbsp;</i>Add Product</a></button>
+      </form>
     </div>
 </div>
   <div class="row">

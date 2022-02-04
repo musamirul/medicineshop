@@ -14,7 +14,8 @@
         <div class="col-6 bg-white">
             <div class="m-3">
                 <h5>Record Files</h5>
-                <span style="font-size: 13px;">Manage and protect your record files</span>
+                <span style="font-size: 13px;">Manage and protect your record files</span><br/>
+                <span class="text-danger" style="font-size: 13px;">*Please upload Less than 2MB</span>
                 <span class="d-grid mx-auto mt-3 mb-4" style="border-bottom:0.5px solid rgb(241, 240, 240);"></span>
                 <div  class="ms-5 me-5">
                     <form enctype="multipart/form-data" method="post">

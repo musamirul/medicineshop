@@ -9,7 +9,7 @@ $_SESSION['Cust_Id'];*/
 //get id from link
 $id = intval($_GET['prodId']);
 ?>
-
+<?php Include("Message_Notification.php") ?>
 <?php
 //Select product 
 $product_query = mysqli_query($con,"SELECT * FROM product WHERE Product_ID = '$id'");
@@ -76,7 +76,7 @@ $count_result = mysqli_fetch_object($count_query);
                 <div class="row">
                     <label class="col-sm-2 col-form-label">Pres Doc :</label>
                     <div style="position:relative" class="col-sm-4">
-                        <select class="form-select" name="record_id" size="3">
+                        <select class="form-select" name="record_id" size="3" required>
                             <?php
                                 $record_cust_ID = $_SESSION['Cust_Id'];
                                 //count record
@@ -221,7 +221,6 @@ $count_result = mysqli_fetch_object($count_query);
         date_default_timezone_set("Asia/Kuala_Lumpur");
         $timeStamp = date("Y-m-d h:i:sa");
 
-
         $cart_status = array();
         $count = 0;
         $cart_check_query = mysqli_query($con,"SELECT * FROM cart WHERE FK_Cart_Cust_ID = '$cust_ID'");
@@ -241,6 +240,9 @@ $count_result = mysqli_fetch_object($count_query);
             $cartItem_query = mysqli_query($con,"INSERT INTO cart_item (Cart_Item_Qty, Cart_Item_Amount, FK_Cart_ID, FK_Item_Product_ID, FK_Item_Seller_ID, FK_Item_Shipping_ID, FK_Item_Record_ID) 
             VALUES ('$quantity','$product_Price','$cart_ID','$product_ID','$seller_ID','1','$record_id')");
 
+            $_SESSION['message'] = "Item Added to Cart";
+            echo '<script>window.location.href="product-view.php?prodId='.$id.'"</script>';
+
         }else{
                 $cart_create_query = mysqli_query($con,"INSERT INTO cart(Cart_TimeStamp, Cart_Status, FK_Cart_Cust_ID)
                 VALUES ('$timeStamp','pending','$cust_ID')");
@@ -253,6 +255,9 @@ $count_result = mysqli_fetch_object($count_query);
                 //add item into cart_item
                 $cartItem_query = mysqli_query($con,"INSERT INTO cart_item (Cart_Item_Qty, Cart_Item_Amount, FK_Cart_ID, FK_Item_Product_ID, FK_Item_Seller_ID, FK_Item_Shipping_ID, FK_Item_Record_ID) 
                 VALUES ('$quantity','$product_Price','$cart_ID','$product_ID','$seller_ID','1','$record_id')");
+
+                $_SESSION['message'] = "Item Added to Cart";
+                echo '<script>window.location.href="product-view.php?prodId='.$id.'"</script>';
         }
         //New profile Account, never have cart
             /*if($cart_check_result['FK_Cart_Cust_ID']==""){
@@ -321,6 +326,8 @@ if(isset($_POST['submit'])){
     
     $query_uploadFile=mysqli_query($con,"INSERT INTO record(Record_Timestamp, Record_File, Record_FileName, FK_Record_Product_ID, FK_Record_Cust_ID)
     VALUES ('$date','$fname','$name','0','$record_cust_ID')");
+
+    $_SESSION['message'] = "Prescription uploaded";
     echo '<script>window.location.href="product-view.php?prodId='.$id.'"</script>';
     //header("Location:cust_record-upload.php?msg=success");
     

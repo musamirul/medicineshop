@@ -1,7 +1,7 @@
 
 <?php include("Interface/header.php")?>
-
 <div class="row mb-5 mt-5">
+<?php Include("Message_Notification.php") ?>
     <div class="col-2"></div>
     <div class="col-8">
         <div style="color: rgb(102, 101, 101);font-size: 14px;" class="row bg-white mt-3 mb-3 p-3 shadow-sm">
@@ -73,7 +73,12 @@
                 <div class="col-2"><center>RM <?php echo $result_cart_item_select['Cart_Item_Amount'];?></center></div>
                 <div class="col-1"><center><?php echo $result_cart_item_select['Cart_Item_Qty'] ?></center></div>
                 <div class="col-2"><center><?php echo $result_cart_item_select['Cart_Item_Amount']*$result_cart_item_select['Cart_Item_Qty'];?></center></div>
-                <div class="col-1"><center><button type="submit" class="btn btn-primary">delete</button></center></div>
+                <div class="col-1">
+                    <form method="post">
+                        <input type="hidden" name="item_id" value="<?php echo $result_cart_item_select['Cart_Item_ID'] ?>">
+                        <center><button type="submit" name="btn_deleteItem" class="btn btn-primary">delete</button></center>
+                    </form>
+                </div>
                 <span class="d-grid mx-auto mt-3 mb-4" style="border-bottom:0.5px solid rgb(241, 240, 240);"></span>
             </div>
             <?php }?>
@@ -102,6 +107,15 @@
         $total_quantity = $total_quantity+$result_total['Cart_Item_Qty'];
         $total_amount = $total_amount+($result_total['Cart_Item_Qty']*$result_total['Cart_Item_Amount']);
     }
+?>
+<?php
+if(isset($_POST['btn_deleteItem'])){
+    $item_id = $_POST['item_id'];
+    $query_delete = mysqli_query($con,"DELETE FROM cart_item WHERE Cart_Item_ID = '$item_id'");
+    $_SESSION['message']='item have successfully deleted';
+    echo '<script>window.location.href="cust_shopping_cart.php"</script>';
+
+}
 ?>
 <div style="margin-bottom: 57px;" class="text-center fixed-bottom">
    <div class="container">

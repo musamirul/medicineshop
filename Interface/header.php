@@ -87,7 +87,7 @@ session_start();
                             $result_countCart = mysqli_fetch_array($query_countCart);
                             $cartcount = $result_countCart[0];
                       ?>
-                    <a style="font-size: 14px; color: rgb(20, 10, 109);" class="text-decoration-none position-relative" href="cust_shopping_cart.php">
+                    <a style="font-size: 14px; color: rgb(20, 10, 109);" class="text-decoration-none position-relative" href="customer/cust_shopping_cart.php">
                     <i style="font-size: 30px;" class="bi bi-cart"></i>
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                         <?php echo $cartcount; ?>
