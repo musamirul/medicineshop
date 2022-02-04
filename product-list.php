@@ -23,7 +23,7 @@ height: 100px;
                 <input class="form-control form-control-lg" type="text" name="productSearch" placeholder="Search for product, brand and shop">
                 <button type="submit" name="searchButton">Search</button>
             </div>
-
+            <?php if(isset($_POST['searchButton'])){echo "true"}; ?>
         </form>
     </div>
 </div>

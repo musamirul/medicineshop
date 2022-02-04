@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 //include("includes/config.php");
 include("Interface/header.php");
 /*$_SESSION['id'];
