@@ -52,16 +52,12 @@ session_start();
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
                             <?php echo $_SESSION['username'];?>
-                          </a>
-                          
-                          <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
-                            <?php echo $_SESSION['username'];?>
-                          </a>
+                            </a>
                           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink" >
                             <li><a class="dropdown-item" href="#"></a></li>
-                            <li><a class="dropdown-item" href="profile.php">My profile</a></li>
+                            <li><a class="dropdown-item" href="customer/profile.php">My profile</a></li>
                             <li><a class="dropdown-item" href="#">Settings</a></li>
-                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                            <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                           </ul>
                         </li>
                         <?php } ?>
@@ -76,7 +72,7 @@ session_start();
                       <form method="post" action="product-list.php">
                         <div class="input-group mb-3">
                           <input class="form-control" type="text" name="productSearch" placeholder="Search for product, brand and shop">
-                          <button class="btn btn-primary" name="searchButton" type="button"><i class="bi bi-search ps-3 pe-3"></i></button>
+                          <button class="btn btn-primary" name="searchButton" type="submit"><i class="bi bi-search ps-3 pe-3"></i></button>
                         </div>
                       </form>
                   </div>

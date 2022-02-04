@@ -326,4 +326,4 @@ if(isset($_POST['submit'])){
     
 }
 ?>
-<?php //include("Interface/footer.php")?>
+<?php include("Interface/footer.php")?>

@@ -19,7 +19,7 @@
     include("../includes/config.php");
     if($_SESSION['id']==""||$_SESSION['username']=="" || $_SESSION['role']!="customer"){
         session_unset();
-        "<script>window.location.href='../login.php'</script>";
+        header("Location:../Login.php");
     }
     $_SESSION['id'];
     $_SESSION['username'];
@@ -64,7 +64,7 @@
                             <li><a class="dropdown-item" href="#"></a></li>
                             <li><a class="dropdown-item" href="profile.php">My profile</a></li>
                             <li><a class="dropdown-item" href="#">Settings</a></li>
-                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                            <li><a class="dropdown-item" href="../logout.php">Logout</a></li>
                           </ul>
                         </li>
                       </ul>
@@ -75,10 +75,12 @@
                   <img class="ms-3" src="Interface/style/image/logo.png" height="48px" width="130px" alt="" loading="lazy" />
                 </div>
                   <div class="col-8 mt-1">
-                    <div class="input-group mb-3">
-                      <input type="text" class="form-control" placeholder="Search Medicine">
-                      <button class="btn btn-primary" type="button"><i class="bi bi-search ps-3 pe-3"></i></button>
-                    </div>
+                    <form method="post" action="../product-list.php">
+                        <div class="input-group mb-3">
+                          <input class="form-control" type="text" name="productSearch" placeholder="Search for product, brand and shop">
+                          <button class="btn btn-primary" name="searchButton" type="submit"><i class="bi bi-search ps-3 pe-3"></i></button>
+                        </div>
+                      </form>
                   </div>
                   <div class="col-2">
                     <?php

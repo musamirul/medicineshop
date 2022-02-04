@@ -64,7 +64,7 @@ $loginID = $result_get_loginID['Login_ID'];
   //insert into database
 if(isset($_POST['Save'])){
     $name = $_POST['name'];
-    echo $dob = $_POST['dob'];
+    $dob = $_POST['dob'];
     $gender = $_POST['gender'];
     $phone = $_POST['phone'];
     $email = $_POST['email'];

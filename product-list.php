@@ -16,17 +16,6 @@ height: 100px;
 
 }
 </style>
-<div class="container">
-    <div class="row">
-        <form method="post">
-            <div class="input-group mb-3">
-                <input class="form-control form-control-lg" type="text" name="productSearch" placeholder="Search for product, brand and shop">
-                <button type="submit" name="searchButton">Search</button>
-            </div>
-            <?php if(isset($_POST['searchButton'])){echo "true"}; ?>
-        </form>
-    </div>
-</div>
 
 <div class="col-12 mt-5">
     <div class="container">

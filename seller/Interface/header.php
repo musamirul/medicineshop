@@ -106,7 +106,7 @@
                     <li><a class="dropdown-item" href="#"><?php echo $_SESSION['username']; ?></a></li>
                     <li><a class="dropdown-item" href="#">My profile</a></li>
                     <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Logout</a></li>
+                    <li><a class="dropdown-item" href="../logout.php">Logout</a></li>
                   </ul>
                 </li>
               </ul>

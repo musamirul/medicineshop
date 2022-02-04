@@ -62,10 +62,10 @@
                                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                                     <form method="POST">
                                         <div class="row mb-3 mt-4">
-                                            <input type="text" class="form-control" name="username" placeholder="Please enter your username"/>
+                                            <input type="text" class="form-control" name="username" placeholder="Please enter your username" required/>
                                         </div>
                                         <div class="row mb-3">
-                                            <input type="password" class="form-control" name="password" placeholder="Please enter your password"/>
+                                            <input type="password" class="form-control" name="password" placeholder="Please enter your password" required/>
                                         </div>
                                         <div class="d-grid gap-1">
                                             <button class="btn btn-primary" name="login" type="submit">Sign In</button>
@@ -82,10 +82,10 @@
                                 <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                                     <form method="POST">
                                         <div class="row mb-3 mt-4">
-                                            <input type="text" class="form-control" name="usernameAcc" placeholder="Please enter your username"/>
+                                            <input type="text" class="form-control" name="usernameAcc" placeholder="Please enter your username" required/>
                                         </div>
                                         <div class="row mb-3">
-                                            <input type="password" class="form-control" name="passwordAcc" placeholder="Please enter your password"/>
+                                            <input type="password" class="form-control" name="passwordAcc" placeholder="Please enter your password" required/>
                                         </div>
                                         <div class="d-grid gap-1">
                                             <button class="btn btn-primary" name="CreateAccountBtn" type="submit">Create Account</button>
@@ -164,12 +164,14 @@ if(isset($_POST['login'])){
                 exit();
 
             }else{
-                echo "Account is inactive";
+                $_SESSION['message'] = "Account is inactive";
+                echo '<script>window.location.href="Login.php"</script>';
             }
             
         }
     }else{
-        echo 'false';
+        $_SESSION['message'] = 'username not found';
+        echo '<script>window.location.href="Login.php"</script>';
     }
 }
 ?>

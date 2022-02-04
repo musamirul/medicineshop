@@ -1,6 +1,6 @@
 <div class="list-group list-group-flush mx-3 mt-4">
                 <!-- Collapse 1 -->
-                <a class="list-group-item list-group-item-action py-2" aria-current="true" data-bs-toggle="collapse" href="#collapseAccount" aria-expanded="true" aria-controls="collapseAccount">
+                <a class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "profile.php"||$current_file_name== "bank.php"||$current_file_name== "address.php"||$current_file_name== "cust_change-password.php"){ echo "active";}?>" aria-current="true" data-bs-toggle="collapse" href="#collapseAccount" aria-expanded="true" aria-controls="collapseAccount">
                   <i class="bi bi-person fa-fw me-3"></i><span>My Account</span>
                 </a>
                 <!-- Collapsed content -->

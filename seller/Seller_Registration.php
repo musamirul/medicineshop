@@ -18,7 +18,7 @@
     include("../includes/config.php");
     if(isset($_SESSION['message'])){
         $_SESSION['message'];
-        echo "<div class='alert alert-success' role='alert' style='position : absolute; width:500px'>
+        echo "<div class='alert alert-success ms-4 mt-3' role='alert' style='position : absolute; width:500px'>
         <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"
         . $_SESSION['message'] .
         "</div>";
@@ -41,22 +41,50 @@
                     <div class="row">
                         <div class="col-3"></div>
                             <div class="col-6">
-                            <center><h2 style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">New Seller Registration</h2></center>
+                            <center><h2 style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Seller Login & Registration</h2></center>
                             <center><span style="color: grey; font-size: 13px;">Free access to our shopping system</span></center>
                             
-                            <!--Nav bar Sign In-->
-                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                            <form method="POST">
-                                <div class="row mb-3 mt-4">
-                                    <input type="text" class="form-control" name="username" placeholder="Please enter your username" required/>
+                            
+                            <ul class="nav nav-pills nav-pills nav-justified mb-3 mt-4" id="pills-tab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                  <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Sign In</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                  <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Registration</button>
+                                </li>
+                              </ul>
+                              <div class="tab-content" id="pills-tabContent">
+                                  <!--Nav bar Sign In-->
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                    <form method="POST">
+                                        <div class="row mb-3 mt-4">
+                                            <input type="text" class="form-control" name="username" placeholder="Please enter your username"/>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <input type="password" class="form-control" name="password" placeholder="Please enter your password"/>
+                                        </div>
+                                        <div class="d-grid gap-1">
+                                            <button class="btn btn-primary" name="login" type="submit">Sign In</button>
+                                        </div>
+                                    </form>
                                 </div>
-                                <div class="row mb-3">
-                                    <input type="password" class="form-control" name="password" placeholder="Please enter your password" required/>
+                                    <!--Nav bar Registration-->
+                                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                    <form method="POST">
+                                        <div class="row mb-3 mt-4">
+                                            <input type="text" class="form-control" name="username" placeholder="Please enter your username" required/>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <input type="password" class="form-control" name="password" placeholder="Please enter your password" required/>
+                                        </div>
+                                        <div class="d-grid gap-1">
+                                            <button class="btn btn-primary" name="save_registration" type="submit">Create Account</button>
+                                        </div>
+                                    </form>
                                 </div>
-                                <div class="d-grid gap-1">
-                                    <button class="btn btn-primary" name="save_registration" type="submit">Create Account</button>
-                                </div>
-                            </form>
+                              </div>
+                            </div>
+                            
                         <div class="col-3"></div>
                     </div>
                 </div>
@@ -84,6 +112,42 @@
         exit();
         }
 
+    }
+
+    if(isset($_POST['login'])){
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        
+        //check username and password
+        $Query_Check = mysqli_query($con,"SELECT * FROM login WHERE (username ='$username' AND password = '$password')");
+        $result = mysqli_fetch_array($Query_Check);
+
+            if($result['role']=='seller') {
+                $login_id = $result['Login_ID'];
+                //check if account have approve
+                $query_checkApproval = mysqli_query($con,"SELECT * FROM seller WHERE FK_Seller_Login_ID = '$login_id'");
+                $result_checkApproval = mysqli_fetch_array($query_checkApproval);
+                if($result_checkApproval['Seller_Registration_Status']=="Active"){
+
+                    $_SESSION['id'] = $result['Login_ID'];
+                    $_SESSION['username'] = $_POST['username'];
+                    $_SESSION['role'] = $result['role'];
+                    $_SESSION['RegStatus'] = $result_checkApproval['Seller_Registration_Status'];
+                    $_SESSION['Seller_Id'] = $result_checkApproval['Seller_ID'];
+                    //go to seller page
+                    echo '<script>window.location.href="Seller_Dashboard.php"</script>';
+                    //header("location:seller/Seller_Dashboard.php");
+                    exit();
+
+                }else{
+                    $_SESSION['message']="Account is inactive";
+                    echo '<script>window.location.href="Seller_Registration.php"</script>';
+                }
+                
+            }else{
+                $_SESSION['message']="Wrong login access";
+                echo '<script>window.location.href="Seller_Registration.php"</script>';
+            }
     }
 
 ?>

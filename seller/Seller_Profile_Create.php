@@ -99,13 +99,13 @@
 <?php
     if(isset($_POST['saveDetail'])){
         
-        $username = $_SESSION['username'];
-        $company = $_POST['name'];
-        $registrationNo = $_POST['registrationNo'];
-        $phone = $_POST['phone'];
-        $address = $_POST['address'];
-        $bankName = $_POST['bankName'];
-        $bankNo = $_POST['bankNo'];
+        echo $username = $_SESSION['username'];
+        echo $company = $_POST['name'];
+        echo $registrationNo = $_POST['registrationNo'];
+        echo $phone = $_POST['phone'];
+        echo $address = $_POST['address'];
+        echo $bankName = $_POST['bankName'];
+        echo $bankNo = $_POST['bankNo'];
 
         //get seller loginID
         $query_getId = mysqli_query($con, "SELECT * FROM login WHERE username = '$username'");
