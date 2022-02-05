@@ -142,7 +142,7 @@
 
         $query_shipmentTracking = mysqli_query($con,"INSERT INTO tracking_shipment(Track_Ship_Status, Track_Ship_Date, Track_Ship_Time,FK_Tracking_ID)
          VALUES ('ship','$todayDate','$todayTime','$trackingID')");
-        $_SESSION['message'] = 'Successfully update bank account';
+        $_SESSION['message'] = 'Successfully update shipment';
         echo '<script>window.location.href="Seller_Shipment_toShip.php?msg=success"</script>';
     }
 ?>
