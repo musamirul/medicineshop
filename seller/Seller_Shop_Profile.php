@@ -1,5 +1,7 @@
 <?php include("Interface/header.php"); ?>
 <?php
+
+
 $Seller_ID = $_SESSION['Seller_Id'];
 $query_shop = mysqli_query($con,"SELECT * FROM seller_shop WHERE FK_Shop_Seller_ID='$Seller_ID'");
 $result_shop = mysqli_fetch_array($query_shop);

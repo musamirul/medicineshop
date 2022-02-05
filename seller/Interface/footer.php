@@ -78,6 +78,15 @@ if (toastTrigger) {
     toast.show()
   })
 }
+</script>
+<script>
+function openPdf(src)
+  {
+    var omyFrame = document.getElementById("myFrame");
+    omyFrame.style.display="block";
+    omyFrame.src = src;
+  }
+</script>
     </script>
   </body>
 </html>

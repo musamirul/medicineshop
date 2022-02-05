@@ -137,7 +137,11 @@ $count_result = mysqli_fetch_object($count_query);
         <div class="col-3 m-3">
             <div class="d-flex flex-column bd-highlight">
                 <div class="p-2 bd-highlight"><?php echo $seller_result['Seller_Name']; ?></div>
-                <div class="p-2 bd-highlight"><button class="btn btn-primary">View Shop</button></div>
+                <div class="p-2 bd-highlight">
+                    <form method="post" action="shop-view.php?sellerId=<?php echo $seller_result['Seller_ID']?>">
+                        <button class="btn btn-primary">View Shop</button>
+                    </form>
+                </div>
             </div>
         </div>
         <div class="col-7 m-3">

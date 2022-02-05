@@ -98,7 +98,14 @@ $temp_CartID;
             ?>
                 <div class="row bg-white p-3 shadow-sm">
                 <!--Product List-->
-                    <div class="col-7"><img style="height: 3rem; width:3rem;" src="../seller/<?php echo $result_product_name['Product_Image']; ?>">
+                    <div style="position:relative" class="col-7"><img style="height: 3rem; width:3rem;" src="../seller/<?php echo $result_product_name['Product_Image']; ?>">
+                    <?php
+                        if($result_product_name['Product_RecordType']=='yes'){ 
+                    ?>
+                        <div style="position:absolute; top:-20px; left:-10px;color: white; font-size:10px" class="bg-danger p-1">Prescribed medicine</div>
+                    <?php
+                        }
+                    ?>
                     <?php echo $result_product_name['Product_Name']; ?></div>
                     <div class="col-2"><center>RM <?php echo $result_cart_item_select['Cart_Item_Amount'];?></center></div>
                     <div class="col-1"><center><?php echo $result_cart_item_select['Cart_Item_Qty'] ?></center></div>

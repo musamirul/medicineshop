@@ -68,7 +68,15 @@
                 $result_product_name = mysqli_fetch_array($query_product_name);
             ?>
             <div class="row">
-                <div class="col-6"><img style="height: 6rem; width:6rem;" src="../seller/<?php echo $result_product_name['Product_Image']; ?>">
+                <div style="position:relative" class="col-6">
+                    <img style="height: 6rem; width:6rem;" src="../seller/<?php echo $result_product_name['Product_Image']; ?>">
+            <?php
+                if($result_product_name['Product_RecordType']=='yes'){ 
+            ?>
+                <div style="position:absolute; top:-5px; left:10px;color: white; font-size:10px" class="bg-danger p-1">Prescribed medicine</div>
+            <?php
+                }
+            ?>
                 <?php echo $result_product_name['Product_Name']; ?></div>
                 <div class="col-2"><center>RM <?php echo $result_cart_item_select['Cart_Item_Amount'];?></center></div>
                 <div class="col-1"><center><?php echo $result_cart_item_select['Cart_Item_Qty'] ?></center></div>

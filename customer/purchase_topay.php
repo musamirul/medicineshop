@@ -15,7 +15,7 @@
             <div class="row bg-white mb-3 p-3">
                 <ul class="nav nav-pills d-flex justify-content-evenly">
                     <li class="nav-item">
-                        <a class="nav-link text-reset" href="cust_purchase">All</a>
+                        <a class="nav-link text-reset" href="cust_purchase.php">All</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="purchase_topay.php">To Pay</a>
