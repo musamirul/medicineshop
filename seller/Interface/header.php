@@ -15,6 +15,11 @@
   $current_file_name = basename($_SERVER['PHP_SELF']); 
   date_default_timezone_set("Asia/Kuala_Lumpur");
 ?>
+<?php
+  $getImg_Seller_ID = $_SESSION['Seller_Id'];
+  $query_seller_getImg = mysqli_query($con,"SELECT * FROM seller_shop WHERE FK_Shop_Seller_ID='$getImg_Seller_ID'");
+  $result_seller_getImg = mysqli_fetch_array($query_seller_getImg);
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -100,12 +105,11 @@
                 <!-- Avatar -->
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
-                    <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle" height="22" alt="" loading="lazy" />
+                    <img <?php if($result_seller_getImg==''){ ?> src="temp.jpg" <?php }else{ ?>src="shop_img/<?php echo $result_seller_getImg['Shop_Img']; ?>" <?php } ?>class="rounded-circle" height="22" alt="" loading="lazy" />
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink" >
-                    <li><a class="dropdown-item" href="#"><?php echo $_SESSION['username']; ?></a></li>
-                    <li><a class="dropdown-item" href="#">My profile</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item" href="Seller_Information.php"><?php echo $_SESSION['username']; ?></a></li>
+                    <li><a class="dropdown-item" href="Seller_Shop_Profile.php">My profile</a></li>
                     <li><a class="dropdown-item" href="../logout.php">Logout</a></li>
                   </ul>
                 </li>

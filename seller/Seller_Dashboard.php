@@ -15,7 +15,11 @@
   $current_file_name = basename($_SERVER['PHP_SELF']); 
 
 ?>
-
+<?php
+  $getImg_Seller_ID = $_SESSION['Seller_Id'];
+  $query_seller_getImg = mysqli_query($con,"SELECT * FROM seller_shop WHERE FK_Shop_Seller_ID='$getImg_Seller_ID'");
+  $result_seller_getImg = mysqli_fetch_array($query_seller_getImg);
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -48,6 +52,7 @@
                     
                     <a href="Seller_Shipment.php" class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "Seller_Shipment.php" || $current_file_name=="Seller_Shipment_cancel.php" || $current_file_name=="Seller_Shipment_completed.php" || $current_file_name=="Seller_Shipment_shipping.php" || $current_file_name=="Seller_Shipment_toShip.php"|| $current_file_name=="Seller_Shipment_unpaid.php")echo "active"?> " aria-current="true"><i class="bi bi-truck me-3"></i><span>Shipment</span></a>
                     <a href="Seller_Order.php" class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "Seller_Order.php") echo "active"?>" aria-current="true"><i class="bi bi-cart-fill me-3"></i><span>Order</span></a>
+                    <a href="Seller_Prescribed_Order.php" class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "Seller_Prescribed_Order.php") echo "active"?>" aria-current="true"><i class="bi bi-cart-fill me-3"></i><span>Prescribed Order</span></a>
                     <a href="Seller_Customer.php" class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "Seller_Customer.php") echo "active"?>" aria-current="true"><i class="bi bi-people-fill me-3"></i><span>Customer</span></a>
                     <!-- <a href="#" class="list-group-item list-group-item-action py-2" aria-current="true"><i class="bi bi-bar-chart-fill me-3"></i><span>Statistics</span></a>
                     <a href="#" class="list-group-item list-group-item-action py-2" aria-current="true"><i class="bi bi-chat-left-dots-fill me-3"></i><span>Reviews</span></a>-->
@@ -101,13 +106,12 @@
                 <!-- Avatar -->
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
-                    <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle" height="22" alt="" loading="lazy" />
+                    <img <?php if($result_seller_getImg==''){ ?> src="temp.jpg" <?php }else{ ?>src="shop_img/<?php echo $result_seller_getImg['Shop_Img']; ?>" <?php } ?>class="rounded-circle" height="22" alt="" loading="lazy" />
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink" >
-                    <li><a class="dropdown-item" href="#"><?php echo $_SESSION['username']; ?></a></li>
-                    <li><a class="dropdown-item" href="#">My profile</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Logout</a></li>
+                    <li><a class="dropdown-item" href="Seller_Information.php"><?php echo $_SESSION['username']; ?></a></li>
+                    <li><a class="dropdown-item" href="Seller_Shop_Profile.php">My profile</a></li>
+                    <li><a class="dropdown-item" href="../logout.php">Logout</a></li>
                   </ul>
                 </li>
               </ul>

@@ -114,7 +114,7 @@
                         if(isset($_POST['btnApprove'])){
                             $shipOption = $_POST['shipOption'];
                             $actionUpdate = $_POST['actionUpdate'];
-                            $tracking_ID = $_POST['tracking_ID'];
+                            $trackingID = $_POST['tracking_ID'];
                             $order_ID = $_POST['Order_ID'];
                             date_default_timezone_set("Asia/Kuala_Lumpur");
                             $todayDate = date('d-m-Y');
