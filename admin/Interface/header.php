@@ -39,6 +39,7 @@
                     	<li class="list-group-item py-1 <?php if($current_file_name== "Admin_ManageCust.php") echo "active"?>"><a href="Admin_ManageCust.php" class="text-decoration-none text-reset"><i style="font-size:14px" class="bi bi-person-fill me-3"></i>Customer</a></li>
                       <li class="list-group-item py-1 <?php if($current_file_name== "Admin_ManageSeller.php"||$current_file_name=="Admin_ManageSeller_Active.php"||$current_file_name=="Admin_ManageSeller_Deactive.php"||$current_file_name=="Admin_ManageSeller_ReqApproval.php"||$current_file_name=="Admin_ManageSeller_Suspend.php") echo "active"?>"><a href="Admin_ManageSeller.php" class="text-decoration-none text-reset"><i style="font-size:14px" class="bi bi-person-fill me-3"></i>Seller</a></li>
                     </ul>
+                    <a href="Admin_Consultation.php" class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "Admin_Consultation.php") echo "active"?>" aria-current="true"><i class="bi bi-clipboard me-3"></i><span>Consultation</span></a>
 
                   <a href="#customerCollapse" aria-current="true" aria-controls="customerCollapse" data-bs-toggle="collapse" aria-expanded="true" class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "Seller_Product-Add.php"||$current_file_name== "Seller_Product-View.php") echo "active"?>"><i class="bi bi-bag-fill me-3"></i><span>Product</span></a>
                     <ul class="collapse list-group list-group-flush ps-4" id="customerCollapse">

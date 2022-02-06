@@ -44,7 +44,7 @@
                       <!-- Right links -->
                       <ul class="navbar-nav ms-auto float-end">
                         <!-- Notification dropdown -->
-                        <li class="nav-item dropdown">
+                        <!--<li class="nav-item dropdown">
                           <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
                             <span style="font-size: 14px;">notification</span>
                             <span class="position-absolute top-30 start-90 translate-middle badge rounded-pill bg-danger">1</span>
@@ -54,7 +54,7 @@
                             <li><a class="dropdown-item" href="#">Another news</a></li>
                             <li><a class="dropdown-item" href="#">Something else here</a></li>
                           </ul>
-                        </li>
+                        </li>-->
                         <!-- Avatar -->
                         <li class="nav-item dropdown">
                           <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
@@ -63,7 +63,7 @@
                           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink" >
                             <li><a class="dropdown-item" href="#"></a></li>
                             <li><a class="dropdown-item" href="profile.php">My profile</a></li>
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="cust_purchase.php">My Purchase</a></li>
                             <li><a class="dropdown-item" href="../logout.php">Logout</a></li>
                           </ul>
                         </li>

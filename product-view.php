@@ -70,7 +70,7 @@ $count_result = mysqli_fetch_object($count_query);
             </div>
             <?php 
                 //if producttype is yes display prescription document
-                if($product_result['Product_RecordType']=='yes'){
+                if($product_result['Product_RecordType']=='yes' && isset($_SESSION['Cust_Id'])){
             ?>
             <div class="col bg-warning p-3">
                 <div class="row">
@@ -99,7 +99,7 @@ $count_result = mysqli_fetch_object($count_query);
 
                     </div>
                         <label style="font-size:14px" class="col col-form-label"> Please select/add prescription document to proceed Add to Cart </label>
-                        <label style="font-size:14px" class="col col-form-label"> Don't have one? <a class="text-reset" href="cust_get_prescription.php">Click here</a> </label>
+                        <label style="font-size:14px" class="col col-form-label"> Don't have one? <a class="text-reset" data-bs-toggle="modal" data-bs-target="#getPrescription">Click here</a> </label>
                 </div>
             </div>
             <?php }else{?>
@@ -213,7 +213,69 @@ $count_result = mysqli_fetch_object($count_query);
       </div>
     </div>
 </div>
+<!-- Get Prescription -->
+<div class="modal fade" id="getPrescription" tabindex="-1" aria-labelledby="editModalLabel" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel"><strong>Prescription Required</strong></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+          <div class="modal-body">
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <div class="d-flex flex-column bd-highlight mb-3">
+                        <div class="p-2 bd-highlight"><span>This medication requires a valid prescription from a doctor. Please upload your prescription.</span></div>
+                        <div class="p-2 bd-highlight"><span><strong>Don't Have a prescription? Get a free consult with our doctor today</strong><span></div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-2 ps-5"><i style="font-size: 30px;" class="bi bi-telephone"></i></div>
+                        <div class="col">
+                            <div style="color: grey;font-weight: 500;" class="row">Step 1</div>
+                            <div class="row">Click Below Button and our doctor will contact you within 1-hour</div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-2 ps-5"><i style="font-size: 30px;" class="bi bi-journal-arrow-up"></i></div>
+                        <div class="col">
+                            <div style="color: grey;font-weight: 500;" class="row">Step 2</div>
+                            <div class="row">Doctor will upload prescription into your record</div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-2 ps-5"><i style="font-size: 30px;" class="bi bi-cart-plus"></i></div>
+                        <div class="col">
+                            <div style="color: grey;font-weight: 500;" class="row">Step 3</div>
+                            <div class="row">You can proceed to purchase and select the uploaded prescription in your record</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+          <form enctype="multipart/form-data" method="post">
+            <button type="submit" class="btn btn-primary" name="prescriptionBtn">Prescription Request</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </form>
+          </div>   
+      </div>
+    </div>
+</div>
+<?php
+    if(isset($_POST['prescriptionBtn'])){
+        $presProduct_ID = $product_result['Product_ID'];
+        $presCust_ID = $_SESSION['Cust_Id'];
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+        $todayDate = date('d-m-Y');
+        $todayTime = date('h:i:s a');
 
+        $query_consult = mysqli_query($con,"INSERT INTO consult(Consult_RegDate, Consult_RegTime, Consult_Status, Consult_CompDate, Consult_CompTime, FK_Consult_Cust_ID, FK_Consult_Product_ID, FK_Consult_Admin_ID) 
+        VALUES ('$todayDate','$todayTime','request','0','0','$presCust_ID','$presProduct_ID','0')");
+
+        $_SESSION['message'] = "Successfully request for a consultation";
+        echo '<script>window.location.href="product-view.php?prodId='.$id.'"</script>';
+    }
+?>
 <?php
     if(isset($_POST['AddToCart'])){
         $quantity = $_POST['quantity'];
@@ -332,7 +394,7 @@ if(isset($_POST['submit'])){
     $query_uploadFile=mysqli_query($con,"INSERT INTO record(Record_Timestamp, Record_File, Record_FileName, FK_Record_Product_ID, FK_Record_Cust_ID)
     VALUES ('$date','$fname','$name','0','$record_cust_ID')");
 
-    $_SESSION['message'] = "Prescription uploaded";
+    $_SESSION['message'] = "Prescription successfully uploaded";
     echo '<script>window.location.href="product-view.php?prodId='.$id.'"</script>';
     //header("Location:cust_record-upload.php?msg=success");
     

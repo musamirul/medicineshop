@@ -35,7 +35,7 @@
                 <?php 
                     //select from tracking where tracking status is not delivered
                     $custID = $_SESSION['Cust_Id'];
-                    $query_tracking = mysqli_query($con,"SELECT * FROM tracking WHERE FK_Tracking_Cust_ID = '$custID' AND Tracking_Status = 'delivered'");
+                    $query_tracking = mysqli_query($con,"SELECT * FROM tracking WHERE FK_Tracking_Cust_ID = '$custID' AND Tracking_Status = 'completed'");
                     while($result_tracking = mysqli_fetch_array($query_tracking)){
                         $Seller_ID = $result_tracking['FK_Tracking_Seller_ID'];
                         $Cart_ID = $result_tracking['FK_Tracking_Cart_ID'];

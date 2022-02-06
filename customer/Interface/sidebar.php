@@ -8,9 +8,9 @@
                   <li class="list-group-item py-1 <?php if($current_file_name== "profile.php") echo "active"?>">
                     <a href="profile.php" class="text-reset text-decoration-none">Profile</a>
                   </li>
-                  <li class="list-group-item py-1">
+                  <!--<li class="list-group-item py-1">
                     <a href="" class="text-reset text-decoration-none">Banks</a>
-                  </li>
+                  </li>-->
                   <li class="list-group-item py-1 <?php if($current_file_name== "address.php") echo "active"?>">
                     <a href="address.php" class="text-reset text-decoration-none">Addresses</a>
                   </li>
