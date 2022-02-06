@@ -106,10 +106,9 @@
                     <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle" height="22" alt="" loading="lazy" />
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink" >
-                    <li><a class="dropdown-item" href="#"><?php echo $_SESSION['username']; ?></a></li>
-                    <li><a class="dropdown-item" href="#">My profile</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Logout</a></li>
+                    <li><a class="dropdown-item" href="Admin_Dashboard"><?php echo $_SESSION['username']; ?></a></li>
+                    <li><a class="dropdown-item" href="Admin_Dashboard">My profile</a></li>
+                    <li><a class="dropdown-item" href="../logout.php">Logout</a></li>
                   </ul>
                 </li>
               </ul>

@@ -19,6 +19,29 @@
   $getImg_Seller_ID = $_SESSION['Seller_Id'];
   $query_seller_getImg = mysqli_query($con,"SELECT * FROM seller_shop WHERE FK_Shop_Seller_ID='$getImg_Seller_ID'");
   $result_seller_getImg = mysqli_fetch_array($query_seller_getImg);
+  
+  $prescribedCount = 0;
+  $query_countOrder = mysqli_query($con,"SELECT * FROM orders WHERE FK_Order_Seller_ID='$getImg_Seller_ID' AND Order_Status='payment_completed'");
+  while($result_countOrder = mysqli_fetch_array($query_countOrder)){
+
+    $Order_count_ID = $result_countOrder['Order_ID'];
+    $query_counttracking = mysqli_query($con,"SELECT * FROM tracking WHERE FK_Tracking_Order_ID='$Order_count_ID' AND 'Tracking_Status' = 'preparing'");
+    while($result_counttracking = mysqli_fetch_array($query_counttracking)){
+      $Order_Cart_ID = $result_countOrder['FK_Order_Cart_ID'];
+      $query_countCartItem = mysqli_query($con,"SELECT * FROM cart_item WHERE FK_Cart_ID = '$Order_Cart_ID'");
+      while($result_countCartItem = mysqli_fetch_array($query_countCartItem)){
+
+          $Item_Product_ID = $result_countCartItem['FK_Item_Product_ID'];
+          $query_countProduct = mysqli_query($con,"SELECT * FROM product WHERE Product_ID='$Item_Product_ID' AND FK_Product_Seller_ID = '$getImg_Seller_ID'");
+          while($result_countProduct = mysqli_fetch_array($query_countProduct)){
+              if($result_countProduct['Product_RecordType']=='yes'){
+                $prescribedCount++;
+              }
+          }
+      }
+    }
+  }
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -51,7 +74,7 @@
                     
                     <a href="Seller_Shipment.php" class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "Seller_Shipment.php" || $current_file_name=="Seller_Shipment_cancel.php" || $current_file_name=="Seller_Shipment_completed.php" || $current_file_name=="Seller_Shipment_shipping.php" || $current_file_name=="Seller_Shipment_toShip.php"|| $current_file_name=="Seller_Shipment_unpaid.php")echo "active"?> " aria-current="true"><i class="bi bi-truck me-3"></i><span>Shipment</span></a>
                     <a href="Seller_Order.php" class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "Seller_Order.php") echo "active"?>" aria-current="true"><i class="bi bi-cart-fill me-3"></i><span>Order</span></a>
-                    <a href="Seller_Prescribed_Order.php" class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "Seller_Prescribed_Order.php") echo "active"?>" aria-current="true"><i class="bi bi-cart-fill me-3"></i><span>Prescribed Order</span></a>
+                    <a href="Seller_Prescribed_Order.php" class="list-group-item list-group-item-action py-2 <?php if($prescribedCount>0){echo "bg-danger text-white"; }elseif($current_file_name== "Seller_Prescribed_Order.php") echo "active"?>" aria-current="true"><i class="bi bi-cart-fill me-3"></i><span>Prescribed Order</span></a>
                     <a href="Seller_Customer.php" class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "Seller_Customer.php") echo "active"?>" aria-current="true"><i class="bi bi-people-fill me-3"></i><span>Customer</span></a>
                     <!-- <a href="#" class="list-group-item list-group-item-action py-2" aria-current="true"><i class="bi bi-bar-chart-fill me-3"></i><span>Statistics</span></a>
                     <a href="#" class="list-group-item list-group-item-action py-2" aria-current="true"><i class="bi bi-chat-left-dots-fill me-3"></i><span>Reviews</span></a>-->
@@ -96,7 +119,7 @@
                     <span class="badge rounded-pill badge-notification bg-danger">1</span>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                    <li><a class="dropdown-item" href="#">Some news</a></li>
+                    <li><a class="dropdown-item" href="#">news</a></li>
                     <li><a class="dropdown-item" href="#">Another news</a></li>
                     <li><a class="dropdown-item" href="#">Something else here</a></li>
                   </ul>

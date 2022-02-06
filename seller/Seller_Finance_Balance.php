@@ -96,6 +96,8 @@
                                     echo "<i class='bi bi-arrow-up-circle-fill text-success'></i>"; 
                                 }elseif($result_trans['Transaction_Type']=='withdraw'){
                                     echo "<i class='bi bi-arrow-down-circle-fill text-danger'></i>";
+                                }elseif($result_trans['Transaction_Type']=='cancel'){
+                                    echo "<i class='bi bi-arrow-down-circle-fill text-danger'></i>";
                                 }
 
                             ?>
@@ -109,6 +111,8 @@
                                 if($result_trans['Transaction_Type']=='income'){
                                     echo "<span class='text-success'>RM".$result_trans['Transaction_Amount']."</span>"; 
                                 }elseif($result_trans['Transaction_Type']=='withdraw'){
+                                    echo "<span class='text-danger'>RM".$result_trans['Transaction_Amount']."</span>";
+                                }elseif($result_trans['Transaction_Type']=='cancel'){
                                     echo "<span class='text-danger'>RM".$result_trans['Transaction_Amount']."</span>";
                                 }
 

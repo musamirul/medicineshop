@@ -47,7 +47,6 @@
                 <tbody>
                     <?php
                         
-
                         //Get ID,Status & Amount from Order Table
                         $query_order = mysqli_query($con,"SELECT * FROM tracking WHERE Tracking_Status ='preparing' AND FK_Tracking_Seller_ID = '$Seller_ID'");
                         while($result_order = mysqli_fetch_array($query_order)){
@@ -67,7 +66,7 @@
                             $result_ship_method = mysqli_fetch_array($query_ship_method);
 
                             $Order_Cart_ID = $result_order['FK_Tracking_Cart_ID'];
-                            $cart_item = mysqli_query($con,"SELECT * FROM cart_item WHERE FK_Cart_ID = '$Order_Cart_ID' AND FK_Item_Record_ID > '0'");
+                            $cart_item = mysqli_query($con,"SELECT * FROM cart_item WHERE FK_Cart_ID = '$Order_Cart_ID' AND FK_Item_Record_ID > '0' AND FK_Item_Seller_ID ='$Seller_ID'");
                             while($result_cart_item = mysqli_fetch_array($cart_item)){
 
                                 $FK_Record_ID = $result_cart_item['FK_Item_Record_ID'];
@@ -120,6 +119,16 @@
                             $todayDate = date('d-m-Y');
                             $todayTime = date('h:i:s a');
 
+                            //Get wallet id
+                            $query_wallet = mysqli_query($con,"SELECT * FROM wallet WHERE FK_Wallet_Seller_ID='$Seller_ID'");
+                            $result_wallet = mysqli_fetch_array($query_wallet);
+                            $wallet_id = $result_wallet['Wallet_ID'];
+
+                            //get order amount
+                            $query_orderAmount = mysqli_query($con,"SELECT * FROM orders WHERE Order_ID = '$order_ID'");
+                            $result_orderAmount = mysqli_fetch_array($query_orderAmount);
+                            $order_amount = $result_orderAmount['Order_Amount'];
+
                             if($actionUpdate=='approve'){
                                 $query_updateTracking = mysqli_query($con,"UPDATE tracking SET Tracking_Status='ship',Tracking_Channel='$shipOption' WHERE Tracking_ID = '$trackingID'");
 
@@ -136,11 +145,16 @@
                                 $query_shipmentTracking = mysqli_query($con,"INSERT INTO tracking_shipment(Track_Ship_Status, Track_Ship_Date, Track_Ship_Time,FK_Tracking_ID)
                                 VALUES ('cancel','$todayDate','$todayTime','$trackingID')");
 
+                                //create new transaction for cancel
+                                $query_transaction = mysqli_query($con,"INSERT INTO transaction(Transaction_Date, Transaction_Time, Transaction_Type, Transaction_Amount, Transaction_Status, FK_Transaction_Wallet_ID, FK_Transaction_Seller_ID, FK_Transaction_Order_ID) 
+                                VALUES ('$todayDate','$todayTime','cancel','$order_amount','completed','$wallet_id','$Seller_ID','$order_ID')");
+
                                 //update Orders to cancel
                                 $query_orders = mysqli_query($con,"UPDATE orders SET Order_Status='cancel' WHERE Order_ID = '$order_ID' AND FK_Order_Seller_ID ='$Seller_ID'");
 
                                 //update wallet to refund
-                                
+                                $newAmount = $result_wallet['Wallet_Amount'] - $order_amount;
+                                $query_walletRefund = mysqli_query($con,"UPDATE wallet SET Wallet_Amount='$newAmount' WHERE Wallet_ID = '$wallet_id'");
 
                                 $_SESSION['messageErr'] = 'Shipment have successfully decline';
                                 echo '<script>window.location.href="Seller_Prescribed_Order.php?msg=success"</script>';
@@ -150,7 +164,9 @@
                         }
                     ?>
                     <?php
+
                             }
+                           
                         }
                     ?>
                 </tbody>

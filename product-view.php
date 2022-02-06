@@ -98,7 +98,8 @@ $count_result = mysqli_fetch_object($count_query);
                         </div>
 
                     </div>
-                        <label style="font-size:14px" class="col col-form-label"> Please select/add prescription document to proceed Add to Cart</label>
+                        <label style="font-size:14px" class="col col-form-label"> Please select/add prescription document to proceed Add to Cart </label>
+                        <label style="font-size:14px" class="col col-form-label"> Don't have one? <a class="text-reset" href="cust_get_prescription.php">Click here</a> </label>
                 </div>
             </div>
             <?php }else{?>

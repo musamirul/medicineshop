@@ -73,7 +73,7 @@
                                     </form>
                                     <div class="row">
                                         <div class="d-flex flex-row bd-highlight mt-3 justify-content-between">
-                                            <div class="p-2 bd-highlight">Remember me</div>
+                                            <div class="p-2 bd-highlight"><a class="text-decoration-none" href="seller/Seller_Registration.php">Seller Registration</a></div>
                                             <div class="p-2 bd-highlight"><a class="text-decoration-none" href="#">Forgot password?</a></div>
                                         </div>
                                     </div>
