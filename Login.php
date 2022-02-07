@@ -114,6 +114,10 @@ if(isset($_POST['login'])){
         //ADMINISTRATOR
         if($result['role']=='administrator'){
             //go to admin page
+            $login_id = $result['Login_ID'];
+            $query_admin_id = mysqli_query($con,"SELECT * FROM admin WHERE FK_Admin_Login_ID = '$login_id'");
+            $result_admin_id = mysqli_fetch_array($query_admin_id);
+            
             $_SESSION['id'] = $result['Login_ID'];
             $_SESSION['username'] = $result['username'];
             $_SESSION['role'] = $result['role'];

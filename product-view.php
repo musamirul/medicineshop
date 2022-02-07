@@ -80,7 +80,7 @@ $count_result = mysqli_fetch_object($count_query);
                             <?php
                                 $record_cust_ID = $_SESSION['Cust_Id'];
                                 //count record
-                                $query_CountRecord = mysqli_query($con,"SELECT * FROM record WHERE FK_Record_Cust_ID = '$record_cust_ID'");
+                                $query_CountRecord = mysqli_query($con,"SELECT COUNT(*) FROM record WHERE FK_Record_Cust_ID = '$record_cust_ID'");
                                 $result_CountRecord = mysqli_fetch_array($query_CountRecord);
 
                                 //display record

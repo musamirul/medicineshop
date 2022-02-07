@@ -21,6 +21,7 @@
     $cancelcount = $result_countcancel[0];
 
 ?>
+<?php include("Message_Notification.php"); ?>
 <div class="row">
     <div class="col-12 bg-white shadow-sm p-3 mb-5 bg-body rounded me-5">
         <div class="row p-3">
@@ -103,6 +104,7 @@
                         <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#upload<?php echo $Cust_ID ?>">Upload</button></td>
                         <td>
                             <form method="post">
+                            
                             <select class="form-select form-select-sm" name="status">
                                 <option value="complete">complete</option>
                                 <option value="cancel">cancel</option>                           
@@ -113,6 +115,7 @@
                             </form>
                         </td>
                     </tr>
+                    
                         <!-- View Seller -->
                         <div class="modal fade" id="upload<?php echo $Cust_ID ?>" tabindex="-1" aria-labelledby="editModalLabel" class="modal fade" role="dialog">
                             <div class="modal-dialog">
@@ -134,121 +137,83 @@
                             </div>
                             </div>
                         </div>
-                        <!-- End Seller -->
-
-                        <!-- View Medical History -->
-                        <div class="modal fade" id="medHis<?php echo $Cust_ID; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
+                        <!-- View Seller -->
+                        <div class="modal fade" id="medHis<?php echo $Cust_ID; ?>" tabindex="-1" aria-labelledby="editModalLabel" class="modal fade" role="dialog">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
                                     <h5 class="modal-title" id="editModalLabel">Medical History & Declaration</strong></h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="form-group row">
-                                        <div class="col-sm-12">
-                                            <?php 
-                                            $query_medical_history = mysqli_query($con,"SELECT * FROM medical_history WHERE FK_Med_Cust_ID='$Cust_ID'");
-                                            $result_medical_history = mysqli_fetch_array($query_medical_history);
-                                            
-                                            ?>
-                                                <div class="row mt-2 p-2">
-                                                    <div class="d-flex flex-column bd-highlight">
-                                                        <div style="font-size: 20px;" class="p-2 bd-highlight"><?php echo $result_customer['Cust_Name']; ?></div>
-                                                        <div style="font-size: 13px; color: rgb(0, 119, 255);" class="ps-2 bd-highlight"><?php echo $result_customer['Cust_Phone']; ?></div>
-                                                        <div style="font-size: 13px; color: rgb(0, 119, 255);" class="ps-2 bd-highlight"><?php echo $result_customer['Cust_Email']; ?></div>
-                                                    </div>
-                                                    <div class="d-flex flex-row bd-highlight mb-3">
-                                                        <div style="font-size: 13px; color:grey;" class="p-2 bd-highlight">Date of Birth : <?php echo $result_customer['Cust_DOB']; ?></div>
-                                                        <div style="font-size: 13px; color: grey;" class="p-2 bd-highlight">Gender : <?php echo $result_customer['Cust_Gender']; ?></div>
-                                                    </div>
-                                                    <span class="d-grid mx-auto mt-3 mb-3" style="border-bottom:0.5px solid rgb(241, 240, 240);"></span>
-                                
-                                                </div>
-                                                <div style="font-size: 13px" class="row ps-3 pb-2">
-                                                    <div class="col-3">Blood Group:</div>
-                                                    <div class="col float-start"><?php echo $result_medical_history['Blood_Group']; ?></div>
-                                                </div>
-                                                <div style="font-size: 13px" class="row ps-3 pb-2">
-                                                    <div class="col-3">Weight:</div>
-                                                    <div class="col float-start"><?php echo $result_medical_history['Weight']; ?>kg</div>
-                                                </div>
-                                                <div style="font-size: 13px" class="row ps-3 pb-2">
-                                                    <div class="col-3">Height:</div>
-                                                    <div class="col float-start"><?php echo $result_medical_history['Height']; ?>cm</div>
-                                                </div>
-                                                <div style="font-size: 13px" class="row ps-3 pb-2">
-                                                    <div class="col-3">BMI:</div>
-                                                    <div class="col float-start"><?php echo $result_medical_history['BMI']; ?>cm</div>
-                                                </div>
-                                                <div style="font-size: 13px" class="row ps-3 pb-2">
-                                                    <div class="col-3">Drinking Alcohol?:</div>
-                                                    <div class="col float-start"><?php echo $result_medical_history['Alcohol']; ?></div>
-                                                </div>
-                                                <div style="font-size: 13px" class="row ps-3 pb-2">
-                                                    <div class="col-3">Smoking?:</div>
-                                                    <div class="col float-start"><?php echo $result_medical_history['Smoking']; ?></div>
-                                                </div>
-                                                <div style="font-size: 13px" class="row ps-3 pb-2">
-                                                    <div class="col-3">Regularly Exercise?:</div>
-                                                    <div class="col float-start"><?php echo $result_medical_history['Exercise']; ?></div>
-                                                </div>
-                                                <div style="font-size: 13px" class="row ps-3 pb-2">
-                                                    <div class="col-3">Previous & Current Illness:</div>
-                                                    <div class="col float-start"><?php echo $result_medical_history['Illness']; ?></div>
-                                                </div>
-                                                <div style="font-size: 13px" class="row ps-3 pb-2">
-                                                    <div class="col-3">Previous & Current Surgery:</div>
-                                                    <div class="col float-start"><?php echo $result_medical_history['Surgery']; ?></div>
-                                                </div>
-                                                <span class="d-grid mx-auto mt-3 mb-3" style="border-bottom:0.5px solid rgb(241, 240, 240);"></span>
-                                                <div class="row mt-3">
-                                                    <span style="font-size: 20px;" >Declaration Files</span>
-                                                    <div style="padding: 20px;" class="row shadow bg-body rounded">
-                                                    <table id="example" class="display center" style="width: 100%; text-align: center;">
-                                                        <thead>
-                                                        <tr>
-                                                            <th>Record ID</th>
-                                                            <th>Types</th>
-                                                            <th>Files Name</th>
-                                                            <th>TimeStamp</th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                        </thead>
-
-                                                        <tbody>
-                                                            <?php
-                                                                $query_showDoc = mysqli_query($con,"SELECT * FROM declaration WHERE FK_Declaration_Cust_ID = '$Cust_ID'");
-                                                                while($result_showDoc = mysqli_fetch_array($query_showDoc)){
-                                                                    $name = $result_showDoc['Declaration_FileName'];   
-                                                            ?>
-                                                            <tr>
-                                                                <td><?php echo $result_showDoc['Declaration_ID']?></td>
-                                                                <td><?php echo $result_showDoc['Declaration_Name']?></td>
-                                                                <td><?php echo $name; ?></td>
-                                                                <td><?php echo $result_showDoc['Declaration_TimeStamp']?></td>
-                                                                <td><a href="../customer/cust_declaration-download.php?filename=<?php echo $name;?>&f=<?php echo $result_showDoc['Declaration_File']?>"><button>Download</button></a></td>
-                                                            </tr>
-                                                            <?php
-                                                                }
-                                                            ?>
-                                                        </tbody>
-
-                                                    </table>
-                                                </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    </form>
-                                    </div>   
                                 </div>
+                                <div class="modal-body">
+                                    <?php 
+                                    $query_medical_history = mysqli_query($con,"SELECT * FROM medical_history WHERE FK_Med_Cust_ID='$Cust_ID'");
+                                    $result_medical_history = mysqli_fetch_array($query_medical_history);
+                                    
+                                    ?>
+                                    <div class="row mt-2 p-2">
+                                        <div class="d-flex flex-column bd-highlight">
+                                            <div style="font-size: 20px;" class="p-2 bd-highlight"><?php echo $result_customer['Cust_Name']; ?></div>
+                                            <div style="font-size: 13px; color: rgb(0, 119, 255);" class="ps-2 bd-highlight"><?php echo $result_customer['Cust_Phone']; ?></div>
+                                            <div style="font-size: 13px; color: rgb(0, 119, 255);" class="ps-2 bd-highlight"><?php echo $result_customer['Cust_Email']; ?></div>
+                                        </div>
+                                        <div class="d-flex flex-row bd-highlight mb-3">
+                                            <div style="font-size: 13px; color:grey;" class="p-2 bd-highlight">Date of Birth : <?php echo $result_customer['Cust_DOB']; ?></div>
+                                            <div style="font-size: 13px; color: grey;" class="p-2 bd-highlight">Gender : <?php echo $result_customer['Cust_Gender']; ?></div>
+                                        </div>
+                                        <span class="d-grid mx-auto mt-3 mb-3" style="border-bottom:0.5px solid rgb(241, 240, 240);"></span>
+                                    </div>
+                                    <div style="font-size: 13px" class="row ps-3 pb-2">
+                                        <div class="col-3">Blood Group:</div>
+                                        <div class="col float-start"><?php echo $result_medical_history['Blood_Group']; ?></div>
+                                    </div>
+                                    <div style="font-size: 13px" class="row ps-3 pb-2">
+                                        <div class="col-3">Weight:</div>
+                                        <div class="col float-start"><?php echo $result_medical_history['Weight']; ?>kg</div>
+                                    </div>
+                                    <div style="font-size: 13px" class="row ps-3 pb-2">
+                                        <div class="col-3">Height:</div>
+                                        <div class="col float-start"><?php echo $result_medical_history['Height']; ?>cm</div>
+                                    </div>
+                                    <div style="font-size: 13px" class="row ps-3 pb-2">
+                                        <div class="col-3">BMI:</div>
+                                        <div class="col float-start"><?php echo $result_medical_history['BMI']; ?>cm</div>
+                                    </div>
+                                    <div style="font-size: 13px" class="row ps-3 pb-2">
+                                        <div class="col-3">Drinking Alcohol?:</div>
+                                        <div class="col float-start"><?php echo $result_medical_history['Alcohol']; ?></div>
+                                    </div>
+                                    <div style="font-size: 13px" class="row ps-3 pb-2">
+                                        <div class="col-3">Smoking?:</div>
+                                        <div class="col float-start"><?php echo $result_medical_history['Smoking']; ?></div>
+                                    </div>
+                                    <div style="font-size: 13px" class="row ps-3 pb-2">
+                                        <div class="col-3">Regularly Exercise?:</div>
+                                        <div class="col float-start"><?php echo $result_medical_history['Exercise']; ?></div>
+                                    </div>
+                                    <div style="font-size: 13px" class="row ps-3 pb-2">
+                                        <div class="col-3">Previous & Current Illness:</div>
+                                        <div class="col float-start"><?php echo $result_medical_history['Illness']; ?></div>
+                                    </div>
+                                    <div style="font-size: 13px" class="row ps-3 pb-2">
+                                        <div class="col-3">Previous & Current Surgery:</div>
+                                        <div class="col float-start"><?php echo $result_medical_history['Surgery']; ?></div>
+                                    </div>
+                                    <span class="d-grid mx-auto mt-3 mb-3" style="border-bottom:0.5px solid rgb(241, 240, 240);"></span>
+                                    <div class="row mt-2 p-2">
+                                        <span style="font-size: 20px;" >Declaration Files</span>
+                                        <div style="padding: 20px;" class="row shadow bg-body rounded">
+                                            
+                                        </div>
+                                    </div>  
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div> 
+                            </div>
                             </div>
                         </div>
-                        <!-- End Medical History-->
-
+                        <!-- End Seller -->
                         <!-- View Product -->
                         <div class="modal fade" id="product<?php echo $Product_ID ?>" tabindex="-1" aria-labelledby="editModalLabel" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
@@ -278,15 +243,21 @@
                             </div>
                             </div>
                         </div>
-                        <!-- End Seller -->                                           
+                        <!-- End Seller -->
+
+
                     <?php
+                        
                         }
+                        
                     ?>
                 </tbody>
             </table>
+            
         </div>
     </div>
 </div>
+
 <?php
     if(isset($_POST['uploadBtn'])){
         $presCust_ID = $_POST['cust_ID'];
@@ -305,6 +276,7 @@
         
         $query_uploadFile=mysqli_query($con,"INSERT INTO record(Record_Timestamp, Record_File, Record_FileName, FK_Record_Product_ID, FK_Record_Cust_ID)
         VALUES ('$date','$fname','$name','0','$presCust_ID')");
+        $_SESSION['message'] = 'successfully upload record';
         echo '<script>window.location.href="Admin_Consultation.php?msg=success"</script>';
     }
 ?>
@@ -316,9 +288,9 @@
         $todayDate = date('d-m-Y');
         $todayTime = date('h:i:s a');
 
-        
-        
-        echo '<script>window.location.href="Admin_ManageCust.php"</script>';
+        $query_updateConsult = mysqli_query($con,"UPDATE consult SET Consult_Status='$status',Consult_CompDate='$todayDate',`Consult_CompTime`='$todayTime',FK_Consult_Admin_ID='' WHERE Consult_ID = '$consult_ID'");
+        $_SESSION['message'] = 'successfully update status';
+        echo '<script>window.location.href="Admin_Consultation.php"</script>';
     }
 ?>
 

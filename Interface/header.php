@@ -36,7 +36,7 @@ session_start();
                         <?php if(!isset($_SESSION['Cust_Id'])){?>
                           <a class="text-decoration-none text-reset" href="Login.php"><span style="font-size:13px">Login | Register</span></a>
                         <?php }else{?>
-                        <li class="nav-item dropdown">
+                        <!--<li class="nav-item dropdown">
                           <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
                             <span style="font-size: 14px;">notification</span>
                             <span class="position-absolute top-30 start-90 translate-middle badge rounded-pill bg-danger">1</span>
@@ -46,7 +46,7 @@ session_start();
                             <li><a class="dropdown-item" href="#">Another news</a></li>
                             <li><a class="dropdown-item" href="#">Something else here</a></li>
                           </ul>
-                        </li>
+                        </li>-->
                         
                         <!-- Avatar -->
                         <li class="nav-item dropdown">
