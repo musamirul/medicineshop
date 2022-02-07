@@ -40,13 +40,13 @@
                 <div class="row bg-white p-3">
                     <ul class="nav nav-pills d-flex justify-content-start">
                         <li style="width: 170px;" class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="Admin_Consultation.php"><center>All<span class="shadow badge bg-secondary ms-3"><?php echo $allcount ?></span></center></a>
+                            <a class="nav-link text-reset" href="Admin_Consultation.php"><center>All<span class="shadow badge bg-secondary ms-3"><?php echo $allcount ?></span></center></a>
                         </li>
                         <li style="width: 170px;" class="nav-item">
                             <a class="nav-link text-reset" href="Admin_Consultation_Request.php"><center>Request<span class="shadow badge bg-secondary ms-3"><?php echo $activecount ?></span></center></a>
                         </li>
                         <li style="width: 170px;" class="nav-item">
-                            <a class="nav-link text-reset" href="Admin_Consultation_Complete.php"><center>Complete<span class="shadow badge bg-secondary ms-3"><?php echo $completecount ?></span></center></a>
+                            <a class="nav-link active" aria-current="page" href="Admin_Consultation_Complete.php"><center>Complete<span class="shadow badge bg-secondary ms-3"><?php echo $completecount ?></span></center></a>
                         </li>
                         <li style="width: 170px;" class="nav-item">
                             <a class="nav-link text-reset" href="Admin_Consultation_Cancel.php"><center>Cancel<span class="shadow badge bg-secondary ms-3"><?php echo $cancelcount ?></span></center></a>
@@ -77,7 +77,7 @@
                 <tbody>
                     <?php
                         //display all table data
-                        $query_showData = mysqli_query($con,"SELECT * FROM consult");
+                        $query_showData = mysqli_query($con,"SELECT * FROM consult WHERE Consult_Status ='complete'");
                         while($result_showData = mysqli_fetch_array($query_showData)){
                             $Cust_ID = $result_showData['FK_Consult_Cust_ID']; 
                             $query_customer = mysqli_query($con,"SELECT * FROM customer WHERE Cust_ID = '$Cust_ID'");
