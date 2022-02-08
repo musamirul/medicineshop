@@ -26,7 +26,9 @@ session_start();
               <div class="col">
                 <div class="row mb-2">
                   <div class="col ps-4">
-                    <a style="font-size: 13px; color: rgb(20, 10, 109);" class="text-decoration-none pe-2" href="seller/Seller_Registration.php">Seller Center</a>
+                    <a style="font-size: 13px; color: grey;" class="text-decoration-none text-reset" href="seller/Seller_Registration.php">Seller Center</a>
+                    <span style="font-size:13px; color: grey;">|</span>
+                    <a style="font-size: 13px; color: grey;" class="text-decoration-none text-reset" href="healthinfo-list.php">Health Article</a>
 
                   </div>
                   <div class="col">

@@ -67,6 +67,19 @@
         ['view', ['fullscreen', 'codeview', 'help']]
       ]
     });
+    $('#summernote_health').summernote({
+      placeholder: 'Enter Article Text',
+      tabsize: 2,
+      height: 800,
+      toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'underline', 'clear']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['table', ['table']],
+        ['view', ['fullscreen', 'codeview', 'help']]
+      ]
+    });
   </script>
   <script>
     var toastTrigger = document.getElementById('liveToastBtn')
