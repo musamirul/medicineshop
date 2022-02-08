@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Feb 06, 2022 at 05:27 PM
+-- Generation Time: Feb 08, 2022 at 04:52 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -30,19 +30,22 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `administrator`;
 CREATE TABLE IF NOT EXISTS `administrator` (
   `Admin_ID` int(45) NOT NULL AUTO_INCREMENT,
+  `Admin_Name` varchar(254) NOT NULL,
   `Admin_Email` varchar(45) NOT NULL,
   `Admin_EmpNo` varchar(45) NOT NULL,
   `Admin_Dept` varchar(45) NOT NULL,
+  `Admin_Status` varchar(45) NOT NULL,
   `FK_Admin_Login_ID` int(45) NOT NULL,
   PRIMARY KEY (`Admin_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `administrator`
 --
 
-INSERT INTO `administrator` (`Admin_ID`, `Admin_Email`, `Admin_EmpNo`, `Admin_Dept`, `FK_Admin_Login_ID`) VALUES
-(1, 'musamirul@it.gmail', '344343', 'finance', 20);
+INSERT INTO `administrator` (`Admin_ID`, `Admin_Name`, `Admin_Email`, `Admin_EmpNo`, `Admin_Dept`, `Admin_Status`, `FK_Admin_Login_ID`) VALUES
+(1, 'Dr Ameirul Mustaqim', 'musamirul@it.gmail', '344343', 'it', 'Active', 19),
+(2, 'Dr Amran Musa', 'dramran@kpjklang.com', '12443837', 'consultant', 'active', 53);
 
 -- --------------------------------------------------------
 
@@ -171,7 +174,7 @@ CREATE TABLE IF NOT EXISTS `consult` (
 --
 
 INSERT INTO `consult` (`Consult_ID`, `Consult_RegDate`, `Consult_RegTime`, `Consult_Status`, `Consult_CompDate`, `Consult_CompTime`, `FK_Consult_Cust_ID`, `FK_Consult_Product_ID`, `FK_Consult_Admin_ID`) VALUES
-(3, '06-02-2022', '11:58:17 pm', 'request', '0', '0', 18, 54, 0);
+(3, '06-02-2022', '11:58:17 pm', 'complete', '07-02-2022', '10:54:41 pm', 18, 54, 1);
 
 -- --------------------------------------------------------
 
@@ -237,11 +240,21 @@ CREATE TABLE IF NOT EXISTS `healthinfo` (
   `HealthInfo_ID` int(45) NOT NULL AUTO_INCREMENT,
   `HealthInfo_Title` varchar(45) NOT NULL,
   `HealthInfo_Desc` longtext NOT NULL,
-  `HealthInfo_TimeStamp` timestamp(6) NOT NULL,
+  `HealthInfo_Date` varchar(45) NOT NULL,
+  `HealthInfo_Time` varchar(45) NOT NULL,
+  `HealthInfo_Tags` varchar(254) NOT NULL,
   `HealthInfo_Author` varchar(45) NOT NULL,
   `FK_HealthInfo_Admin_ID` int(45) NOT NULL,
   PRIMARY KEY (`HealthInfo_ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `healthinfo`
+--
+
+INSERT INTO `healthinfo` (`HealthInfo_ID`, `HealthInfo_Title`, `HealthInfo_Desc`, `HealthInfo_Date`, `HealthInfo_Time`, `HealthInfo_Tags`, `HealthInfo_Author`, `FK_HealthInfo_Admin_ID`) VALUES
+(3, 'The Development and Causes of Cancer', '<p>The fundamental abnormality resulting in the development of cancer is the continual unregulated proliferation of cancer cells. Rather than responding appropriately to the signals that control normal cell behavior, cancer cells grow and divide in an uncontrolled manner, invading normal tissues and organs and eventually spreading throughout the body. The generalized loss of growth control exhibited by cancer cells is the net result of accumulated abnormalities in multiple cell regulatory systems and is reflected in several aspects of cell behavior that distinguish cancer cells from their normal counterparts.</p><p><span style=\"font-weight: bolder;\">Types of Cancer</span></p><p>Cancer can result from abnormal proliferation of any of the different kinds of cells in the body, so there are more than a hundred distinct types of cancer, which can vary substantially in their behavior and response to treatment. The most important issue in cancer pathology is the distinction between benign and malignant tumors. A tumor is any abnormal proliferation of cells, which may be either benign or malignant. A benign tumor, such as a common skin wart, remains confined to its original location, neither invading surrounding normal tissue nor spreading to distant body sites. A malignant tumor, however, is capable of both invading surrounding normal tissue and spreading throughout the body via the circulatory or lymphatic systems (metastasis). Only malignant tumors are properly referred to as cancers, and it is their ability to invade and metastasize that makes cancer so dangerous. Whereas benign tumors can usually be removed surgically, the spread of malignant tumors to distant body sites frequently makes them resistant to such localized treatment.</p><p>Both benign and malignant tumors are classified according to the type of cell from which they arise. Most cancers fall into one of three main groups: carcinomas, sarcomas, and leukemias or lymphomas. Carcinomas, which include approximately 90% of human cancers, are malignancies of epithelial cells. Sarcomas, which are rare in humans, are solid tumors of connective tissues, such as muscle, bone, cartilage, and fibrous tissue. Leukemias and lymphomas, which account for approximately 8% of human malignancies, arise from the blood-forming cells and from cells of the immune system, respectively. Tumors are further classified according to tissue of origin (e.g., lung or breast carcinomas) and the type of cell involved. For example, fibrosarcomas arise from fibroblasts, and erythroid leukemias from precursors of erythrocytes (red blood cells).</p><p>Although there are many kinds of cancer, only a few occur frequently. More than a million cases of cancer are diagnosed annually in the United States, and more than 500,000 Americans die of cancer each year. Cancers of 10 different body sites account for more than 75% of this total cancer incidence. The four most common cancers, accounting for more than half of all cancer cases, are those of the breast, prostate, lung, and colon/rectum. Lung cancer, by far the most lethal, is responsible for nearly 30% of all cancer deaths.</p><p><span style=\"font-weight: bolder;\">The Development of Cancer</span></p><p>One of the fundamental features of cancer is tumor clonality, the development of tumors from single cells that begin to proliferate abnormally. The single-cell origin of many tumors has been demonstrated by analysis of X chromosome inactivation . As discussed in Chapter 8, one member of the X chromosome pair is inactivated by being converted to heterochromatin in female cells. X inactivation occurs randomly during embryonic development, so one X chromosome is inactivated in some cells, while the other X chromosome is inactivated in other cells. Thus, if a female is heterozygous for an X chromosome gene, different alleles will be expressed in different cells. Normal tissues are composed of mixtures of cells with different inactive X chromosomes, so expression of both alleles is detected in normal tissues of heterozygous females. In contrast, tumor tissues generally express only one allele of a heterozygous X chromosome gene. The implication is that all of the cells constituting such a tumor were derived from a single cell of origin, in which the pattern of X inactivation was fixed before the tumor began to develop.</p><p>The clonal origin of tumors does not, however, imply that the original progenitor cell that gives rise to a tumor has initially acquired all of the characteristics of a cancer cell. On the contrary, the development of cancer is a multistep process in which cells gradually become malignant through a progressive series of alterations. One indication of the multistep development of cancer is that most cancers develop late in life. The incidence of colon cancer, for example, increases more than tenfold between the ages of 30 and 50, and another tenfold between 50 and 70. Such a dramatic increase of cancer incidence with age suggests that most cancers develop as a consequence of multiple abnormalities, which accumulate over periods of many years.<br></p><p><br></p>', '08-02-2022', '10:02:01 pm', 'cancer, tumor', 'Geoffrey M Cooper', 1),
+(5, 'HIV/AIDS', '<p>The human immunodeficiency virus (HIV) targets the immune system and weakens peoples defense against many infections and some types of cancer that people with healthy immune systems can fight off. As the virus destroys and impairs the function of immune cells, infected individuals gradually become immunodeficient. Immune function is typically measured by CD4 cell count.</p><p>The most advanced stage of HIV infection is acquired immunodeficiency syndrome (AIDS), which can take many years to develop if not treated, depending on the individual. AIDS is defined by the development of certain cancers, infections or other severe long-term clinical manifestations.</p><p><b>Signs and symptoms</b></p><p>The symptoms of HIV vary depending on the stage of infection. Though people living with HIV tend to be most infectious in the first few months after being infected, many are unaware of their status until the later stages. In the first few weeks after initial infection people may experience no symptoms or an influenza-like illness including fever, headache, rash or sore throat.</p><p>As the infection progressively weakens the immune system, they can develop other signs and symptoms, such as swollen lymph nodes, weight loss, fever, diarrhoea and cough. Without treatment, they could also develop severe illnesses such as tuberculosis (TB), cryptococcal meningitis, severe bacterial infections, and cancers such as lymphomas and Kaposis sarcoma.</p><p><b>Transmission</b></p><p>HIV can be transmitted via the exchange of a variety of body fluids from infected people, such as blood, breast milk, semen and vaginal secretions. HIV can also be transmitted from a mother to her child during pregnancy and delivery. Individuals cannot become infected through ordinary day-to-day contact such as kissing, hugging, shaking hands, or sharing personal objects, food or water.&nbsp;</p><p>It is important to note that people with HIV who are taking ART and are virally suppressed do not transmit HIV to their sexual partners.&nbsp; Early access to ART and support to remain on treatment is therefore critical not only to improve the health of people with HIV but also to prevent HIV transmission.</p><p><b>Diagnosis</b></p><p>HIV can be diagnosed through rapid diagnostic tests that provide same-day results. This greatly facilitates early diagnosis and linkage with treatment and care. People can also use HIV self-tests to test themselves. However, no single test can provide a full HIV diagnosis; confirmatory testing is required, conducted by a qualified and trained health or community worker at a community centre or clinic. HIV infection can be detected with great accuracy using WHO prequalified tests within a nationally approved testing strategy.</p><p>Most widely-used HIV diagnostic tests detect antibodies produced by the person as part of their immune response to fight HIV. In most cases, people develop antibodies to HIV within 28 days of infection. During this time, people experience the so-called window period â€“ when HIV antibodies havenâ€™t been produced in high enough levels to be detected by standard tests and when they may have had no signs of HIV infection, but also when they may transmit HIV to others. After infection, an individual may transmit HIV transmission to a sexual or drug-sharing partner or for pregnant women to their infant during pregnancy or the breastfeeding period.</p><p>Following a positive diagnosis, people should be retested before they are enrolled in treatment and care to rule out any potential testing or reporting error. Notably, once a person diagnosed with HIV and has started treatment they should not be retested.</p><p>While testing for adolescents and adults has been made simple and efficient, this is not the case for babies born to HIV-positive mothers. For&nbsp; children less than 18 months of age, serological testing is not sufficient to identify HIV infection â€“ virological testing must be provided as early as birth or at 6 weeks of age. New technologies are now becoming available to perform this test at the point of care and enable same-day results, which will accelerate appropriate linkage with treatment and care.</p><p><b>Treatment</b></p><p>HIV disease can be managed by treatment regimens composed of a combination of three or more antiretroviral (ARV) drugs. Current antiretroviral therapy (ART) does not cure HIV infection but highly suppresses viral replication within a persons body and allows an individuals immune system recovery to strengthen and regain the capacity to fight off opportunistic infections and some cancers.</p><p>Since 2016, WHO has recommended that all people living with HIV be provided with lifelong ART, including children, adolescents, adults and pregnant and breastfeeding women, regardless of clinical status or CD4 cell count.&nbsp;</p><p>By June 2021, 187 countries had already adopted this recommendation, covering 99% of all people living with HIV globally. In addition to the treat all strategy, WHO recommends a rapid ART initiation to all people living with HIV, including offering ART on the same day as diagnosis among those who are ready to start treatment. By June 2021, 82 low- and middle-income countries reported that they have adopted this policy, and approximately half of them reported country-wide implementation.</p><p>Globally, 28.2 million people living with HIV were receiving ART in 2021. The global ART coverage rate was 73% [56â€“88%] in 2020. However, more efforts are needed to scale up treatment, particularly for children and adolescents. Only 54% [37â€“69%] of children (0â€“14 years old) were receiving ART at the end of 2020.</p>', '08-02-2022', '10:40:58 pm', 'hiv, aids', 'Ahmad Mustapha', 1);
 
 -- --------------------------------------------------------
 
@@ -256,7 +269,7 @@ CREATE TABLE IF NOT EXISTS `login` (
   `password` varchar(45) NOT NULL,
   `role` varchar(45) NOT NULL,
   PRIMARY KEY (`Login_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=54 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `login`
@@ -267,6 +280,7 @@ INSERT INTO `login` (`Login_ID`, `username`, `password`, `role`) VALUES
 (50, 'bigpharma', '123', 'seller'),
 (51, 'healthlane', '123', 'seller'),
 (52, 'mustaqim', '123', 'customer'),
+(53, 'dramran', '123', 'administrator'),
 (49, 'sterling', '123', 'seller'),
 (48, 'ameirul', '123', 'customer');
 
@@ -381,7 +395,7 @@ CREATE TABLE IF NOT EXISTS `record` (
   `FK_Record_Product_ID` int(45) NOT NULL,
   `FK_Record_Cust_ID` int(45) NOT NULL,
   PRIMARY KEY (`Record_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `record`
@@ -389,6 +403,7 @@ CREATE TABLE IF NOT EXISTS `record` (
 
 INSERT INTO `record` (`Record_ID`, `Record_Timestamp`, `Record_File`, `Record_FileName`, `FK_Record_Product_ID`, `FK_Record_Cust_ID`) VALUES
 (19, '2022-02-07 12:54:31am', '20220207005431_ConsultPrescription.pdf', 'ConsultPrescription.pdf', 0, 18),
+(20, '2022-02-07 10:53:58pm', '20220207225358_PrescriptionDoc.pdf', 'PrescriptionDoc.pdf', 0, 18),
 (12, '2022-02-06 04:14:54pm', '20220206161454_Prescription.pdf', 'Prescription.pdf', 0, 18);
 
 -- --------------------------------------------------------
