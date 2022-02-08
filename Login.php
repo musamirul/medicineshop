@@ -138,7 +138,7 @@ if(isset($_POST['login'])){
                 $_SESSION['username'] = $_POST['username'];
                 $_SESSION['role'] = $result['role'];
                 $_SESSION['Cust_Id'] = $result_check['Cust_ID'];
-                echo '<script>window.location.href="customer/profile.php"</script>';
+                echo '<script>window.location.href="index.php"</script>';
                 //header("location:http://localhost/medicineshop/homepage.php");
 
             }else{

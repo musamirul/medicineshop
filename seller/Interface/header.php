@@ -112,7 +112,7 @@
                   </a>
               <!-- Right links -->
               <ul class="navbar-nav ms-auto d-flex flex-row">
-                <!-- Notification dropdown -->
+                <!-- Notification dropdown 
                 <li class="nav-item dropdown">
                   <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
                     <i class="fas fa-bell"></i>
@@ -123,7 +123,7 @@
                     <li><a class="dropdown-item" href="#">Another news</a></li>
                     <li><a class="dropdown-item" href="#">Something else here</a></li>
                   </ul>
-                </li>
+                </li>-->
                 
                 <!-- Avatar -->
                 <li class="nav-item dropdown">
@@ -132,7 +132,7 @@
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink" >
                     <li><a class="dropdown-item" href="Seller_Information.php"><?php echo $_SESSION['username']; ?></a></li>
-                    <li><a class="dropdown-item" href="Seller_Shop_Profile.php">My profile</a></li>
+                    <li><a class="dropdown-item" href="Seller_Shop_Profile.php">My shop</a></li>
                     <li><a class="dropdown-item" href="../logout.php">Logout</a></li>
                   </ul>
                 </li>

@@ -58,7 +58,7 @@ session_start();
                           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink" >
                             <li><a class="dropdown-item" href="#"></a></li>
                             <li><a class="dropdown-item" href="customer/profile.php">My profile</a></li>
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="customer/cust_purchase.php">My Purchase</a></li>
                             <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                           </ul>
                         </li>
