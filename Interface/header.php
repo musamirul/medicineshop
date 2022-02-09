@@ -35,9 +35,9 @@ session_start();
                       <!-- Right links -->
                       <ul class="navbar-nav ms-auto float-end">
                         <!-- Notification dropdown -->
-                        <?php if(!isset($_SESSION['Cust_Id'])){?>
+                        <?php if(!isset($_SESSION['id'])){?>
                           <a class="text-decoration-none text-reset" href="Login.php"><span style="font-size:13px">Login | Register</span></a>
-                        <?php }else{?>
+                        <?php }elseif(isset($_SESSION['Cust_Id'])){?>
                         <!--<li class="nav-item dropdown">
                           <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
                             <span style="font-size: 14px;">notification</span>
@@ -62,13 +62,41 @@ session_start();
                             <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                           </ul>
                         </li>
+                        <?php 
+                            }elseif(isset($_SESSION['Seller_Id'])){ 
+                              $getImg_Seller_ID = $_SESSION['Seller_Id'];
+                              $query_seller_getImg = mysqli_query($con,"SELECT * FROM seller_shop WHERE FK_Shop_Seller_ID='$getImg_Seller_ID'");
+                              $result_seller_getImg = mysqli_fetch_array($query_seller_getImg);
+                          ?>
+                          
+                          <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
+                              <img <?php if($result_seller_getImg==''){ ?> src="seller/temp.jpg" <?php }else{ ?>src="seller/shop_img/<?php echo $result_seller_getImg['Shop_Img']; ?>" <?php } ?>class="rounded-circle" height="22" alt="" loading="lazy" />
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink" >
+                              <li><a class="dropdown-item" href="seller/Seller_Information.php"><?php echo $_SESSION['username']; ?></a></li>
+                              <li><a class="dropdown-item" href="seller/Seller_Shop_Profile.php">My shop</a></li>
+                              <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                            </ul>
+                          </li>
+                        <?php }elseif(isset($_SESSION['Admin_Id'])){  ?>
+                          <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
+                              <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle" height="22" alt="" loading="lazy" />
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink" >
+                              <li><a class="dropdown-item" href="admin/Admin_Dashboard"><?php echo $_SESSION['username']; ?></a></li>
+                              <li><a class="dropdown-item" href="admin/Admin_Information">My profile</a></li>
+                              <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                            </ul>
+                          </li>
                         <?php } ?>
                       </ul>
                   </div>
                 </div>
                 <div class="row">
                 <div class="col-2">
-                  <img class="ms-3" src="Interface/style/image/logo.png" height="48px" width="130px" alt="" loading="lazy" />
+                  <a href="index.php"><img class="ms-3" src="Interface/style/image/logo.png" height="48px" width="130px" alt="" loading="lazy" /></a>
                 </div>
                   <div class="col-8 mt-1">
                       <form method="post" action="product-list.php">

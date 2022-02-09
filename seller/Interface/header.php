@@ -107,7 +107,7 @@
               </button>
 
                   <!-- Brand -->
-                  <a class="navbar-brand" href="#">
+                  <a class="navbar-brand" href="../index.php">
                     <img class="ms-3" src="Interface/style/image/logo.png" height="30" alt="" loading="lazy" />
                   </a>
               <!-- Right links -->

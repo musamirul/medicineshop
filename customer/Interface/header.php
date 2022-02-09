@@ -74,7 +74,7 @@
                 </div>
                 <div class="row">
                 <div class="col-2">
-                  <img class="ms-3" src="Interface/style/image/logo.png" height="48px" width="130px" alt="" loading="lazy" />
+                  <a href="../index.php"><img class="ms-3" src="Interface/style/image/logo.png" height="48px" width="130px" alt="" loading="lazy" /></a>
                 </div>
                   <div class="col-8 mt-1">
                     <form method="post" action="../product-list.php">

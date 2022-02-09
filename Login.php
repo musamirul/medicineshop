@@ -38,7 +38,7 @@
                 
                     <div class="row mt-4">
                         <div class="d-flex justify-content-center">
-                            <div class="p-2 bd-highlight"><img src="Interface/style/image/logo.png" style="height: 30px;"></div>
+                            <div class="p-2 bd-highlight"><a href="index.php"><img src="Interface/style/image/logo.png" style="height: 30px;"></a></div>
                             <div class="pe-2 pt-2 pb-2 bd-highlight" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;font-weight: bold; font-size: 20px;">OnlineMedicineShopping</div>
                         </div>
                     </div>
