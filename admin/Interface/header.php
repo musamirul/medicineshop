@@ -52,7 +52,7 @@
                     <a href="Admin_Information.php" class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "Admin_Information.php")echo "active"?> " aria-current="true"><i class="bi bi-info-square me-3"></i><span>My Profile</span></a>
                     
                     <br /><br />
-                    <a href="#" class="list-group-item list-group-item-action py-2" aria-current="true"><i class="bi bi-gear-fill me-3"></i><span>Settings</span></a>
+                    <!--<a href="#" class="list-group-item list-group-item-action py-2" aria-current="true"><i class="bi bi-gear-fill me-3"></i><span>Settings</span></a>-->
                 </div>       
             </div>
 		</nav>

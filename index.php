@@ -109,12 +109,12 @@ height: 100px;
                         while($result_healthinfo = mysqli_fetch_array($query_healthinfo)){
                     ?>
                     <div class="col-sm-6">
-                        <div class="card mb-3" style="max-width: 540px;">
+                        <div class="card mb-3" style="max-width: 600px;">
                             <div class="row g-0">
-                                <!--<div class="col-md-4">
-                                <img src="..." class="img-fluid rounded-start" alt="...">
-                                </div>-->
-                                <div class="col-md-12">
+                                <div class="col-md-3">
+                                <img style="height: 165px; width: 150px;" src="admin/img/<?php echo $result_healthinfo['HealthInfo_Img'] ?>" class="img-fluid rounded-start">
+                                </div>
+                                <div class="col-md-9">
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         <form method="post" action="healthinfo-list.php">

@@ -93,7 +93,7 @@
                       <li class="list-group-item py-1"><a href="Seller_Information.php" class="text-decoration-none text-reset"><i style="font-size:14px" class="bi bi-info-square me-3"></i>My Information</a></li>
                     </ul>
                     <br /><br />
-                    <a href="#" class="list-group-item list-group-item-action py-2" aria-current="true"><i class="bi bi-gear-fill me-3"></i><span>Settings</span></a>
+                    <!--<a href="#" class="list-group-item list-group-item-action py-2" aria-current="true"><i class="bi bi-gear-fill me-3"></i><span>Settings</span></a>-->
                 </div>       
             </div>
 		</nav>

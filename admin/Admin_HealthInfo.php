@@ -19,7 +19,7 @@
         <span class="d-grid mx-auto mt-3 mb-3" style="border-bottom:0.5px solid rgb(241, 240, 240);"></span>
         <div class="row pt-2 ms-2 me-2">
             <div class="col-8">
-                <form method="post">
+                <form enctype="multipart/form-data" method="post">
                 <textarea id="summernote_health" class="form-control" rows="5" cols="500" name="description" placeholder="Enter Article Text" required></textarea>
             </div>
             <div class="col-4">
@@ -45,6 +45,16 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col">
+                        <b>Article IMAGE</b> <br />
+                        <small>Here you can upload images of article. You are allowed to upload 1 image only</small>
+                        <br /><br />
+                        <input type="file" name="file"><br /><br />
+                        <small style="color: red;" class="">NOTES:</small>
+                        <small><i>Image can be uploaded of any dimension but we recommend you to upload image with dimension of 1024x1024 & its size must be less than 15mb</i></small>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
                         <button type="submit" name="updateInfoBtn" class="btn btn-primary">Submit</button>
                     </form>
                     </div>
@@ -60,12 +70,24 @@
         $title = $_POST['title'];
         $author = $_POST['author'];
         $tags = $_POST['tags'];
+
+
+        $name=$_FILES['file']['name'];
+        $size=$_FILES['file']['size'];
+        $type=$_FILES['file']['type'];
+        $temp=$_FILES['file']['tmp_name'];
+
+
         date_default_timezone_set("Asia/Kuala_Lumpur");
         $todayDate = date('d-m-Y');
         $todayTime = date('h:i:s a');
 
-        $query_information = mysqli_query($con,"INSERT INTO healthinfo(HealthInfo_Title, HealthInfo_Desc, HealthInfo_Date, HealthInfo_Time, HealthInfo_Tags, HealthInfo_Author,FK_HealthInfo_Admin_ID) 
-        VALUES ('$title','$description','$todayDate','$todayTime','$tags','$author','$AdminID')");
+        $date = date("Y-m-d h:i:sa");
+        $fname = date("YmdHis").'_'.$name;
+        $move = move_uploaded_file($temp,"img/".$fname);
+
+        $query_information = mysqli_query($con,"INSERT INTO healthinfo(HealthInfo_Title, HealthInfo_Desc, HealthInfo_Img, HealthInfo_Date, HealthInfo_Time, HealthInfo_Tags, HealthInfo_Author,FK_HealthInfo_Admin_ID) 
+        VALUES ('$title','$description','$fname','$todayDate','$todayTime','$tags','$author','$AdminID')");
         
         $_SESSION['message'] = 'Successfully update information';
         echo '<script>window.location.href="Admin_HealthInfo.php?msg=success"</script>';

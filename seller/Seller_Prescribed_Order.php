@@ -30,6 +30,9 @@
             </div>
         </div>
         <span class="d-grid mx-auto mt-3 mb-3" style="border-bottom:0.5px solid rgb(241, 240, 240);"></span>
+        <div style="background-color: rgb(220, 235, 255);" class="text-start p-2">
+            <span style="font-size: 16px; color: black;"><b>Status Pending</b></span>
+         </div>
         <div class="row pt-2">
             <table id="example" class="display center" style="width: 100%; text-align: center; font-size: 13px;">
                 <thead>
@@ -163,6 +166,84 @@
                             
                         }
                     ?>
+                    <?php
+
+                            }
+                           
+                        }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+        <span class="d-grid mx-auto mt-3 mb-3" style="border-bottom:0.5px solid rgb(241, 240, 240);"></span>
+            <div style="background-color: rgb(220, 255, 255);" class="text-start p-2">
+                <span style="font-size: 16px; color: black;"><b>Status Updated</b></span>
+             </div>
+        <div class="row pt-2">
+            <table id="example1" class="display center" style="width: 100%; text-align: center; font-size: 13px;">
+                <thead>
+                    <tr>
+                        <th>Prod. List</th>
+                        <th>Customer Name</th>
+                        <th>Shipping Method</th>
+                        <th>Med. History</th>
+                        <th>Cust Record</th>
+                        <th>Channel</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        
+                        //Get ID,Status & Amount from Order Table
+                        $query_order = mysqli_query($con,"SELECT * FROM orders WHERE FK_Order_Seller_ID = '$Seller_ID'");
+                        while($result_order = mysqli_fetch_array($query_order)){
+
+                            $Cust_ID = $result_order['FK_Order_Cust_ID'];
+                            //Get name,contact,email from customer table
+                            $query_cust = mysqli_query($con,"SELECT * FROM customer WHERE Cust_ID='$Cust_ID'");
+                            $result_cust = mysqli_fetch_array($query_cust);
+
+                            //Customer Shipping_address table
+                            $query_shipping = mysqli_query($con,"SELECT * FROM shipping_address WHERE FK_ShipAdd_Cust_ID = '$Cust_ID'");
+                            $result_shipping = mysqli_fetch_array($query_shipping);
+
+                            $ship_id = $result_order['FK_Order_Ship_ID'];
+                            //Get Shipping method from shipping table
+                            $query_ship_method = mysqli_query($con,"SELECT * FROM shipping WHERE Shipping_ID='$ship_id'");
+                            $result_ship_method = mysqli_fetch_array($query_ship_method);
+
+                            $Order_Cart_ID = $result_order['FK_Order_Cart_ID'];
+                            $cart_item = mysqli_query($con,"SELECT * FROM cart_item WHERE FK_Cart_ID = '$Order_Cart_ID' AND FK_Item_Record_ID > '0' AND FK_Item_Seller_ID ='$Seller_ID'");
+                            while($result_cart_item = mysqli_fetch_array($cart_item)){
+
+                                $FK_Record_ID = $result_cart_item['FK_Item_Record_ID'];
+
+                                //Get Item Name
+                                $Cart_Product_ID = $result_cart_item['FK_Item_Product_ID'];
+                                $query_item_product = mysqli_query($con,"SELECT * FROM product WHERE Product_ID = '$Cart_Product_ID'");
+                                $result_item_product = mysqli_fetch_array($query_item_product);
+                                
+                                $query_record = mysqli_query($con,"SELECT * FROM record WHERE Record_ID='$FK_Record_ID'");
+                                $result_record = mysqli_fetch_array($query_record);
+
+                                $TOrder_ID = $result_order['Order_ID'];
+                                $query_track = mysqli_query($con,"SELECT * FROM tracking WHERE FK_Tracking_Order_ID='$TOrder_ID'");
+                                $result_track = mysqli_fetch_array($query_track);
+
+
+
+
+                    ?>
+                    <tr>
+                        <td><a data-bs-toggle="modal" data-bs-target="#productView<?php echo $Order_Cart_ID; ?>" href="">#<?php echo $result_order['Order_ID']; ?></a></td>
+                        <td><?php echo $result_cust['Cust_Name']; ?></td>
+                        <td><?php echo $result_ship_method['Shipping_Method'] ?></td>
+                        <td><a data-bs-toggle="modal" data-bs-target="#healthView<?php echo $Cust_ID; ?>" href="">View</a></td>
+                        <td><a href="javascript:void(0)" onclick="openPdf('../customer/upload/<?php echo $result_record['Record_File']; ?>')">View</a></td>
+                        <td><?php echo $result_track['Tracking_Channel']; ?></td>
+                        <td><?php echo $result_order['Order_Status'] ?></td>
+                    </tr>
                     <?php
 
                             }
