@@ -25,8 +25,9 @@
   while($result_countOrder = mysqli_fetch_array($query_countOrder)){
 
     $Order_count_ID = $result_countOrder['Order_ID'];
-    $query_counttracking = mysqli_query($con,"SELECT * FROM tracking WHERE FK_Tracking_Order_ID='$Order_count_ID' AND 'Tracking_Status' = 'preparing'");
+    $query_counttracking = mysqli_query($con,"SELECT * FROM tracking WHERE FK_Tracking_Order_ID='$Order_count_ID' AND Tracking_Status = 'preparing'");
     while($result_counttracking = mysqli_fetch_array($query_counttracking)){
+
       $Order_Cart_ID = $result_countOrder['FK_Order_Cart_ID'];
       $query_countCartItem = mysqli_query($con,"SELECT * FROM cart_item WHERE FK_Cart_ID = '$Order_Cart_ID'");
       while($result_countCartItem = mysqli_fetch_array($query_countCartItem)){
@@ -71,7 +72,6 @@
                         <!--<li class="list-group-item py-1"><a href="#" class="text-decoration-none text-reset"><i style="font-size:14px" class="bi bi-bag-dash-fill me-3"></i>Update product</a></li>-->
                         <li class="list-group-item py-1 <?php if($current_file_name== "Seller_Product-View.php") echo "active"?>"><a href="Seller_Product-View.php" class="text-decoration-none text-reset"><i style="font-size:14px" class="bi bi-bag-check-fill me-3"></i>List product</a></li>
                     </ul>
-                    
                     <a href="Seller_Shipment.php" class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "Seller_Shipment.php" || $current_file_name=="Seller_Shipment_cancel.php" || $current_file_name=="Seller_Shipment_completed.php" || $current_file_name=="Seller_Shipment_shipping.php" || $current_file_name=="Seller_Shipment_toShip.php"|| $current_file_name=="Seller_Shipment_unpaid.php")echo "active"?> " aria-current="true"><i class="bi bi-truck me-3"></i><span>Shipment</span></a>
                     <a href="Seller_Order.php" class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "Seller_Order.php") echo "active"?>" aria-current="true"><i class="bi bi-cart-fill me-3"></i><span>Order</span></a>
                     <a href="Seller_Prescribed_Order.php" class="list-group-item list-group-item-action py-2 <?php if($prescribedCount>0){echo "bg-danger text-white"; }elseif($current_file_name== "Seller_Prescribed_Order.php") echo "active"?>" aria-current="true"><i class="bi bi-cart-fill me-3"></i><span>Prescribed Order</span></a>
