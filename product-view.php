@@ -63,7 +63,7 @@ $count_result = mysqli_fetch_object($count_query);
                 <div class="row">
                     <label class="col-sm-2 col-form-label">Quantity</label>
                     <div class="col-sm-2">
-                        <input type="number" name="quantity" class="form-control" placeholder="Number" required>
+                        <input type="number" name="quantity" class="form-control" value="1" placeholder="Number" required>
                     </div>
                     <label class="col-sm-3 col-form-label"><?php echo $product_result['Product_Qty'] ?> Pieces Available</label>
                 </div>

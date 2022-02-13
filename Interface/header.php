@@ -27,9 +27,6 @@ session_start();
                 <div class="row mb-2">
                   <div class="col ps-4">
                     <a style="font-size: 13px; color: grey;" class="text-decoration-none text-reset" href="seller/Seller_Registration.php">Seller Center</a>
-                    <span style="font-size:13px; color: grey;">|</span>
-                    <a style="font-size: 13px; color: grey;" class="text-decoration-none text-reset" href="healthinfo-list.php">Health Article</a>
-
                   </div>
                   <div class="col">
                       <!-- Right links -->
@@ -127,10 +124,16 @@ session_start();
                     <?php } ?>
                   </div>
                 </div>
+                <div class="row">
+                  <div class="d-flex flex-row bd-highlight">
+                      <div class="bd-highlight ps-5 pe-3 text-muted"><a style="font-size: 13px;" class="text-decoration-none" href="healthinfo-list.php">Health Article</a></div>
+                      <div class="bd-highlight pe-3 text-muted"><a style="font-size: 13px;" class="text-decoration-none" href="doctor.php">Our Doctors</a></div>
+                  </div>
+                </div>
               </div>
             </div>
             <!-- Container wrapper -->
     </nav>
 </header>
     <main style="margin-top: 100px">
-  <div class="container-fluid ps-5 pe-5 pt-4">
+  <div class="container-fluid ps-5 pe-5 pt-5">

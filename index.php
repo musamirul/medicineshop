@@ -66,6 +66,13 @@ height: 100px;
                             <a class="text-decoration-none text-reset" href="product-view.php?prodId=<?php echo $result_product['Product_ID']?>">
                             <div class="card h-100 shadow">
                                 <center><img style="height:160px; width:150px" src="<?php echo 'seller/'.$result_product['Product_Image']; ?>" class="card-img-top" alt="..."></center>
+                                <?php
+                                if($result_product['Product_RecordType']=='yes'){ 
+                                ?>
+                                <div style="position:absolute; top:0px; left:-4px;color: white;" class="bg-danger p-1">Prescribed medicine</div>
+                                <?php
+                                    }
+                                ?>
                                 <div class="card-body">
                                     <h5 style="font-size: 15px;" class="card-title"><?php echo $result_product['Product_Name']; ?></h5>
                                     <p><small class="text-muted"><?php echo $result_product['Product_ManufacturerName']; ?></small></p>

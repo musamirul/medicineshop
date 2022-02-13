@@ -130,6 +130,16 @@
             $Query_Submit_Profile = mysqli_query($con, "INSERT INTO administrator(Admin_Name, Admin_Email, Admin_EmpNo, Admin_Dept, Admin_Status, FK_Admin_Login_ID) 
             VALUES ('$name','$email','$empNo','$department','active','$login_id')");
 
+            if($department=='consultant'){
+                $query_selectAdminID = mysqli_query($con,"SELECT * FROM administrator WHERE FK_Admin_Login_ID ='$login_id'");
+                $result_selectAdminID = mysqli_fetch_array($result_selectAdminID);
+                $result_Admin_ID = $result_Admin_ID['Admin_ID'];
+
+                $query_createConsult = mysqli_query($con, "INSERT INTO consultant_profile(Consult_Profile_Speciality, Consult_Profile_Education,
+                 Consult_Profile_Language, Consult_Profile_Phone, Consult_Profile_Experience, Consult_Profile_Img, FK_Consult_Profile_Admin_ID) 
+                VALUES ('','','','','','','$result_Admin_ID')");
+            }
+
             $_SESSION['message'] = 'Profile '.$name.' have successfully created';
             echo '<script>window.location.href="Admin_ManageAdmin.php"</script>';
             exit();

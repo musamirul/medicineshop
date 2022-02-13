@@ -121,6 +121,7 @@ if(isset($_POST['login'])){
             $_SESSION['id'] = $result['Login_ID'];
             $_SESSION['username'] = $result['username'];
             $_SESSION['role'] = $result['role'];
+            $_SESSION['department'] = $result_admin_id['Admin_Dept'];
             $_SESSION['Admin_Id'] = $result_admin_id['Admin_ID'];
             echo '<script>window.location.href="admin/Admin_Dashboard.php"</script>';
         

@@ -8,9 +8,11 @@
   $_SESSION['id'];
   $_SESSION['username'];
   $_SESSION['role'];
+  $_SESSION['department'];
   //Get Current File Name for Navbar active button
   $current_file_name = basename($_SERVER['PHP_SELF']); 
   date_default_timezone_set("Asia/Kuala_Lumpur");
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -18,7 +20,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="Interface/style/bootstrap/css/bootstrap.min.css" media="screen">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>-->
+    <link href="Interface/style/chosen/chosen.css" rel="stylesheet">
+    <link href="Interface/style/fontawesome/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link href="Interface/style/css/style1.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="Interface/style/DataTables/css/jquery.dataTables.css">
@@ -32,14 +36,16 @@
     	<nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
         	<div class="position-sticky">
             	<div class="list-group list-group-flush mx-3 mt-4">
+                  <?php if($_SESSION['department']!='consultant'){?>
                 	<a href="Admin_Dashboard.php" class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "Admin_Dashboard.php") echo "active"?>" aria-current="true"><i class="bi bi-house-door-fill me-3"></i><span>Dashboard</span></a>
 
-                  <a href="#userCollapse" aria-current="true" aria-controls="userCollapse" data-bs-toggle="collapse" aria-expanded="true" class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "Admin_ManageSeller.php"||$current_file_name=="Admin_ManageSeller_Active.php"||$current_file_name=="Admin_ManageSeller_Deactive.php"||$current_file_name=="Admin_ManageSeller_ReqApproval.php"||$current_file_name=="Admin_ManageSeller_Suspend.php" || $current_file_name== "Admin_ManageCust.php" || $current_file_name== "Admin_ManageCust_Active.php" || $current_file_name== "Admin_ManageCust_Deactive.php" || $current_file_name== "Admin_ManageCust_Suspend.php" || $current_file_name== "Admin_ManageAdmin.php") echo "active"?>"><i class="bi bi-people-fill me-3"></i><span>User Management</span></a>
+                    <a href="#userCollapse" aria-current="true" aria-controls="userCollapse" data-bs-toggle="collapse" aria-expanded="true" class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "Admin_ManageSeller.php"||$current_file_name=="Admin_ManageSeller_Active.php"||$current_file_name=="Admin_ManageSeller_Deactive.php"||$current_file_name=="Admin_ManageSeller_ReqApproval.php"||$current_file_name=="Admin_ManageSeller_Suspend.php" || $current_file_name== "Admin_ManageCust.php" || $current_file_name== "Admin_ManageCust_Active.php" || $current_file_name== "Admin_ManageCust_Deactive.php" || $current_file_name== "Admin_ManageCust_Suspend.php" || $current_file_name== "Admin_ManageAdmin.php") echo "active"?>"><i class="bi bi-people-fill me-3"></i><span>User Management</span></a>
                     <ul class="collapse list-group list-group-flush ps-4" id="userCollapse">
                     	<li class="list-group-item py-1 <?php if($current_file_name== "Admin_ManageCust.php") echo "active"?>"><a href="Admin_ManageCust.php" class="text-decoration-none text-reset"><i style="font-size:14px" class="bi bi-person-fill me-3"></i>Customer</a></li>
                       <li class="list-group-item py-1 <?php if($current_file_name== "Admin_ManageSeller.php"||$current_file_name=="Admin_ManageSeller_Active.php"||$current_file_name=="Admin_ManageSeller_Deactive.php"||$current_file_name=="Admin_ManageSeller_ReqApproval.php"||$current_file_name=="Admin_ManageSeller_Suspend.php") echo "active"?>"><a href="Admin_ManageSeller.php" class="text-decoration-none text-reset"><i style="font-size:14px" class="bi bi-person-fill me-3"></i>Seller</a></li>
                       <li class="list-group-item py-1 <?php if($current_file_name== "Admin_ManageAdmin.php") echo "active"?>"><a href="Admin_ManageAdmin.php" class="text-decoration-none text-reset"><i style="font-size:14px" class="bi bi-person-fill me-3"></i>Admin</a></li>
                     </ul>
+                  <?php } ?>
                     <a href="#healthCollapse" aria-current="true" aria-controls="healthCollapse" data-bs-toggle="collapse" aria-expanded="true" class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "Admin_HealthInfo.php"||$current_file_name== "Admin_HealthInfo-view.php"||$current_file_name== "Admin_HealthInfo-manage.php"){echo "active";}?>"><i class="bi bi-journal-album me-3"></i><span>Health Article</span></a>
                     <ul class="collapse list-group list-group-flush ps-4" id="healthCollapse">
                     	<li class="list-group-item py-1 <?php if($current_file_name== "Admin_HealthInfo.php") echo "active"?>"><a href="Admin_HealthInfo.php" class="text-decoration-none text-reset"><i style="font-size:14px" class="bi bi-journals me-3"></i>Add Article</a></li>
@@ -48,9 +54,14 @@
                     </ul>
             
                     <a href="Admin_Consultation.php" class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "Admin_Consultation.php" || $current_file_name== "Admin_Consultation_Request.php" || $current_file_name== "Admin_Consultation_Complete.php" || $current_file_name== "Admin_Consultation_Cancel.php") echo "active"?>" aria-current="true"><i class="bi bi-clipboard me-3"></i><span>Consultation</span></a>
-                    <a href="Admin_ManageShipping.php" class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "Admin_ManageShipping.php")echo "active"?> " aria-current="true"><i class="bi bi-truck me-3"></i><span>Shipment Method</span></a>
+                    <?php if($_SESSION['department']!='consultant'){?>
+                      <a href="Admin_ManageShipping.php" class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "Admin_ManageShipping.php")echo "active"?> " aria-current="true"><i class="bi bi-truck me-3"></i><span>Shipment Method</span></a>
+                      <a href="Admin_HelpAssistant.php" class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "Admin_HelpAssistant.php")echo "active"?> " aria-current="true"><i class="bi bi-question-square me-3"></i><span>Help Assistant</span></a>
+                    <?php } ?>
                     <a href="Admin_Information.php" class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "Admin_Information.php")echo "active"?> " aria-current="true"><i class="bi bi-info-square me-3"></i><span>My Profile</span></a>
-                    
+                    <?php if($_SESSION['department']=='consultant'){?>
+                    <a href="Admin_Consultant_Profile.php" class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "Admin_Consultant_Profile.php")echo "active"?> " aria-current="true"><i class="fa-solid fa-user-doctor me-3"></i><span>Doc Profile</span></a>
+                    <?php } ?>
                     <br /><br />
                     <!--<a href="#" class="list-group-item list-group-item-action py-2" aria-current="true"><i class="bi bi-gear-fill me-3"></i><span>Settings</span></a>-->
                 </div>       

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Feb 10, 2022 at 05:06 PM
+-- Generation Time: Feb 13, 2022 at 05:20 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `administrator` (
 --
 
 INSERT INTO `administrator` (`Admin_ID`, `Admin_Name`, `Admin_Email`, `Admin_EmpNo`, `Admin_Dept`, `Admin_Status`, `FK_Admin_Login_ID`) VALUES
-(1, 'Dr Ameirul Mustaqim', 'musamirul@it.gmail', '344343', 'it', 'Active', 19),
+(1, 'Ameirul Mustaqim', 'musamirul@it.gmail', '344343', 'it', 'Active', 19),
 (2, 'Dr Amran Musa', 'dramran@kpjklang.com', '12443837', 'consultant', 'active', 53);
 
 -- --------------------------------------------------------
@@ -64,13 +64,15 @@ CREATE TABLE IF NOT EXISTS `billing` (
   `FK_Billing_Cust_ID` int(45) NOT NULL,
   `FK_Billing_Order_ID` int(45) NOT NULL,
   PRIMARY KEY (`Billing_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `billing`
 --
 
 INSERT INTO `billing` (`Billing_ID`, `Billing_Date`, `Billing_Time`, `Billing_PaymentStatus`, `Billing_PaymentMethod`, `Billing_ReferenceNo`, `FK_Billing_Cust_ID`, `FK_Billing_Order_ID`) VALUES
+(7, '13-02-2022', '02:44:32 pm', 'completed', 'Online Banking', '60248791', 19, 3),
+(6, '13-02-2022', '02:41:19 pm', 'completed', 'Online Banking', '62143258', 18, 2),
 (5, '06-02-2022', '06:03:50 pm', 'completed', 'Online Banking', '7519580', 18, 1);
 
 -- --------------------------------------------------------
@@ -89,13 +91,14 @@ CREATE TABLE IF NOT EXISTS `billing_address` (
   `country` varchar(45) NOT NULL,
   `FK_BillAdd_Cust_ID` int(45) NOT NULL,
   PRIMARY KEY (`BillAdd_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `billing_address`
 --
 
 INSERT INTO `billing_address` (`BillAdd_ID`, `address`, `city`, `state`, `zipcode`, `country`, `FK_BillAdd_Cust_ID`) VALUES
+(7, 'lorong 123', 'Parit Raja', 'Johor', 58738, 'Malaysia', 19),
 (6, 'no 38, lorong haji abu', 'Bukit Tinggi', 'Selangor', 41230, 'Malaysia', 18),
 (5, 'No 39, Lorong Raja Nong', 'Klang', 'Selangor', 41200, 'Malaysia', 17);
 
@@ -112,13 +115,15 @@ CREATE TABLE IF NOT EXISTS `cart` (
   `Cart_Status` varchar(45) NOT NULL,
   `FK_Cart_Cust_ID` int(45) NOT NULL,
   PRIMARY KEY (`Cart_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `cart`
 --
 
 INSERT INTO `cart` (`Cart_ID`, `Cart_TimeStamp`, `Cart_Status`, `FK_Cart_Cust_ID`) VALUES
+(24, '2022-02-13 02:40:54pm', 'payment_completed', 18),
+(25, '2022-02-13 02:42:10pm', 'payment_completed', 19),
 (23, '2022-02-06 05:59:09pm', 'payment_completed', 18);
 
 -- --------------------------------------------------------
@@ -138,13 +143,15 @@ CREATE TABLE IF NOT EXISTS `cart_item` (
   `FK_Item_Shipping_ID` int(45) NOT NULL,
   `FK_Item_Record_ID` int(45) NOT NULL,
   PRIMARY KEY (`Cart_Item_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `cart_item`
 --
 
 INSERT INTO `cart_item` (`Cart_Item_ID`, `Cart_Item_Qty`, `Cart_Item_Amount`, `FK_Cart_ID`, `FK_Item_Product_ID`, `FK_Item_Seller_ID`, `FK_Item_Shipping_ID`, `FK_Item_Record_ID`) VALUES
+(24, 1, 110, 25, 69, 9, 2, 0),
+(23, 1, 120, 24, 70, 8, 3, 19),
 (22, 1, 50000, 23, 54, 7, 1, 12),
 (21, 2, 35, 23, 56, 9, 1, 0),
 (20, 1, 120, 23, 70, 8, 1, 12);
@@ -179,6 +186,32 @@ INSERT INTO `consult` (`Consult_ID`, `Consult_RegDate`, `Consult_RegTime`, `Cons
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `consultant_profile`
+--
+
+DROP TABLE IF EXISTS `consultant_profile`;
+CREATE TABLE IF NOT EXISTS `consultant_profile` (
+  `Consult_Profile_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Consult_Profile_Speciality` varchar(254) NOT NULL,
+  `Consult_Profile_Education` varchar(254) NOT NULL,
+  `Consult_Profile_Language` varchar(50) NOT NULL,
+  `Consult_Profile_Phone` varchar(50) NOT NULL,
+  `Consult_Profile_Experience` varchar(50) NOT NULL,
+  `Consult_Profile_Img` varchar(254) NOT NULL,
+  `FK_Consult_Profile_Admin_ID` int(11) NOT NULL,
+  PRIMARY KEY (`Consult_Profile_ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `consultant_profile`
+--
+
+INSERT INTO `consultant_profile` (`Consult_Profile_ID`, `Consult_Profile_Speciality`, `Consult_Profile_Education`, `Consult_Profile_Language`, `Consult_Profile_Phone`, `Consult_Profile_Experience`, `Consult_Profile_Img`, `FK_Consult_Profile_Admin_ID`) VALUES
+(1, 'Neurologist, Internal Medicine', 'MD (USM), MRCP (UK), MRCP (Ireland), MSc. Clinical Neurology (London), Fellowship in Neurology (Malaysia)', 'English, Bahasa Melayu, Tamil', '017845957', '2000-02-03', '20220213200713_dramran.jpg', 2);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `customer`
 --
 
@@ -193,13 +226,14 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `Cust_Status` varchar(254) NOT NULL,
   `FK_Cust_Login_ID` int(45) NOT NULL,
   PRIMARY KEY (`Cust_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `customer`
 --
 
 INSERT INTO `customer` (`Cust_ID`, `Cust_Name`, `Cust_DOB`, `Cust_Gender`, `Cust_Phone`, `Cust_Email`, `Cust_Status`, `FK_Cust_Login_ID`) VALUES
+(19, 'mus mus ameirul', '2021-09-01', 'male', '0193071722', 'musamirul.mus@gmail.com', 'Active', 54),
 (18, 'mustaqim ameirul', '1998-02-04', 'male', '0193071723', 'musamirul.kpj@gmail.com', 'Active', 52),
 (17, 'Ameirul Mustaqim', '2010-01-06', 'male', '0193071722', 'musamirul.kpj@gmail.com', 'Active', 48);
 
@@ -262,6 +296,23 @@ INSERT INTO `healthinfo` (`HealthInfo_ID`, `HealthInfo_Title`, `HealthInfo_Desc`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `help`
+--
+
+DROP TABLE IF EXISTS `help`;
+CREATE TABLE IF NOT EXISTS `help` (
+  `Help_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Help_Title` varchar(254) NOT NULL,
+  `Help_Category` varchar(50) NOT NULL,
+  `Help_Desc` varchar(500) NOT NULL,
+  `Help_Date` varchar(50) NOT NULL,
+  `FK_Help_Admin_ID` int(11) NOT NULL,
+  PRIMARY KEY (`Help_ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `login`
 --
 
@@ -272,7 +323,7 @@ CREATE TABLE IF NOT EXISTS `login` (
   `password` varchar(45) NOT NULL,
   `role` varchar(45) NOT NULL,
   PRIMARY KEY (`Login_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=54 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=55 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `login`
@@ -284,6 +335,7 @@ INSERT INTO `login` (`Login_ID`, `username`, `password`, `role`) VALUES
 (51, 'healthlane', '123', 'seller'),
 (52, 'mustaqim', '123', 'customer'),
 (53, 'dramran', '123', 'administrator'),
+(54, 'mus', '123', 'customer'),
 (49, 'sterling', '123', 'seller'),
 (48, 'ameirul', '123', 'customer');
 
@@ -336,13 +388,15 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `FK_Order_Cart_ID` int(45) NOT NULL,
   `FK_Order_Ship_ID` int(45) NOT NULL,
   PRIMARY KEY (`Order_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `orders`
 --
 
 INSERT INTO `orders` (`Order_ID`, `Order_No`, `Order_Status`, `Order_Amount`, `FK_Order_ShipAdd_ID`, `FK_Order_BillAdd_ID`, `FK_Order_Cust_ID`, `FK_Order_Seller_ID`, `FK_Order_Cart_ID`, `FK_Order_Ship_ID`) VALUES
+(29, 3, 'payment_completed', 160, 13, 7, 19, 9, 25, 2),
+(28, 2, 'payment_completed', 135, 12, 6, 18, 8, 24, 3),
 (27, 1, 'payment_completed', 124.5, 12, 6, 18, 8, 23, 1),
 (26, 1, 'payment_completed', 74.5, 12, 6, 18, 9, 23, 1),
 (25, 1, 'cancel', 50004.5, 12, 6, 18, 7, 23, 1);
@@ -505,13 +559,14 @@ CREATE TABLE IF NOT EXISTS `shipping_address` (
   `country` varchar(45) NOT NULL,
   `FK_ShipAdd_Cust_ID` int(45) NOT NULL,
   PRIMARY KEY (`ShipAdd_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `shipping_address`
 --
 
 INSERT INTO `shipping_address` (`ShipAdd_ID`, `address`, `city`, `state`, `zipcode`, `country`, `FK_ShipAdd_Cust_ID`) VALUES
+(13, 'lorong 123', 'Parit Raja', 'Johor', 58738, 'Malaysia', 19),
 (12, 'no 38, lorong haji abu', 'Bukit Tinggi', 'Selangor', 41230, 'Malaysia', 18),
 (10, 'No 39, Lorong Raja Nong', 'Klang', 'Selangor', 41200, 'Malaysia', 17);
 
@@ -536,16 +591,18 @@ CREATE TABLE IF NOT EXISTS `tracking` (
   `FK_Tracking_Seller_ID` int(45) NOT NULL,
   `FK_Tracking_Cart_ID` int(45) NOT NULL,
   PRIMARY KEY (`Tracking_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tracking`
 --
 
 INSERT INTO `tracking` (`Tracking_ID`, `Tracking_Date`, `Tracking_Time`, `Tracking_Status`, `Tracking_Channel`, `Tracking_EstimateDate`, `Tracking_EstimateTime`, `FK_Tracking_Order_ID`, `FK_Tracking_Ship_ID`, `FK_Tracking_Cust_ID`, `FK_Tracking_Seller_ID`, `FK_Tracking_Cart_ID`) VALUES
+(11, '13-02-2022', '02:41:19 pm', 'preparing', '', '15-02-2022', '02:41:19 pm', 28, 3, 18, 8, 24),
 (10, '06-02-2022', '06:03:50 pm', 'cancel', '', '11-02-2022', '06:03:50 pm', 25, 1, 18, 7, 23),
 (9, '06-02-2022', '06:03:50 pm', 'completed', 'citylink', '11-02-2022', '06:03:50 pm', 26, 1, 18, 9, 23),
-(8, '06-02-2022', '06:03:50 pm', 'ship', 'citylink', '11-02-2022', '06:03:50 pm', 27, 1, 18, 8, 23);
+(8, '06-02-2022', '06:03:50 pm', 'ship', 'citylink', '11-02-2022', '06:03:50 pm', 27, 1, 18, 8, 23),
+(12, '13-02-2022', '02:44:32 pm', 'completed', 'citylink', '14-02-2022', '02:44:32 pm', 29, 2, 19, 9, 25);
 
 -- --------------------------------------------------------
 
@@ -561,18 +618,21 @@ CREATE TABLE IF NOT EXISTS `tracking_shipment` (
   `Track_Ship_Time` varchar(254) NOT NULL,
   `FK_Tracking_ID` int(11) NOT NULL,
   PRIMARY KEY (`Track_Ship_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tracking_shipment`
 --
 
 INSERT INTO `tracking_shipment` (`Track_Ship_ID`, `Track_Ship_Status`, `Track_Ship_Date`, `Track_Ship_Time`, `FK_Tracking_ID`) VALUES
+(18, 'delivered', '13-02-2022', '02:47:45 pm', 12),
+(17, 'ship', '13-02-2022', '02:47:38 pm', 12),
 (16, 'ship', '06-02-2022', '07:33:45 pm', 8),
 (15, 'cancel', '06-02-2022', '06:50:57 pm', 10),
 (14, 'completed', '06-02-2022', '06:21:47 pm', 9),
 (13, 'delivered', '06-02-2022', '06:21:20 pm', 9),
-(12, 'ship', '06-02-2022', '06:19:30 pm', 9);
+(12, 'ship', '06-02-2022', '06:19:30 pm', 9),
+(19, 'completed', '13-02-2022', '02:47:48 pm', 12);
 
 -- --------------------------------------------------------
 
@@ -592,7 +652,7 @@ CREATE TABLE IF NOT EXISTS `transaction` (
   `FK_Transaction_Seller_ID` int(11) NOT NULL,
   `FK_Transaction_Order_ID` int(11) NOT NULL,
   PRIMARY KEY (`Transaction_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `transaction`
@@ -602,7 +662,9 @@ INSERT INTO `transaction` (`Transaction_ID`, `Transaction_Date`, `Transaction_Ti
 (8, '06-02-2022', '06:03:50 pm', 'income', 50004.5, 'completed', 3, 7, 25),
 (7, '06-02-2022', '06:03:50 pm', 'income', 74.5, 'completed', 5, 9, 26),
 (6, '06-02-2022', '06:03:50 pm', 'income', 124.5, 'completed', 4, 8, 27),
-(9, '06-02-2022', '06:50:57 pm', 'cancel', 50004.5, 'completed', 3, 7, 25);
+(9, '06-02-2022', '06:50:57 pm', 'cancel', 50004.5, 'completed', 3, 7, 25),
+(10, '13-02-2022', '02:41:19 pm', 'income', 135, 'completed', 4, 8, 28),
+(11, '13-02-2022', '02:44:32 pm', 'income', 160, 'completed', 5, 9, 29);
 
 -- --------------------------------------------------------
 
@@ -624,8 +686,8 @@ CREATE TABLE IF NOT EXISTS `wallet` (
 
 INSERT INTO `wallet` (`Wallet_ID`, `Wallet_Amount`, `FK_Wallet_Seller_ID`) VALUES
 (3, 0, 7),
-(4, 124.5, 8),
-(5, 74.5, 9);
+(4, 259.5, 8),
+(5, 234.5, 9);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

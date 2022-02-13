@@ -38,8 +38,6 @@
                       
                     </a>
                     <a style="font-size: 13px; color: grey;" class="text-decoration-none text-reset" href="../seller/Seller_Registration.php">Seller Center</a>
-                    <span style="font-size:13px; color: grey;">|</span>
-                    <a style="font-size: 13px; color: grey;" class="text-decoration-none text-reset" href="../healthinfo-list.php">Health Article</a>
 
                   </div>
                   <div class="col">
@@ -100,6 +98,12 @@
                       </span>
                     </a>
                   </div>
+                  <div class="row">
+                    <div class="d-flex flex-row bd-highlight">
+                        <div class="bd-highlight ps-5 pe-3 text-muted"><a style="font-size: 13px;" class="text-decoration-none" href="healthinfo-list.php">Health Article</a></div>
+                        <div class="bd-highlight pe-3 text-muted"><a style="font-size: 13px;" class="text-decoration-none" href="doctor.php">Our Doctors</a></div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -107,6 +111,6 @@
     </nav>
 </header>
     <main style="margin-top: 58px">
-  <div class="container-fluid pt-4">
+  <div class="container-fluid pt-5">
 
     
