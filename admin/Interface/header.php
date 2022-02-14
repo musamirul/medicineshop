@@ -9,6 +9,7 @@
   $_SESSION['username'];
   $_SESSION['role'];
   $_SESSION['department'];
+  $_SESSION['Admin_Id'];
   //Get Current File Name for Navbar active button
   $current_file_name = basename($_SERVER['PHP_SELF']); 
   date_default_timezone_set("Asia/Kuala_Lumpur");

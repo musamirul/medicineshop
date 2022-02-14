@@ -27,7 +27,7 @@
                         </select>
                     </div>
                     <div class="row mb-3">
-                        <input type="text" class="form-control" name="Title" placeholder="Enter Title"/>
+                        <input type="text" class="form-control" name="title" placeholder="Enter Title"/>
                     </div>
                     <div class="row mb-3">
                         <div class="form-floating">
@@ -44,7 +44,7 @@
             <table id="example" class="display center" style="width: 100%; text-align: center; font-size: 13px;">
                 <thead>
                     <tr>
-                        <th>Help ID</th>
+                        <th>ID</th>
                         <th>Category</th>
                         <th>Title</th>
                         <th>Desc</th>
@@ -55,20 +55,20 @@
                 <tbody>
                     <?php
                         //display all table data
-                        $query_showData = mysqli_query($con,"SELECT * FROM shipping");
+                        $query_showData = mysqli_query($con,"SELECT * FROM help");
                         while($result_showData = mysqli_fetch_array($query_showData)){
 
-                        $shipping_id = $result_showData['Shipping_ID'];
+                        $help_id = $result_showData['Help_ID'];
                     ?>
                     <tr>
-                        <td><?php echo $result_showData['Shipping_ID']; ?></td>
-                        <td><?php echo $result_showData['Shipping_Method']; ?></td>
-                        <td><?php echo $result_showData['Shipping_Method']; ?></td>
-                        <td>RM<?php echo $result_showData['Shipping_Price']; ?></td>
-                        <td><?php echo $result_showData['shipping_day']; ?></td>
+                        <td><?php echo $result_showData['Help_ID']; ?></td>
+                        <td><?php echo $result_showData['Help_Category']; ?></td>
+                        <td><?php echo $result_showData['Help_Title']; ?></td>
+                        <td><?php echo substr($result_showData['Help_Desc'],0,40) ?>...</td>
+                        <td><?php echo $result_showData['Help_Date']; ?></td>
                         <form method ="post">
                         <td>
-                            <input type="hidden" name="DelShipping_id" value="<?php echo $shipping_id; ?>">
+                            <input type="hidden" name="DelHelp_id" value="<?php echo $help_id; ?>">
                             <button class="btn btn-primary" name="delete" type="submit">Delete</button>
                         </td>
                         </form>
@@ -84,27 +84,31 @@
 </div>
 <?php
     if(isset($_POST['delete'])){
-        $DelShipping_id = $_POST['DelShipping_id'];
+        $DelHelp_id = $_POST['DelHelp_id'];
 
-        $query_deleteShipping = mysqli_query($con,"DELETE FROM shipping WHERE Shipping_ID = '$DelShipping_id'");
+        $query_deleteHelp = mysqli_query($con,"DELETE FROM help WHERE Help_ID = '$DelHelp_id'");
         
-        $_SESSION['message'] = 'Shipping #'.$DelShipping_id.' have successfully deleted';
-        echo '<script>window.location.href="Admin_ManageShipping.php?msg=success"</script>';
+        $_SESSION['message'] = 'Help #'.$DelHelp_id.' have successfully deleted';
+        echo '<script>window.location.href="Admin_HelpAssistant.php?msg=success"</script>';
     }
 ?>
 <?php
     if(isset($_POST['Save'])){
-        $method = $_POST['method'];
-        $price = $_POST['price'];
-        $days = $_POST['days'];
+        $category = $_POST['category'];
+        $title = $_POST['title'];
+        $description = $_POST['description'];
+        $adminID = $_SESSION['Admin_Id'];
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+        $date = date("Y-m-d");
 
         
         //insert into shipping table
-        $query_createShipping = mysqli_query($con,"INSERT INTO shipping(Shipping_Method, Shipping_Price, shipping_day) VALUES ('$method','$price','$days')");
+        $query_createShipping = mysqli_query($con,"INSERT INTO help(Help_Title, Help_Category, Help_Desc, Help_Date, FK_Help_Admin_ID) 
+        VALUES ('$title','$category','$description','$date','$adminID')");
 
         //clear post request
-        $_SESSION['message']="successfully created $method shipping";
-        echo '<script>window.location.href="Admin_ManageShipping.php?msg=success"</script>';
+        $_SESSION['message']="successfully created $title";
+        echo '<script>window.location.href="Admin_HelpAssistant.php?msg=success"</script>';
         
     }
 ?>

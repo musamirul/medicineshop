@@ -41,12 +41,27 @@ height: 225px;
             </div>
             
             
-            <div class="col-md-6">
+            <div class="col-md-2">
             <label for="inputQty" class="form-label">Stock Quantity</label>
             <input class="form-control" type="number" placeholder="Enter Product Qty" name="qty"/>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-5">
+            <label for="inputControlType" class="form-label">Select Product Category</label>
+            <select class="form-control" name="prodCategory">
+                <option value="neurology" selected>Brain & Eyes</option>
+                <option value="ent">Ear, Nose & Throat</option>
+                <option value="heart">Heart</option>
+                <option value="lungs">Lungs</option>
+                <option value="stomach">Stomach</option>
+                <option value="liver">Liver</option>
+                <option value="kidney">Kidney</option>
+                <option value="ortho">Bone Joint & Muscle</option>
+                <option value="skin">Skin, Hand & Nails</option>
+                <option value="other">Others</option>
+            </select>
+            </div>
+            <div class="col-md-5">
             <label for="inputControlType" class="form-label">Select Product Type</label>
             <select class="form-control" name="prodType">
                 <option value="control" selected>controlled medicine</option>
