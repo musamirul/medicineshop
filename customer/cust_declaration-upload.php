@@ -43,6 +43,7 @@
                                 <?php
                                     $query_showDoc = mysqli_query($con,"SELECT * FROM declaration WHERE FK_Declaration_Cust_ID = '$Cust_Id'");
                                     while($result_showDoc = mysqli_fetch_array($query_showDoc)){
+                                        $recordID = $result_showDoc['Declaration_ID'];
                                         $name = $result_showDoc['Declaration_FileName'];   
                                 ?>
                                 <tr>
@@ -50,7 +51,19 @@
                                     <td><?php echo $result_showDoc['Declaration_Name']?></td>
                                     <td><?php echo $name; ?></td>
                                     <td><?php echo $result_showDoc['Declaration_TimeStamp']?></td>
-                                    <td><a href="cust_declaration-download.php?filename=<?php echo $name;?>&f=<?php echo $result_showDoc['Declaration_File']?>"><button>Download</button></a></td>
+                                    <td>
+                                    <div class="d-flex flex-row bd-highlight">
+                                            <div class="pe-2 bd-highlight">
+                                                <a href="cust_declaration-download.php?filename=<?php echo $name;?>&f=<?php echo $result_showDoc['Declaration_File']?>"><button class="btn btn-primary">Download</button></a>
+                                            </div>
+                                            <div class="bd-highlight">
+                                                <form method="post">
+                                                    <input type="hidden" name="recordID" value="<?php echo $recordID; ?>" />
+                                                    <button type="submit" name="deleteRecord" class="btn btn-danger">Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <?php
                                     }
@@ -91,6 +104,13 @@ if(isset($_POST['submit'])){
     VALUES ('$fileName','$name','$fname','$date','$Cust_Id')");
     echo '<script>window.location.href="cust_declaration-upload.php?msg=success"</script>';
     
+}
+if(isset($_POST['deleteRecord'])){
+    $recordID = $_POST['recordID'];
+
+    $query_deleteRecord = mysqli_query($con,"DELETE FROM record WHERE Record_ID = '$recordID'");
+    $_SESSION['message'] = "record successfully deleted";
+    echo '<script>window.location.href="cust_declaration-upload.php?msg=success"</script>';
 }
 ?>
 <?php include("Interface/footer.php")?>

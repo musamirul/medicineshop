@@ -5,6 +5,7 @@
     $current_file_name = basename($_SERVER['PHP_SELF']); 
 ?>
 
+<?php include("Message_Notification.php")?>
 <div class="row mt-5">
         <div class="col-2 background-color:black;"></div>
         <!-- Left Navigation -->
@@ -40,13 +41,24 @@
                                 <?php
                                     $query_showDoc = mysqli_query($con,"SELECT * FROM record WHERE FK_Record_Cust_ID = '$Cust_Id'");
                                     while($result_showDoc = mysqli_fetch_array($query_showDoc)){
-                                        $name = $result_showDoc['Record_FileName'];     
+                                        $name = $result_showDoc['Record_FileName'];
+                                        $recordID = $result_showDoc['Record_ID'];     
                                 ?>
                                 <tr>
                                     <td><?php echo $result_showDoc['Record_ID'];?></td>
                                     <td><?php echo $name;?></td>
                                     <td><?php echo $result_showDoc['Record_Timestamp'];?></td>
-                                    <td><a href="cust_declaration-download.php?filename=<?php echo $name;?>&f=<?php echo $result_showDoc['Record_File']?>"><button>Download</button></a></td>
+                                    <td>
+                                        <div class="d-flex flex-row bd-highlight">
+                                            <div class="pe-2 bd-highlight"><a href="cust_declaration-download.php?filename=<?php echo $name;?>&f=<?php echo $result_showDoc['Record_File']?>"><button class="btn btn-primary">Download</button></a></div>
+                                            <div class="bd-highlight">
+                                                <form method="post">
+                                                    <input type="hidden" name="recordID" value="<?php echo $recordID; ?>" />
+                                                    <button type="submit" name="deleteRecord" class="btn btn-danger">Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <?php
                                     }
@@ -82,6 +94,14 @@ if(isset($_POST['submit'])){
     echo '<script>window.location.href="cust_record-upload.php?msg=success"</script>';
     //header("Location:cust_record-upload.php?msg=success");
     
+}
+
+if(isset($_POST['deleteRecord'])){
+    $recordID = $_POST['recordID'];
+
+    $query_deleteRecord = mysqli_query($con,"DELETE FROM record WHERE Record_ID = '$recordID'");
+    $_SESSION['message'] = "record successfully deleted";
+    echo '<script>window.location.href="cust_record-upload.php?msg=success"</script>';
 }
 ?>
 <?php include("Interface/footer.php")?>

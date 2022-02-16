@@ -42,6 +42,11 @@
     } );
     </script>
     <script>
+    $(document).ready(function() {
+        $('#example1').DataTable();
+    } );
+    </script>
+    <script>
     $('#summernote').summernote({
       placeholder: 'Enter Product Details',
       tabsize: 2,

@@ -100,8 +100,10 @@
                   </div>
                   <div class="row">
                     <div class="d-flex flex-row bd-highlight">
-                        <div class="bd-highlight ps-5 pe-3 text-muted"><a style="font-size: 13px;" class="text-decoration-none" href="healthinfo-list.php">Health Article</a></div>
-                        <div class="bd-highlight pe-3 text-muted"><a style="font-size: 13px;" class="text-decoration-none" href="doctor.php">Our Doctors</a></div>
+                    <div class="bd-highlight ps-5 pe-3 text-muted"><a style="font-size: 13px;" class="text-decoration-none" href="../healthinfo-list.php">Health Article</a></div>
+                      <div class="bd-highlight pe-3 text-muted"><a style="font-size: 13px;" class="text-decoration-none" href="../doctor.php">Our Doctors</a></div>
+                      <div class="bd-highlight pe-3 text-muted"><a style="font-size: 13px;" class="text-decoration-none" href="../about_help.php">FAQ</a></div>
+                      <div class="bd-highlight pe-3 text-muted"><a style="font-size: 13px;" class="text-decoration-none" href="../about_dispensation_policy.php">Policy</a></div>
                     </div>
                   </div>
                 </div>
