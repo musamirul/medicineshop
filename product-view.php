@@ -113,7 +113,7 @@ $count_result = mysqli_fetch_object($count_query);
                     <?php if($product_result['Product_RecordType']=='no'){ ?>
 
                         <button type="submit" name="AddToCart" class="btn btn-secondary">Add To Cart</button>
-                        <button type="submit" class="btn btn-dark">Buy Now</button>
+                        <button type="submit"  name="BuyNow" class="btn btn-dark">Buy Now</button>
 
                     <?php }elseif($product_result['Product_RecordType']=='yes'){ ?>
                         <?php if($result_CountRecord[0]==0){ ?>
@@ -283,20 +283,7 @@ $count_result = mysqli_fetch_object($count_query);
         $cust_ID = $_SESSION['Cust_Id'];
         $record_id = $_POST['record_id'];
 
-        date_default_timezone_set("Asia/Kuala_Lumpur");
-        $timeStamp = date("Y-m-d h:i:sa");
-        
-        $cart_create_query = mysqli_query($con,"INSERT INTO cart(Cart_TimeStamp, Cart_Status, FK_Cart_Cust_ID)
-        VALUES ('$timeStamp','pending','$cust_ID')");
-
-        $cart_check_query = mysqli_query($con,"SELECT * FROM cart WHERE FK_Cart_Cust_ID = '$cust_ID' AND Cart_Status = 'buynow'");
-        $cart_check_result = mysqli_fetch_array($cart_check_query);
-        $cart_ID = $cart_check_result['Cart_ID'];
-
-        //add item into cart_item
-        $cartItem_query = mysqli_query($con,"INSERT INTO cart_item (Cart_Item_Qty, Cart_Item_Amount, FK_Cart_ID, FK_Item_Product_ID, FK_Item_Seller_ID, FK_Item_Shipping_ID, FK_Item_Record_ID) 
-        VALUES ('$quantity','$product_Price','$cart_ID','$product_ID','$seller_ID','1','$record_id')");
-        
+        echo '<script>window.location.href="cust_checkout_buyNow.php?quantity='.$quantity.'&product_ID='.$product_ID.'&record_id='.$record_id.'"</script>';
     }
 ?>
 <?php
