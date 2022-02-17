@@ -285,7 +285,7 @@ $count_result = mysqli_fetch_object($count_query);
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
         $timeStamp = date("Y-m-d h:i:sa");
-        /*
+        
         $cart_create_query = mysqli_query($con,"INSERT INTO cart(Cart_TimeStamp, Cart_Status, FK_Cart_Cust_ID)
         VALUES ('$timeStamp','pending','$cust_ID')");
 
@@ -296,7 +296,7 @@ $count_result = mysqli_fetch_object($count_query);
         //add item into cart_item
         $cartItem_query = mysqli_query($con,"INSERT INTO cart_item (Cart_Item_Qty, Cart_Item_Amount, FK_Cart_ID, FK_Item_Product_ID, FK_Item_Seller_ID, FK_Item_Shipping_ID, FK_Item_Record_ID) 
         VALUES ('$quantity','$product_Price','$cart_ID','$product_ID','$seller_ID','1','$record_id')");
-        */
+        
     }
 ?>
 <?php
