@@ -283,7 +283,7 @@ $count_result = mysqli_fetch_object($count_query);
         $cust_ID = $_SESSION['Cust_Id'];
         $record_id = $_POST['record_id'];
 
-        echo '<script>window.location.href="cust_checkout_buyNow.php?quantity='.$quantity.'&product_ID='.$product_ID.'&record_id='.$record_id.'"</script>';
+        echo '<script>window.location.href="customer/cust_checkout_buyNow.php?quantity='.$quantity.'&product_ID='.$product_ID.'&record_id='.$record_id.'"</script>';
     }
 ?>
 <?php
