@@ -186,6 +186,50 @@ $result_seller = mysqli_fetch_array($query_seller);
                 <div style="font-size: 20px; font-weight: bold;" class="col-1 text-end text-danger">RM<?php echo  $_GET['quantity']*$result_product['Product_SellingPrice']+$shipping_price ?></div>
             </div>
 
+            <div class="row bg-white mt-3 mb-3 p-3 shadow-sm">
+            <!-- place order and total price -->
+            <?php 
+                $TotalShipping_count = 0;
+                $TotalPrice_count = 0;
+
+                for($x=0 ; $x<count($TotalShipping); $x++){
+                    $TotalShipping_count = $TotalShipping_count + $TotalShipping[$x];
+                }
+                for($y=0 ; $y<count($TotalPrice); $y++){
+                    $TotalPrice_count = $TotalPrice_count + $TotalPrice[$y];
+                }
+            ?>
+            <div class="row">
+                <div class="col-8"></div>
+                <div class="col-4">
+                    <div class="row ms-5">
+                        <div style="font-size: 14px; color: grey;" class="col-6 ms-3">
+                            <div style="height: 40px;" class="row">Merchandise Subtotal:</div>
+                            <div style="height: 40px;" class="row">Shipping Total:</div>
+                            <div style="height: 50px;" class="row pt-3">Total Payment:</div>
+                        </div>
+                        <div class="col-5">
+                            <div style="height: 40px; color: grey;" class="row"><span class="text-end">RM<?php echo $TotalPrice_count; ?></span></div>
+                            <div style="height: 40px; color: grey;" class="row"><span class="text-end"><?php echo $TotalShipping_count; ?></span></div>
+                            <div style="height: 50px; font-size: 30px; font-weight: 500;" class="row text-danger"><span class="text-end">RM<?php echo $TotalShipping_count+$TotalPrice_count; ?></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row p-3">
+                <span class="d-grid mx-auto mt-3 mb-4" style="border-bottom:0.5px solid rgb(241, 240, 240);"></span>
+                <div class="col-9"></div>
+                <div class="col-3">
+                    <div class="d-grid gap-2 col-12 mx-auto">
+                        <form method="post">
+                            <input type="hidden" name="Order_Amount" value="<?php echo htmlspecialchars(serialize($TotalShippingAndPrice)); ?>">
+                            <input type="hidden" name="FK_Order_Seller_ID" value="<?php echo htmlspecialchars(serialize($FK_Seller_ID)); ?>">
+                            <button class="btn btn-primary" name="Order_button" type="submit" <?php if($result_shippingAddress['ShipAdd_ID']==''){echo 'disabled';} ?>>Place Order</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         
     </div>
     <div class="col-2"></div>
