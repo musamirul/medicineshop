@@ -15,6 +15,12 @@ $result_customerDetail = mysqli_fetch_array($query_customerDetail);
 $query_shippingAddress = mysqli_query($con,"SELECT * FROM shipping_address WHERE FK_ShipAdd_Cust_ID = '$custID'");
 $result_shippingAddress = mysqli_fetch_array($query_shippingAddress);
 $address = $result_shippingAddress['address'] .", ". $result_shippingAddress['city'] .", ". $result_shippingAddress['state'] .", ". $result_shippingAddress['zipcode'] .", ". $result_shippingAddress['country'];
+$ship_id = $result_shippingAddress['ShipAdd_ID'];
+
+//get customer billing address
+$query_BillAddress = mysqli_query($con,"SELECT * FROM billing_address WHERE FK_BillAdd_Cust_ID = '$custID'");
+$result_BillAddress = mysqli_fetch_array($query_BillAddress);
+$bill_id = $result_BillAddress['BillAdd_ID'];
 
 //get product detail
 $productID = $_GET['product_ID'];
@@ -188,17 +194,7 @@ $result_seller = mysqli_fetch_array($query_seller);
 
             <div class="row bg-white mt-3 mb-3 p-3 shadow-sm">
             <!-- place order and total price -->
-            <?php 
-                $TotalShipping_count = 0;
-                $TotalPrice_count = 0;
 
-                for($x=0 ; $x<count($TotalShipping); $x++){
-                    $TotalShipping_count = $TotalShipping_count + $TotalShipping[$x];
-                }
-                for($y=0 ; $y<count($TotalPrice); $y++){
-                    $TotalPrice_count = $TotalPrice_count + $TotalPrice[$y];
-                }
-            ?>
             <div class="row">
                 <div class="col-8"></div>
                 <div class="col-4">
@@ -209,9 +205,9 @@ $result_seller = mysqli_fetch_array($query_seller);
                             <div style="height: 50px;" class="row pt-3">Total Payment:</div>
                         </div>
                         <div class="col-5">
-                            <div style="height: 40px; color: grey;" class="row"><span class="text-end">RM<?php echo $TotalPrice_count; ?></span></div>
-                            <div style="height: 40px; color: grey;" class="row"><span class="text-end"><?php echo $TotalShipping_count; ?></span></div>
-                            <div style="height: 50px; font-size: 30px; font-weight: 500;" class="row text-danger"><span class="text-end">RM<?php echo $TotalShipping_count+$TotalPrice_count; ?></span></div>
+                            <div style="height: 40px; color: grey;" class="row"><span class="text-end">RM<?php echo $_GET['quantity']*$result_product['Product_SellingPrice'];?></span></div>
+                            <div style="height: 40px; color: grey;" class="row"><span class="text-end"><?php echo $result_shipping_method['Shipping_Price']; ?></span></div>
+                            <div style="height: 50px; font-size: 30px; font-weight: 500;" class="row text-danger"><span class="text-end">RM<?php echo ($_GET['quantity']*$result_product['Product_SellingPrice'])+$result_shipping_method['Shipping_Price'];?></span></div>
                         </div>
                     </div>
                 </div>
@@ -221,9 +217,15 @@ $result_seller = mysqli_fetch_array($query_seller);
                 <div class="col-9"></div>
                 <div class="col-3">
                     <div class="d-grid gap-2 col-12 mx-auto">
-                        <form method="post">
-                            <input type="hidden" name="Order_Amount" value="<?php echo htmlspecialchars(serialize($TotalShippingAndPrice)); ?>">
-                            <input type="hidden" name="FK_Order_Seller_ID" value="<?php echo htmlspecialchars(serialize($FK_Seller_ID)); ?>">
+                        <form method="post" action="online_banking_buyNow">
+                            <input type="hidden" name="product_qty" value="<?php echo $quantity; ?>">
+                            <input type="hidden" name="product_id" value="<?php echo $product_ID; ?>">
+                            <input type="hidden" name="record_id" value="<?php echo $record_id; ?>">
+                            <input type="hidden" name="seller_id" value="<?php echo $sellerID; ?>">
+                            <input type="hidden" name="shipping_id" value="<?php echo $result_shipping_method['Shipping_ID']; ?>">
+                            <input type="hidden" name="Order_Amount" value="<?php echo ($_GET['quantity']*$result_product['Product_SellingPrice'])+$result_shipping_method['Shipping_Price']; ?>">
+                            <input type="hidden" name="ShipAdd_Id" value="<?php echo $ship_id; ?>">
+                            <input type="hidden" name="BillAdd_Id" value="<?php echo $bill_id; ?>">
                             <button class="btn btn-primary" name="Order_button" type="submit" <?php if($result_shippingAddress['ShipAdd_ID']==''){echo 'disabled';} ?>>Place Order</button>
                         </form>
                     </div>
@@ -234,6 +236,56 @@ $result_seller = mysqli_fetch_array($query_seller);
     </div>
     <div class="col-2"></div>
 </div>
+ <!-- Add Shipping -->
+ <div class="modal fade" id="AddressModal" tabindex="-1" aria-labelledby="editModalLabel" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">Add Shipping Address <strong> <?php echo $result_customerDetail['Cust_Name'] ?></strong></h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        <form method="POST">
+            <div class="row mb-3 mt-4">
+                <input type="text" class="form-control" name="address" placeholder="Address" required/>
+            </div>
+            <div class="row mb-3">
+                <input type="text" class="form-control" name="city" placeholder="City" required/>
+            </div>
+            <div class="row mb-3">
+                <input type="text" class="form-control" name="state" placeholder="State"  required/>    
+            </div>
+            <div class="row mb-3">
+                <input type="text" class="form-control" name="zipcode" placeholder="Zipcode"  required/>    
+            </div>
+            <div class="row mb-3">
+                <input type="text" class="form-control" name="country" placeholder="Country"  required/>    
+            </div>
+        <div class="modal-footer">
+            <input type="hidden" value="<?php echo $custID; ?>" name="cust_ID">
+            <button class="btn btn-primary" name="saveDetailShip" type="submit">Save</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+        </form>   
+    </div>
+    </div>
+</div>
+<!-- Add Shipping -->
+<?php
+    if(isset($_POST['saveDetailShip'])){
+        $address = $_POST['address'];
+        $city = $_POST['city'];
+        $state = $_POST['state'];
+        $zipcode = $_POST['zipcode'];
+        $country = $_POST['country'];
+        $shipCust_ID = $_POST['cust_ID'];
 
+        $query_AddShip = mysqli_query($con,"INSERT INTO shipping_address(address, city, state, zipcode, country, FK_ShipAdd_Cust_ID) 
+        VALUES ('$address','$city','$state','$zipcode','$country','$shipCust_ID')");
+
+        $query_AddBill = mysqli_query($con,"INSERT INTO billing_address(address, city, state, zipcode, country, FK_BillAdd_Cust_ID) 
+        VALUES ('$address','$city','$state','$zipcode','$country','$shipCust_ID')");
+        echo "<script>window.location.href='cust_checkout.php'</script>";
+    }
+?>
 
 <?php include("Interface/footer.php")?>

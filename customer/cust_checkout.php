@@ -252,7 +252,7 @@ $temp_CartID;
                     <div class="row ms-5">
                         <div style="font-size: 14px; color: grey;" class="col-6 ms-3">
                             <div style="height: 40px;" class="row">Merchandise Subtotal:</div>
-                            <div style="height: 40px;" class="row">Shippint Total:</div>
+                            <div style="height: 40px;" class="row">Shipping Total:</div>
                             <div style="height: 50px;" class="row pt-3">Total Payment:</div>
                         </div>
                         <div class="col-5">
