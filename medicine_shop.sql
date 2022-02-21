@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Feb 14, 2022 at 04:21 PM
+-- Generation Time: Feb 21, 2022 at 04:53 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -64,16 +64,17 @@ CREATE TABLE IF NOT EXISTS `billing` (
   `FK_Billing_Cust_ID` int(45) NOT NULL,
   `FK_Billing_Order_ID` int(45) NOT NULL,
   PRIMARY KEY (`Billing_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `billing`
 --
 
 INSERT INTO `billing` (`Billing_ID`, `Billing_Date`, `Billing_Time`, `Billing_PaymentStatus`, `Billing_PaymentMethod`, `Billing_ReferenceNo`, `FK_Billing_Cust_ID`, `FK_Billing_Order_ID`) VALUES
-(7, '13-02-2022', '02:44:32 pm', 'completed', 'Online Banking', '60248791', 19, 3),
-(6, '13-02-2022', '02:41:19 pm', 'completed', 'Online Banking', '62143258', 18, 2),
-(5, '06-02-2022', '06:03:50 pm', 'completed', 'Online Banking', '7519580', 18, 1);
+(17, '20-02-2022', '10:49:50 pm', 'completed', 'Online Banking', '84418641', 18, 43),
+(16, '20-02-2022', '10:46:27 pm', 'completed', 'Online Banking', '74196007', 18, 3),
+(15, '20-02-2022', '10:40:18 pm', 'completed', 'Online Banking', '95074547', 18, 2),
+(14, '20-02-2022', '10:35:46 pm', 'completed', 'Online Banking', '65168441', 18, 39);
 
 -- --------------------------------------------------------
 
@@ -115,16 +116,17 @@ CREATE TABLE IF NOT EXISTS `cart` (
   `Cart_Status` varchar(45) NOT NULL,
   `FK_Cart_Cust_ID` int(45) NOT NULL,
   PRIMARY KEY (`Cart_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `cart`
 --
 
 INSERT INTO `cart` (`Cart_ID`, `Cart_TimeStamp`, `Cart_Status`, `FK_Cart_Cust_ID`) VALUES
-(24, '2022-02-13 02:40:54pm', 'payment_completed', 18),
-(25, '2022-02-13 02:42:10pm', 'payment_completed', 19),
-(23, '2022-02-06 05:59:09pm', 'payment_completed', 18);
+(43, '2022-02-20 10:49:50pm', 'payment_completed', 18),
+(42, '2022-02-20 10:45:36pm', 'payment_completed', 18),
+(40, '2022-02-20 10:35:46pm', 'payment_completed', 18),
+(41, '2022-02-20 10:39:59pm', 'payment_completed', 18);
 
 -- --------------------------------------------------------
 
@@ -143,18 +145,19 @@ CREATE TABLE IF NOT EXISTS `cart_item` (
   `FK_Item_Shipping_ID` int(45) NOT NULL,
   `FK_Item_Record_ID` int(45) NOT NULL,
   PRIMARY KEY (`Cart_Item_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `cart_item`
 --
 
 INSERT INTO `cart_item` (`Cart_Item_ID`, `Cart_Item_Qty`, `Cart_Item_Amount`, `FK_Cart_ID`, `FK_Item_Product_ID`, `FK_Item_Seller_ID`, `FK_Item_Shipping_ID`, `FK_Item_Record_ID`) VALUES
-(24, 1, 110, 25, 69, 9, 2, 0),
-(23, 1, 120, 24, 70, 8, 3, 19),
-(22, 1, 50000, 23, 54, 7, 1, 12),
-(21, 2, 35, 23, 56, 9, 1, 0),
-(20, 1, 120, 23, 70, 8, 1, 12);
+(40, 1, 120, 43, 70, 8, 1, 19),
+(39, 1, 110, 42, 69, 9, 1, 0),
+(38, 1, 20, 42, 55, 7, 1, 0),
+(37, 1, 35, 41, 56, 9, 1, 0),
+(36, 1, 110, 41, 69, 9, 1, 0),
+(35, 1, 110, 40, 69, 9, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -406,18 +409,18 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `FK_Order_Cart_ID` int(45) NOT NULL,
   `FK_Order_Ship_ID` int(45) NOT NULL,
   PRIMARY KEY (`Order_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `orders`
 --
 
 INSERT INTO `orders` (`Order_ID`, `Order_No`, `Order_Status`, `Order_Amount`, `FK_Order_ShipAdd_ID`, `FK_Order_BillAdd_ID`, `FK_Order_Cust_ID`, `FK_Order_Seller_ID`, `FK_Order_Cart_ID`, `FK_Order_Ship_ID`) VALUES
-(29, 3, 'payment_completed', 160, 13, 7, 19, 9, 25, 2),
-(28, 2, 'payment_completed', 135, 12, 6, 18, 8, 24, 3),
-(27, 1, 'payment_completed', 124.5, 12, 6, 18, 8, 23, 1),
-(26, 1, 'payment_completed', 74.5, 12, 6, 18, 9, 23, 1),
-(25, 1, 'cancel', 50004.5, 12, 6, 18, 7, 23, 1);
+(43, 4, 'payment_completed', 124.5, 12, 6, 18, 8, 43, 1),
+(41, 3, 'payment_completed', 114.5, 12, 6, 18, 9, 42, 1),
+(42, 3, 'payment_completed', 24.5, 12, 6, 18, 7, 42, 1),
+(40, 2, 'payment_completed', 149.5, 12, 6, 18, 9, 41, 1),
+(39, 1, 'payment_completed', 114.5, 12, 6, 18, 9, 40, 1);
 
 -- --------------------------------------------------------
 
@@ -610,18 +613,18 @@ CREATE TABLE IF NOT EXISTS `tracking` (
   `FK_Tracking_Seller_ID` int(45) NOT NULL,
   `FK_Tracking_Cart_ID` int(45) NOT NULL,
   PRIMARY KEY (`Tracking_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tracking`
 --
 
 INSERT INTO `tracking` (`Tracking_ID`, `Tracking_Date`, `Tracking_Time`, `Tracking_Status`, `Tracking_Channel`, `Tracking_EstimateDate`, `Tracking_EstimateTime`, `FK_Tracking_Order_ID`, `FK_Tracking_Ship_ID`, `FK_Tracking_Cust_ID`, `FK_Tracking_Seller_ID`, `FK_Tracking_Cart_ID`) VALUES
-(11, '13-02-2022', '02:41:19 pm', 'preparing', '', '15-02-2022', '02:41:19 pm', 28, 3, 18, 8, 24),
-(10, '06-02-2022', '06:03:50 pm', 'cancel', '', '11-02-2022', '06:03:50 pm', 25, 1, 18, 7, 23),
-(9, '06-02-2022', '06:03:50 pm', 'completed', 'citylink', '11-02-2022', '06:03:50 pm', 26, 1, 18, 9, 23),
-(8, '06-02-2022', '06:03:50 pm', 'ship', 'citylink', '11-02-2022', '06:03:50 pm', 27, 1, 18, 8, 23),
-(12, '13-02-2022', '02:44:32 pm', 'completed', 'citylink', '14-02-2022', '02:44:32 pm', 29, 2, 19, 9, 25);
+(21, '20-02-2022', '10:49:50 pm', 'completed', 'skynet', '25-02-2022', '10:49:50 pm', 43, 1, 18, 8, 43),
+(20, '20-02-2022', '10:46:27 pm', 'completed', 'skynet', '25-02-2022', '10:46:27 pm', 42, 1, 18, 7, 42),
+(19, '20-02-2022', '10:46:27 pm', 'completed', 'skynet', '25-02-2022', '10:46:27 pm', 41, 1, 18, 9, 42),
+(18, '20-02-2022', '10:40:18 pm', 'completed', 'postlaju', '25-02-2022', '10:40:18 pm', 40, 1, 18, 9, 41),
+(17, '20-02-2022', '10:35:46 pm', 'completed', 'citylink', '25-02-2022', '10:35:46 pm', 39, 1, 18, 9, 40);
 
 -- --------------------------------------------------------
 
@@ -637,21 +640,28 @@ CREATE TABLE IF NOT EXISTS `tracking_shipment` (
   `Track_Ship_Time` varchar(254) NOT NULL,
   `FK_Tracking_ID` int(11) NOT NULL,
   PRIMARY KEY (`Track_Ship_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tracking_shipment`
 --
 
 INSERT INTO `tracking_shipment` (`Track_Ship_ID`, `Track_Ship_Status`, `Track_Ship_Date`, `Track_Ship_Time`, `FK_Tracking_ID`) VALUES
-(18, 'delivered', '13-02-2022', '02:47:45 pm', 12),
-(17, 'ship', '13-02-2022', '02:47:38 pm', 12),
-(16, 'ship', '06-02-2022', '07:33:45 pm', 8),
-(15, 'cancel', '06-02-2022', '06:50:57 pm', 10),
-(14, 'completed', '06-02-2022', '06:21:47 pm', 9),
-(13, 'delivered', '06-02-2022', '06:21:20 pm', 9),
-(12, 'ship', '06-02-2022', '06:19:30 pm', 9),
-(19, 'completed', '13-02-2022', '02:47:48 pm', 12);
+(26, 'ship', '20-02-2022', '10:48:38 pm', 19),
+(25, 'completed', '20-02-2022', '10:42:04 pm', 18),
+(23, 'ship', '20-02-2022', '10:41:59 pm', 18),
+(24, 'delivered', '20-02-2022', '10:42:02 pm', 18),
+(22, 'completed', '20-02-2022', '10:39:15 pm', 17),
+(21, 'delivered', '20-02-2022', '10:39:09 pm', 17),
+(20, 'ship', '20-02-2022', '10:38:55 pm', 17),
+(27, 'delivered', '20-02-2022', '10:48:40 pm', 19),
+(28, 'completed', '20-02-2022', '10:48:42 pm', 19),
+(29, 'ship', '20-02-2022', '10:49:21 pm', 20),
+(30, 'delivered', '20-02-2022', '10:49:23 pm', 20),
+(31, 'completed', '20-02-2022', '10:49:24 pm', 20),
+(32, 'ship', '20-02-2022', '10:50:36 pm', 21),
+(33, 'delivered', '20-02-2022', '10:50:56 pm', 21),
+(34, 'completed', '20-02-2022', '10:50:59 pm', 21);
 
 -- --------------------------------------------------------
 
@@ -671,19 +681,18 @@ CREATE TABLE IF NOT EXISTS `transaction` (
   `FK_Transaction_Seller_ID` int(11) NOT NULL,
   `FK_Transaction_Order_ID` int(11) NOT NULL,
   PRIMARY KEY (`Transaction_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `transaction`
 --
 
 INSERT INTO `transaction` (`Transaction_ID`, `Transaction_Date`, `Transaction_Time`, `Transaction_Type`, `Transaction_Amount`, `Transaction_Status`, `FK_Transaction_Wallet_ID`, `FK_Transaction_Seller_ID`, `FK_Transaction_Order_ID`) VALUES
-(8, '06-02-2022', '06:03:50 pm', 'income', 50004.5, 'completed', 3, 7, 25),
-(7, '06-02-2022', '06:03:50 pm', 'income', 74.5, 'completed', 5, 9, 26),
-(6, '06-02-2022', '06:03:50 pm', 'income', 124.5, 'completed', 4, 8, 27),
-(9, '06-02-2022', '06:50:57 pm', 'cancel', 50004.5, 'completed', 3, 7, 25),
-(10, '13-02-2022', '02:41:19 pm', 'income', 135, 'completed', 4, 8, 28),
-(11, '13-02-2022', '02:44:32 pm', 'income', 160, 'completed', 5, 9, 29);
+(20, '20-02-2022', '10:49:50 pm', 'income', 124.5, 'completed', 4, 8, 43),
+(19, '20-02-2022', '10:46:27 pm', 'income', 24.5, 'completed', 3, 7, 42),
+(18, '20-02-2022', '10:46:27 pm', 'income', 114.5, 'completed', 5, 9, 41),
+(17, '20-02-2022', '10:40:18 pm', 'income', 149.5, 'completed', 5, 9, 40),
+(16, '20-02-2022', '10:35:46 pm', 'income', 114.5, 'completed', 5, 9, 39);
 
 -- --------------------------------------------------------
 
@@ -704,9 +713,9 @@ CREATE TABLE IF NOT EXISTS `wallet` (
 --
 
 INSERT INTO `wallet` (`Wallet_ID`, `Wallet_Amount`, `FK_Wallet_Seller_ID`) VALUES
-(3, 0, 7),
-(4, 259.5, 8),
-(5, 234.5, 9);
+(3, 24.5, 7),
+(4, 124.5, 8),
+(5, 378.5, 9);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
