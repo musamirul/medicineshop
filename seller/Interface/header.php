@@ -89,8 +89,8 @@
 
                     <a href="#ShopCollapse" aria-current="true" aria-controls="ShopCollapse" data-bs-toggle="collapse" aria-expanded="true" class="list-group-item list-group-item-action py-2 <?php if($current_file_name== "Seller_Shop_Profile.php"||$current_file_name== "Seller_Information.php") echo "active"?>"><i class="bi bi-shop me-3"></i><span>Shop</span></a>
                     <ul class="collapse list-group list-group-flush ps-4" id="ShopCollapse">
-                    	<li class="list-group-item py-1"><a href="Seller_Shop_Profile.php" class="text-decoration-none text-reset"><i style="font-size:14px" class="bi bi-pencil-square me-3"></i>Shop Profile</a></li>
-                      <li class="list-group-item py-1"><a href="Seller_Information.php" class="text-decoration-none text-reset"><i style="font-size:14px" class="bi bi-info-square me-3"></i>My Information</a></li>
+                    	<li class="list-group-item py-1 <?php if($current_file_name== "Seller_Shop_Profile.php") echo "active"?>"><a href="Seller_Shop_Profile.php" class="text-decoration-none text-reset"><i style="font-size:14px" class="bi bi-pencil-square me-3"></i>Shop Profile</a></li>
+                      <li class="list-group-item py-1 <?php if($current_file_name== "Seller_Information.php") echo "active"?>"><a href="Seller_Information.php" class="text-decoration-none text-reset"><i style="font-size:14px" class="bi bi-info-square me-3"></i>My Information</a></li>
                     </ul>
                     <br /><br />
                     <!--<a href="#" class="list-group-item list-group-item-action py-2" aria-current="true"><i class="bi bi-gear-fill me-3"></i><span>Settings</span></a>-->

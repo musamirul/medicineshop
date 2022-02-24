@@ -293,7 +293,7 @@
                 <tbody>
                     <?php
                         //display all table data
-                        $query_showData = mysqli_query($con,"SELECT * FROM consult WHERE Consult_Status ='request'");
+                        $query_showData = mysqli_query($con,"SELECT * FROM consult WHERE Consult_Status ='complete'");
                         while($result_showData = mysqli_fetch_array($query_showData)){
                             $Cust_ID = $result_showData['FK_Consult_Cust_ID']; 
                             $query_customer = mysqli_query($con,"SELECT * FROM customer WHERE Cust_ID = '$Cust_ID'");
