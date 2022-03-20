@@ -317,7 +317,7 @@ $count_result = mysqli_fetch_object($count_query);
             $cartItem_query = mysqli_query($con,"INSERT INTO cart_item (Cart_Item_Qty, Cart_Item_Amount, FK_Cart_ID, FK_Item_Product_ID, FK_Item_Seller_ID, FK_Item_Shipping_ID, FK_Item_Record_ID) 
             VALUES ('$quantity','$product_Price','$cart_ID','$product_ID','$seller_ID','1','$record_id')");
 
-            $_SESSION['message'] = "Item Added to Cart";
+            $_SESSION['message'] = "Item have successfully Added to Cart";
             echo '<script>window.location.href="product-view.php?prodId='.$id.'"</script>';
 
         }else{
@@ -333,7 +333,7 @@ $count_result = mysqli_fetch_object($count_query);
                 $cartItem_query = mysqli_query($con,"INSERT INTO cart_item (Cart_Item_Qty, Cart_Item_Amount, FK_Cart_ID, FK_Item_Product_ID, FK_Item_Seller_ID, FK_Item_Shipping_ID, FK_Item_Record_ID) 
                 VALUES ('$quantity','$product_Price','$cart_ID','$product_ID','$seller_ID','1','$record_id')");
 
-                $_SESSION['message'] = "Item Added to Cart";
+                $_SESSION['message'] = "Item have successfully Added to Cart";
                 echo '<script>window.location.href="product-view.php?prodId='.$id.'"</script>';
         }
         //New profile Account, never have cart

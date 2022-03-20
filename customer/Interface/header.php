@@ -77,7 +77,7 @@
                   <div class="col-8 mt-1">
                     <form method="post" action="../product-list.php">
                         <div class="input-group mb-3">
-                          <input class="form-control" type="text" name="productSearch" placeholder="Search for product, brand and shop">
+                          <input class="form-control" type="text" name="productSearch" placeholder="Search for product">
                           <button class="btn btn-primary" name="searchButton" type="submit"><i class="bi bi-search ps-3 pe-3"></i></button>
                         </div>
                       </form>

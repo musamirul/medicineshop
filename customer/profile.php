@@ -38,7 +38,7 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">Name</label>
+                                <label class="col-sm-2 col-form-label">DOB</label>
                                 <div class="col-sm-10">
                                     <input type="date" class="form-control" name="dob" value="<?php echo $result_check['Cust_DOB'] ?>"/>
                                 </div>
@@ -131,7 +131,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label">Name</label>
+                            <label class="col-sm-2 col-form-label">DOB</label>
                             <div class="col-sm-10">
                                 <input type="date" class="form-control" name="dob"/>
                             </div>
