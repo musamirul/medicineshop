@@ -42,7 +42,7 @@
                 </thead>
                 <tbody>
                     <?php 
-                        for($x = 0; $x <count($Cust_ID); $x++){
+                        for($x = 0; $x < count($Cust_ID); $x++){
                         $ArrayCust = $Cust_ID[$x];
 
                         //Customer Table

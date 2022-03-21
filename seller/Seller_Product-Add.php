@@ -139,6 +139,7 @@ if(isset($_POST['createProduct'])){
     $manufacturer = $_POST['manufacturer'];
     $price = $_POST['price'];
     $tags = $_POST['prodTags'];
+    $prodCategory = $_POST['prodCategory'];
     $sellerID = $_SESSION['Seller_Id'];
 
     /*$file=$_FILES['image']['tmp_name'];
@@ -160,8 +161,8 @@ if(isset($_POST['createProduct'])){
     $fname = date("YmdHis").'_'.$name;
     $move = move_uploaded_file($temp,"img/".$fname);
 
-    $query_addProduct = mysqli_query($con,"INSERT INTO product (Product_Name, Product_Desc, Product_Spec, Product_Image, Product_Qty, Product_Type, Product_RecordType, Product_ExpiracyDate, Product_ManufacturerName, Product_SellingPrice, Product_Tags, FK_Product_Seller_ID)
-    VALUES ('$Pname','$description','$specification','img/$fname','$qty','$prodType','$recordType','$expiredDate','$manufacturer','$price','$tags','$sellerID')");
+    $query_addProduct = mysqli_query($con,"INSERT INTO product (Product_Name, Product_Desc, Product_Spec, Product_Image, Product_Qty, Product_Type, Product_Category, Product_RecordType, Product_ExpiracyDate, Product_ManufacturerName, Product_SellingPrice, Product_Tags, FK_Product_Seller_ID)
+    VALUES ('$Pname','$description','$specification','img/$fname','$qty','$prodType','$prodCategory','$recordType','$expiredDate','$manufacturer','$price','$tags','$sellerID')");
     $_SESSION['message'] = 'Successfully Add Product '.$name;
     
     echo '<script>window.location.href="Seller_Product-Add.php"</script>';
