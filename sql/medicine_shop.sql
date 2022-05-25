@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Feb 21, 2022 at 04:53 PM
+-- Generation Time: Apr 24, 2022 at 08:47 AM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `administrator` (
   `Admin_Status` varchar(45) NOT NULL,
   `FK_Admin_Login_ID` int(45) NOT NULL,
   PRIMARY KEY (`Admin_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `administrator`
@@ -45,7 +45,8 @@ CREATE TABLE IF NOT EXISTS `administrator` (
 
 INSERT INTO `administrator` (`Admin_ID`, `Admin_Name`, `Admin_Email`, `Admin_EmpNo`, `Admin_Dept`, `Admin_Status`, `FK_Admin_Login_ID`) VALUES
 (1, 'Ameirul Mustaqim', 'musamirul@it.gmail', '344343', 'it', 'Active', 19),
-(2, 'Dr Amran Musa', 'dramran@kpjklang.com', '12443837', 'consultant', 'active', 53);
+(2, 'Dr Amran Musa', 'dramran@kpjklang.com', '12443837', 'consultant', 'active', 53),
+(3, 'tengku syakir', 'tmsyakir@fin.com', '20162222', 'finance', 'active', 58);
 
 -- --------------------------------------------------------
 
@@ -64,17 +65,15 @@ CREATE TABLE IF NOT EXISTS `billing` (
   `FK_Billing_Cust_ID` int(45) NOT NULL,
   `FK_Billing_Order_ID` int(45) NOT NULL,
   PRIMARY KEY (`Billing_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `billing`
 --
 
 INSERT INTO `billing` (`Billing_ID`, `Billing_Date`, `Billing_Time`, `Billing_PaymentStatus`, `Billing_PaymentMethod`, `Billing_ReferenceNo`, `FK_Billing_Cust_ID`, `FK_Billing_Order_ID`) VALUES
-(17, '20-02-2022', '10:49:50 pm', 'completed', 'Online Banking', '84418641', 18, 43),
-(16, '20-02-2022', '10:46:27 pm', 'completed', 'Online Banking', '74196007', 18, 3),
-(15, '20-02-2022', '10:40:18 pm', 'completed', 'Online Banking', '95074547', 18, 2),
-(14, '20-02-2022', '10:35:46 pm', 'completed', 'Online Banking', '65168441', 18, 39);
+(24, '24-04-2022', '04:41:51 pm', 'completed', 'Online Banking', '25675069', 17, 55),
+(23, '24-04-2022', '04:40:30 pm', 'completed', 'Online Banking', '92331701', 20, 1);
 
 -- --------------------------------------------------------
 
@@ -92,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `billing_address` (
   `country` varchar(45) NOT NULL,
   `FK_BillAdd_Cust_ID` int(45) NOT NULL,
   PRIMARY KEY (`BillAdd_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `billing_address`
@@ -101,7 +100,8 @@ CREATE TABLE IF NOT EXISTS `billing_address` (
 INSERT INTO `billing_address` (`BillAdd_ID`, `address`, `city`, `state`, `zipcode`, `country`, `FK_BillAdd_Cust_ID`) VALUES
 (7, 'lorong 123', 'Parit Raja', 'Johor', 58738, 'Malaysia', 19),
 (6, 'no 38, lorong haji abu', 'Bukit Tinggi', 'Selangor', 41230, 'Malaysia', 18),
-(5, 'No 39, Lorong Raja Nong', 'Klang', 'Selangor', 41200, 'Malaysia', 17);
+(5, 'No 32, Jalan Dato Yusof Shahbudin', 'Klang', 'Selangor', 41000, 'Malaysia', 17),
+(8, 'No 34, Jalan Bentara 1, Taman Saga', 'Klang', 'Selangor', 41200, 'Malaysia', 20);
 
 -- --------------------------------------------------------
 
@@ -116,17 +116,15 @@ CREATE TABLE IF NOT EXISTS `cart` (
   `Cart_Status` varchar(45) NOT NULL,
   `FK_Cart_Cust_ID` int(45) NOT NULL,
   PRIMARY KEY (`Cart_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `cart`
 --
 
 INSERT INTO `cart` (`Cart_ID`, `Cart_TimeStamp`, `Cart_Status`, `FK_Cart_Cust_ID`) VALUES
-(43, '2022-02-20 10:49:50pm', 'payment_completed', 18),
-(42, '2022-02-20 10:45:36pm', 'payment_completed', 18),
-(40, '2022-02-20 10:35:46pm', 'payment_completed', 18),
-(41, '2022-02-20 10:39:59pm', 'payment_completed', 18);
+(52, '2022-04-24 04:41:51pm', 'payment_completed', 17),
+(51, '2022-04-24 04:40:21pm', 'payment_completed', 20);
 
 -- --------------------------------------------------------
 
@@ -145,19 +143,15 @@ CREATE TABLE IF NOT EXISTS `cart_item` (
   `FK_Item_Shipping_ID` int(45) NOT NULL,
   `FK_Item_Record_ID` int(45) NOT NULL,
   PRIMARY KEY (`Cart_Item_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=52 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `cart_item`
 --
 
 INSERT INTO `cart_item` (`Cart_Item_ID`, `Cart_Item_Qty`, `Cart_Item_Amount`, `FK_Cart_ID`, `FK_Item_Product_ID`, `FK_Item_Seller_ID`, `FK_Item_Shipping_ID`, `FK_Item_Record_ID`) VALUES
-(40, 1, 120, 43, 70, 8, 1, 19),
-(39, 1, 110, 42, 69, 9, 1, 0),
-(38, 1, 20, 42, 55, 7, 1, 0),
-(37, 1, 35, 41, 56, 9, 1, 0),
-(36, 1, 110, 41, 69, 9, 1, 0),
-(35, 1, 110, 40, 69, 9, 1, 0);
+(51, 1, 20, 52, 72, 10, 2, 0),
+(50, 1, 3799, 51, 71, 8, 1, 23);
 
 -- --------------------------------------------------------
 
@@ -177,14 +171,7 @@ CREATE TABLE IF NOT EXISTS `consult` (
   `FK_Consult_Product_ID` int(45) NOT NULL,
   `FK_Consult_Admin_ID` int(45) NOT NULL,
   PRIMARY KEY (`Consult_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `consult`
---
-
-INSERT INTO `consult` (`Consult_ID`, `Consult_RegDate`, `Consult_RegTime`, `Consult_Status`, `Consult_CompDate`, `Consult_CompTime`, `FK_Consult_Cust_ID`, `FK_Consult_Product_ID`, `FK_Consult_Admin_ID`) VALUES
-(3, '06-02-2022', '11:58:17 pm', 'complete', '07-02-2022', '10:54:41 pm', 18, 54, 1);
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -229,13 +216,14 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `Cust_Status` varchar(254) NOT NULL,
   `FK_Cust_Login_ID` int(45) NOT NULL,
   PRIMARY KEY (`Cust_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `customer`
 --
 
 INSERT INTO `customer` (`Cust_ID`, `Cust_Name`, `Cust_DOB`, `Cust_Gender`, `Cust_Phone`, `Cust_Email`, `Cust_Status`, `FK_Cust_Login_ID`) VALUES
+(20, 'Aidil Mustafa', '2009-01-20', 'male', '014254879', 'aidilm@gmail.com', 'Active', 56),
 (19, 'mus mus ameirul', '2021-09-01', 'male', '0193071722', 'musamirul.mus@gmail.com', 'Active', 54),
 (18, 'mustaqim ameirul', '1998-02-04', 'male', '0193071723', 'musamirul.kpj@gmail.com', 'Active', 52),
 (17, 'Ameirul Mustaqim', '2010-01-06', 'male', '0193071722', 'musamirul.kpj@gmail.com', 'Active', 48);
@@ -255,16 +243,16 @@ CREATE TABLE IF NOT EXISTS `declaration` (
   `Declaration_TimeStamp` varchar(45) NOT NULL,
   `FK_Declaration_Cust_ID` int(45) NOT NULL,
   PRIMARY KEY (`Declaration_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `declaration`
 --
 
 INSERT INTO `declaration` (`Declaration_ID`, `Declaration_Name`, `Declaration_FileName`, `Declaration_File`, `Declaration_TimeStamp`, `FK_Declaration_Cust_ID`) VALUES
-(28, 'cert', 'OtherCert.pdf', '20220204234557_OtherCert.pdf', '2022-02-04 11:45:57pm', 17),
-(24, 'Identity Card', 'ICCard.pdf', '20220204234251_ICCard.pdf', '2022-02-04 11:42:51pm', 17),
-(25, 'sijil', 'cetaksijil.pdf', '20220204234411_cetaksijil.pdf', '2022-02-04 11:44:11pm', 17);
+(32, 'ICCard', 'ICCardTest.pdf', '20220424163601_ICCardTest.pdf', '2022-04-24 04:36:01pm', 17),
+(31, 'DeclarationForm', 'HealthDeclarationTest.pdf', '20220424163418_HealthDeclarationTest.pdf', '2022-04-24 04:34:18pm', 18),
+(30, 'IdentityCard', 'ICCardTest.pdf', '20220424163208_ICCardTest.pdf', '2022-04-24 04:32:08pm', 20);
 
 -- --------------------------------------------------------
 
@@ -344,14 +332,17 @@ CREATE TABLE IF NOT EXISTS `login` (
   `password` varchar(45) NOT NULL,
   `role` varchar(45) NOT NULL,
   PRIMARY KEY (`Login_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=55 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=59 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `login`
 --
 
 INSERT INTO `login` (`Login_ID`, `username`, `password`, `role`) VALUES
+(58, 'syakir', '123', 'administrator'),
 (19, 'admin1', '123', 'administrator'),
+(57, 'medplus', '123', 'seller'),
+(56, 'aidil', '123', 'customer'),
 (50, 'bigpharma', '123', 'seller'),
 (51, 'healthlane', '123', 'seller'),
 (52, 'mustaqim', '123', 'customer'),
@@ -380,13 +371,14 @@ CREATE TABLE IF NOT EXISTS `medical_history` (
   `Surgery` varchar(45) NOT NULL,
   `FK_Med_Cust_ID` int(45) NOT NULL,
   PRIMARY KEY (`Medical_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `medical_history`
 --
 
 INSERT INTO `medical_history` (`Medical_ID`, `Blood_Group`, `Weight`, `Height`, `Alcohol`, `Smoking`, `Exercise`, `Illness`, `BMI`, `Surgery`, `FK_Med_Cust_ID`) VALUES
+(7, 'A+', 70, 135, 'no', 'no', 'yes', 'none', 38.41, 'none', 20),
 (6, 'A+', 59, 170, 'no', 'no', 'no', 'none', 20.42, 'none', 18),
 (5, 'A+', 51, 170, 'yes', 'yes', 'yes', 'infection, shingles, proriasis', 17.65, 'cataract surgery, free skin graft', 17);
 
@@ -409,18 +401,15 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `FK_Order_Cart_ID` int(45) NOT NULL,
   `FK_Order_Ship_ID` int(45) NOT NULL,
   PRIMARY KEY (`Order_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=56 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `orders`
 --
 
 INSERT INTO `orders` (`Order_ID`, `Order_No`, `Order_Status`, `Order_Amount`, `FK_Order_ShipAdd_ID`, `FK_Order_BillAdd_ID`, `FK_Order_Cust_ID`, `FK_Order_Seller_ID`, `FK_Order_Cart_ID`, `FK_Order_Ship_ID`) VALUES
-(43, 4, 'payment_completed', 124.5, 12, 6, 18, 8, 43, 1),
-(41, 3, 'payment_completed', 114.5, 12, 6, 18, 9, 42, 1),
-(42, 3, 'payment_completed', 24.5, 12, 6, 18, 7, 42, 1),
-(40, 2, 'payment_completed', 149.5, 12, 6, 18, 9, 41, 1),
-(39, 1, 'payment_completed', 114.5, 12, 6, 18, 9, 40, 1);
+(55, 2, 'payment_completed', 70, 10, 5, 17, 10, 52, 2),
+(54, 1, 'payment_completed', 3803.5, 14, 8, 20, 8, 51, 1);
 
 -- --------------------------------------------------------
 
@@ -445,7 +434,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   `Product_Tags` varchar(254) NOT NULL,
   `FK_Product_Seller_ID` int(45) NOT NULL,
   PRIMARY KEY (`Product_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=72 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=73 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `product`
@@ -457,7 +446,8 @@ INSERT INTO `product` (`Product_ID`, `Product_Name`, `Product_Desc`, `Product_Sp
 (56, 'RESPACK DISPOSABLE FACE MASK 4PLY KF94 EARLOOP', '<p>A face mask is a covering that you wear over your face, for example to prevent yourself from breathing bad air or from spreading germs, or to protect your face when you are in a dangerous situation.<br></p>', '<ol><li>Three dimensional mask with lightweight structure for easy breathing</li><li>Adjustable nose bridge and elastic ear loop has enough elasticity to make a good seal</li><li>Multilayer protection can filter out dust, germs smoke and almost 98 particles in the air</li></ol>', 'img/facemask.jpg', 20, 'noncontrol', 'other', 'no', '2022-02-26', 'minimask', 35, 'facemask, 4ply, mask', 9),
 (69, 'HLP LIFESENZE COQ10 150MG PLUS', '<p><span style=\"background-color: rgba(var(--bs-body-bg-rgb),var(--bs-bg-opacity)); font-size: var(--bs-body-font-size); font-weight: var(--bs-body-font-weight); text-align: var(--bs-body-text-align);\">What is Coenzyme Q10</span></p><p><span style=\"background-color: rgba(var(--bs-body-bg-rgb),var(--bs-bg-opacity)); font-size: var(--bs-body-font-size); font-weight: var(--bs-body-font-weight); text-align: var(--bs-body-text-align);\">is a fat soluble antioxidant vitamin that plays an indispensable role in energy production and its found in every cell of the body</span></p>', '<p>The roles of Coenzyme Q10 in our body</p><ul><li>Energy booster</li><li>Powerful antioxidant</li><li>Cardio protection</li><li>Anti hypertension</li><li>Immuno stimulation</li><li>Increase stamina</li><li>Anti-aging</li><li>Reverse the effect of statin</li></ul>', 'img/20220206155121_lifesenze.jpg', 10, 'noncontrol', 'ortho', 'no', '2022-02-09', 'lifesenze', 110, 'lifesenze, coq10, hlp', 9),
 (70, 'Lipitor 20mg Tablet', '<p><b>Introduction of Lipitor 20mg Tablet</b></p><p>When used as directed by a doctor, Lipitor 20mg Tablet is a regularly prescribed drug that is considered safe for long-term usage. It may be consumed either with food or on an empty stomach. It may be taken at any time of day, however it is best if you take it at the same time every day. Although most individuals do not feel bad when they stop taking their prescription, doing so may make their condition worse, increasing their risk of heart disease and stroke</p>', '<p>Before starting Lipitor, please consult a doctor especially if you are having any of the listed problems. Contraindications:</p><ul><li>Atve liver diseases</li><li>&nbsp;Raised hepatic enzymes</li><li>Allergy to Lipitor or any of its contents.</li><li>&nbsp;It is not advisable for children and babies. Please keep it away from their reach</li><li>Hypersensitivity</li><li>Drug interactions with Lipitor</li></ul><p>Interactions may differ individually. You are encouraged to ask your doctor about any possible interactions of this drug.</p><ol><li>Cyclosorine</li><li>Fibric acid derivatives</li><li>&nbsp;Erythromycin</li><li>Niacin</li><li>Diltiazem</li><li>&nbsp;Digoxin</li><li>Colestipol</li><li>Colchicine</li><li>&nbsp;Fibrates</li></ol><p>This list may be incomplete. Please mention all the drugs you are taking to the doctor before starting a new one. Please be alert of the following situations as well:</p><ol><li><span style=\"background-color: rgba(var(--bs-body-bg-rgb),var(--bs-bg-opacity)); font-size: var(--bs-body-font-size); font-weight: var(--bs-body-font-weight); text-align: var(--bs-body-text-align);\">Avoid excessive exposure to sun</span></li><li>Avoid using it for a long term</li><li>Alcohol may affect the effectiveness of this drug</li></ol>', 'img/20220206160122_Lipitor.JPG', 50, 'control', 'heart', 'yes', '2022-02-11', 'Upjohn', 120, 'lipitor, atorvastatin', 8),
-(71, 'Zykadia 150mg Hard Capsule', '<p><b>How To Use Zykadia 150mg Hard Capsule</b></p><p>This medicine is for oral use only. Swallow this medication as a whole with water. Do not chew or crush the capsule. It is better to take this medication at a fixed time if it is indicated for everyday use.</p>', '<p><b>Alcohol Warning( Safe )</b></p><p>There is no contraindication on the consumption of alcohol with Zykadia 150mg Hard Capsule suggested by any previous clinical data. However, the side effects of alcohol may worsen the adverse reaction of Zykadia 150mg Hard Capsule and caution should be taken by the user.</p><p><b>Pregnancy Warning (Not Safe)</b></p><p>Animal reproductive studies have been shown potential harm to the development of the fetus. Due to its potential harm to human pregnancy, it is not advisable to be used during pregnancy and effective contraception should be considered in women of child-bearing potential.</p><p><b>Breastfeeding Warning ( Limited Data )</b></p><p>It is not known whether Zykadia 150mg Hard Capsule will be excreted into human breastmilk or not and it is advisable not to breastfeed the infant during treatment period due to its potential adverse effects.</p><p><b>Driving Warning ( Not Advisable )</b></p><p>It is not advisable to drive or operate machinery when taking Ceritini due to its potential side effects such as dizziness and eye disorders which can affect concentration and ability to drive.</p>', 'img/20220206192935_zykadia.JPG', 15, 'control', 'lungs', 'yes', '2022-07-14', 'Novartis', 3799, 'zykadia, lung cancer, cancer', 8);
+(71, 'Zykadia 150mg Hard Capsule', '<p><b>How To Use Zykadia 150mg Hard Capsule</b></p><p>This medicine is for oral use only. Swallow this medication as a whole with water. Do not chew or crush the capsule. It is better to take this medication at a fixed time if it is indicated for everyday use.</p>', '<p><b>Alcohol Warning( Safe )</b></p><p>There is no contraindication on the consumption of alcohol with Zykadia 150mg Hard Capsule suggested by any previous clinical data. However, the side effects of alcohol may worsen the adverse reaction of Zykadia 150mg Hard Capsule and caution should be taken by the user.</p><p><b>Pregnancy Warning (Not Safe)</b></p><p>Animal reproductive studies have been shown potential harm to the development of the fetus. Due to its potential harm to human pregnancy, it is not advisable to be used during pregnancy and effective contraception should be considered in women of child-bearing potential.</p><p><b>Breastfeeding Warning ( Limited Data )</b></p><p>It is not known whether Zykadia 150mg Hard Capsule will be excreted into human breastmilk or not and it is advisable not to breastfeed the infant during treatment period due to its potential adverse effects.</p><p><b>Driving Warning ( Not Advisable )</b></p><p>It is not advisable to drive or operate machinery when taking Ceritini due to its potential side effects such as dizziness and eye disorders which can affect concentration and ability to drive.</p>', 'img/20220206192935_zykadia.JPG', 15, 'control', 'lungs', 'yes', '2022-07-14', 'Novartis', 3799, 'zykadia, lung cancer, cancer', 8),
+(72, 'Actimol Paracetamol', '<p>Actimol is a paracetamol-based analgesic for temporary relief of headaches, joint and muscle pains, migraine and period pain. It also helps to reduce back pain and soothes toothaches. Actimol comes in both 500mg and 650mg, which are also gentle on the stomach</p>', '<ul><li>Paracetamol 500mg | Paracetamol 650mg<br></li><li>Each tablet contains Paracetamol 500mg / 650mg.</li><li>Hypersensitivity to paracetamol or any other ingredients/ components of the product.</li><li>Severe and active hepatic impairment.</li></ul>', 'img/20220321233056_actimol.JPG', 20, 'noncontrol', 'other', 'no', '2022-03-31', 'actimol', 20, 'actimol, panadol, paracetamol', 10);
 
 -- --------------------------------------------------------
 
@@ -474,16 +464,16 @@ CREATE TABLE IF NOT EXISTS `record` (
   `FK_Record_Product_ID` int(45) NOT NULL,
   `FK_Record_Cust_ID` int(45) NOT NULL,
   PRIMARY KEY (`Record_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `record`
 --
 
 INSERT INTO `record` (`Record_ID`, `Record_Timestamp`, `Record_File`, `Record_FileName`, `FK_Record_Product_ID`, `FK_Record_Cust_ID`) VALUES
-(19, '2022-02-07 12:54:31am', '20220207005431_ConsultPrescription.pdf', 'ConsultPrescription.pdf', 0, 18),
-(20, '2022-02-07 10:53:58pm', '20220207225358_PrescriptionDoc.pdf', 'PrescriptionDoc.pdf', 0, 18),
-(12, '2022-02-06 04:14:54pm', '20220206161454_Prescription.pdf', 'Prescription.pdf', 0, 18);
+(24, '2022-04-24 04:34:46pm', '20220424163446_prescriptionChemo.pdf', 'prescriptionChemo.pdf', 0, 18),
+(25, '2022-04-24 04:35:46pm', '20220424163546_PrescriptionDoc.pdf', 'PrescriptionDoc.pdf', 0, 17),
+(23, '2022-04-24 04:32:24pm', '20220424163224_PrescriptionTest.pdf', 'PrescriptionTest.pdf', 0, 20);
 
 -- --------------------------------------------------------
 
@@ -503,7 +493,7 @@ CREATE TABLE IF NOT EXISTS `seller` (
   `Seller_Registration_Status` varchar(45) NOT NULL,
   `FK_Seller_Login_ID` int(45) NOT NULL,
   PRIMARY KEY (`Seller_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `seller`
@@ -511,6 +501,7 @@ CREATE TABLE IF NOT EXISTS `seller` (
 
 INSERT INTO `seller` (`Seller_ID`, `Seller_Name`, `Seller_RegistrationNo`, `Seller_Phone`, `Seller_Address`, `Seller_BankAccName`, `Seller_BankAccNo`, `Seller_Registration_Status`, `FK_Seller_Login_ID`) VALUES
 (9, 'Health Lane Family Pharmacy', 122545332, '0367305793', '5, Jln Burung Jentayu, Taman Bukit Maluri, 51200 Kuala Lumpur', 'hongleong', '5124448755365', 'Active', 51),
+(10, 'Medplus pharmacy', 43345343, '034567234', '19-G, Jalan Mahogani 5, Bandar Botanik, 41200 Klang, Selangor', 'maybank', '5124425436', 'Active', 57),
 (7, 'Sterling Pharmacy', 25666421, '0333262598', 'Aeon Bukit Tinggi Shopping Centre, S21, Persiaran Batu Nilam 1/ks6, Bandar Bukit Tinggi 2, 41200 Klang', 'maybank', '2100025421534', 'Active', 49),
 (8, 'Big Pharmacy', 51222342, '0342805099', 'No. 40, Jalan Bunga Tanjung 9,Taman Muda Cheras, 56100 Kuala Lumpur', 'cimb', '512445614523', 'Active', 50);
 
@@ -530,7 +521,7 @@ CREATE TABLE IF NOT EXISTS `seller_shop` (
   `Shop_Cover_File` varchar(254) NOT NULL,
   `FK_Shop_Seller_ID` int(254) NOT NULL,
   PRIMARY KEY (`Shop_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `seller_shop`
@@ -539,7 +530,8 @@ CREATE TABLE IF NOT EXISTS `seller_shop` (
 INSERT INTO `seller_shop` (`Shop_ID`, `Shop_Desc`, `Shop_Img`, `Shop_Img_File`, `Shop_Cover`, `Shop_Cover_File`, `FK_Shop_Seller_ID`) VALUES
 (5, '<p>With a vision to build a brand based on trust and to provide customers excellent services and products at competitive prices, the founders of BIG Pharmacy, Lee Meng Chuan and Lim Sin Yin opened their first outlet in Damansara Uptown in year 2006.</p><p>From there, the BIG Pharmacy brand was recognised by many and the number of outlets slowly grew from 1 outlet to 13 outlets.</p><p>As part of the Groupâ€™s plan to expand in the southern region of Malaysia, the Group merged with RedCap Pharmacy in year 2018, My Pharmacy in year 2019 and the combined entity now has more than 80 BIG Pharmacy outlets in Malaysia.</p><p>All the outlets are staffed with licensed pharmacists, registered under Lembaga Farmasi Malaysia. The pharmacists are trained to provide the best range of care for customers, from dispensing medications to providing healthcare advice. There are also nutritionists and dieticians on site to provide dietary advice and guidance on selection of supplements.</p>', '20220206155406_bigpharmacylogo.JPG', 'bigpharmacylogo.JPG', '20220206155411_bigpharmacybanner.JPG', 'bigpharmacybanner.JPG', 8),
 (6, '<p>Health Lane Family Pharmacy is a growing chain of pharmacy with more than 30 years experience! We currently have almost 100 outlets in Klang Valley, Negeri Sembilan, Melaka, Johor, Sarawak and still expanding. Our retail outlets are supported by an efficient Headquarter team based in Sentul.</p><p><br></p><p>In Health Lane Family Pharmacy our tagline is â€œGREAT HEALTH BEGINS HEREâ€, our goal is to establish a strong bond and long term relationship with our customers, treating them like family by providing personalized service, caring advice and recommending wholesome solutions to help them achieve great health.</p>', '20220206144712_healthlanelogo.png', 'healthlanelogo.png', '20220206144718_healthlanebanner.jpg', 'healthlanebanner.jpg', 9),
-(4, '<p>Sterling Specialty Pharmacyâ€™s mission is to streamline patient access to critical specialty medications while prioritizing continuity of care, clinical excellence, and strategic partnerships.</p><p><b>Long-Term Care Pharmacy</b></p><p><span style=\"font-size: var(--bs-body-font-size); font-weight: var(--bs-body-font-weight); text-align: var(--bs-body-text-align);\">Sterling Long Term Care Pharmacyâ€™s mission is to provide innovative services and advocacy to the long-term care community by partnering with others who care.</span></p>', '20220205002027_sterling.png', 'sterling.png', '20220205002043_sterlingbanner.jpg', 'sterlingbanner.jpg', 7);
+(4, '<p>Sterling Specialty Pharmacyâ€™s mission is to streamline patient access to critical specialty medications while prioritizing continuity of care, clinical excellence, and strategic partnerships.</p><p><b>Long-Term Care Pharmacy</b></p><p><span style=\"font-size: var(--bs-body-font-size); font-weight: var(--bs-body-font-weight); text-align: var(--bs-body-text-align);\">Sterling Long Term Care Pharmacyâ€™s mission is to provide innovative services and advocacy to the long-term care community by partnering with others who care.</span></p>', '20220205002027_sterling.png', 'sterling.png', '20220205002043_sterlingbanner.jpg', 'sterlingbanner.jpg', 7),
+(7, '<p>Medplus Pharmacy &amp; Baby is offering a new integrated shopping experience where customers can access to a wide range of pharmacy and baby products<br></p>', '20220424162851_medplus.png', 'medplus.png', '', '', 10);
 
 -- --------------------------------------------------------
 
@@ -581,16 +573,17 @@ CREATE TABLE IF NOT EXISTS `shipping_address` (
   `country` varchar(45) NOT NULL,
   `FK_ShipAdd_Cust_ID` int(45) NOT NULL,
   PRIMARY KEY (`ShipAdd_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `shipping_address`
 --
 
 INSERT INTO `shipping_address` (`ShipAdd_ID`, `address`, `city`, `state`, `zipcode`, `country`, `FK_ShipAdd_Cust_ID`) VALUES
+(14, 'No 34, Jalan Bentara 1, Taman Saga', 'Klang', 'Selangor', 41200, 'Malaysia', 20),
 (13, 'lorong 123', 'Parit Raja', 'Johor', 58738, 'Malaysia', 19),
 (12, 'no 38, lorong haji abu', 'Bukit Tinggi', 'Selangor', 41230, 'Malaysia', 18),
-(10, 'No 39, Lorong Raja Nong', 'Klang', 'Selangor', 41200, 'Malaysia', 17);
+(10, 'No 32, Jalan Dato Yusof Shahbudin', 'Klang', 'Selangor', 41000, 'Malaysia', 17);
 
 -- --------------------------------------------------------
 
@@ -613,18 +606,15 @@ CREATE TABLE IF NOT EXISTS `tracking` (
   `FK_Tracking_Seller_ID` int(45) NOT NULL,
   `FK_Tracking_Cart_ID` int(45) NOT NULL,
   PRIMARY KEY (`Tracking_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tracking`
 --
 
 INSERT INTO `tracking` (`Tracking_ID`, `Tracking_Date`, `Tracking_Time`, `Tracking_Status`, `Tracking_Channel`, `Tracking_EstimateDate`, `Tracking_EstimateTime`, `FK_Tracking_Order_ID`, `FK_Tracking_Ship_ID`, `FK_Tracking_Cust_ID`, `FK_Tracking_Seller_ID`, `FK_Tracking_Cart_ID`) VALUES
-(21, '20-02-2022', '10:49:50 pm', 'completed', 'skynet', '25-02-2022', '10:49:50 pm', 43, 1, 18, 8, 43),
-(20, '20-02-2022', '10:46:27 pm', 'completed', 'skynet', '25-02-2022', '10:46:27 pm', 42, 1, 18, 7, 42),
-(19, '20-02-2022', '10:46:27 pm', 'completed', 'skynet', '25-02-2022', '10:46:27 pm', 41, 1, 18, 9, 42),
-(18, '20-02-2022', '10:40:18 pm', 'completed', 'postlaju', '25-02-2022', '10:40:18 pm', 40, 1, 18, 9, 41),
-(17, '20-02-2022', '10:35:46 pm', 'completed', 'citylink', '25-02-2022', '10:35:46 pm', 39, 1, 18, 9, 40);
+(30, '24-04-2022', '04:41:51 pm', 'completed', 'citylink', '25-04-2022', '04:41:51 pm', 55, 2, 17, 10, 52),
+(29, '24-04-2022', '04:40:30 pm', 'delivered', 'skynet', '29-04-2022', '04:40:30 pm', 54, 1, 20, 8, 51);
 
 -- --------------------------------------------------------
 
@@ -640,28 +630,18 @@ CREATE TABLE IF NOT EXISTS `tracking_shipment` (
   `Track_Ship_Time` varchar(254) NOT NULL,
   `FK_Tracking_ID` int(11) NOT NULL,
   PRIMARY KEY (`Track_Ship_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=48 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tracking_shipment`
 --
 
 INSERT INTO `tracking_shipment` (`Track_Ship_ID`, `Track_Ship_Status`, `Track_Ship_Date`, `Track_Ship_Time`, `FK_Tracking_ID`) VALUES
-(26, 'ship', '20-02-2022', '10:48:38 pm', 19),
-(25, 'completed', '20-02-2022', '10:42:04 pm', 18),
-(23, 'ship', '20-02-2022', '10:41:59 pm', 18),
-(24, 'delivered', '20-02-2022', '10:42:02 pm', 18),
-(22, 'completed', '20-02-2022', '10:39:15 pm', 17),
-(21, 'delivered', '20-02-2022', '10:39:09 pm', 17),
-(20, 'ship', '20-02-2022', '10:38:55 pm', 17),
-(27, 'delivered', '20-02-2022', '10:48:40 pm', 19),
-(28, 'completed', '20-02-2022', '10:48:42 pm', 19),
-(29, 'ship', '20-02-2022', '10:49:21 pm', 20),
-(30, 'delivered', '20-02-2022', '10:49:23 pm', 20),
-(31, 'completed', '20-02-2022', '10:49:24 pm', 20),
-(32, 'ship', '20-02-2022', '10:50:36 pm', 21),
-(33, 'delivered', '20-02-2022', '10:50:56 pm', 21),
-(34, 'completed', '20-02-2022', '10:50:59 pm', 21);
+(47, 'completed', '24-04-2022', '04:42:26 pm', 30),
+(46, 'delivered', '24-04-2022', '04:42:23 pm', 30),
+(45, 'ship', '24-04-2022', '04:42:19 pm', 30),
+(44, 'delivered', '24-04-2022', '04:41:08 pm', 29),
+(43, 'ship', '24-04-2022', '04:41:01 pm', 29);
 
 -- --------------------------------------------------------
 
@@ -681,18 +661,15 @@ CREATE TABLE IF NOT EXISTS `transaction` (
   `FK_Transaction_Seller_ID` int(11) NOT NULL,
   `FK_Transaction_Order_ID` int(11) NOT NULL,
   PRIMARY KEY (`Transaction_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `transaction`
 --
 
 INSERT INTO `transaction` (`Transaction_ID`, `Transaction_Date`, `Transaction_Time`, `Transaction_Type`, `Transaction_Amount`, `Transaction_Status`, `FK_Transaction_Wallet_ID`, `FK_Transaction_Seller_ID`, `FK_Transaction_Order_ID`) VALUES
-(20, '20-02-2022', '10:49:50 pm', 'income', 124.5, 'completed', 4, 8, 43),
-(19, '20-02-2022', '10:46:27 pm', 'income', 24.5, 'completed', 3, 7, 42),
-(18, '20-02-2022', '10:46:27 pm', 'income', 114.5, 'completed', 5, 9, 41),
-(17, '20-02-2022', '10:40:18 pm', 'income', 149.5, 'completed', 5, 9, 40),
-(16, '20-02-2022', '10:35:46 pm', 'income', 114.5, 'completed', 5, 9, 39);
+(31, '24-04-2022', '04:41:51 pm', 'income', 70, 'completed', 6, 10, 55),
+(30, '24-04-2022', '04:40:30 pm', 'income', 3803.5, 'completed', 4, 8, 54);
 
 -- --------------------------------------------------------
 
@@ -706,16 +683,17 @@ CREATE TABLE IF NOT EXISTS `wallet` (
   `Wallet_Amount` double NOT NULL,
   `FK_Wallet_Seller_ID` int(11) NOT NULL,
   PRIMARY KEY (`Wallet_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `wallet`
 --
 
 INSERT INTO `wallet` (`Wallet_ID`, `Wallet_Amount`, `FK_Wallet_Seller_ID`) VALUES
-(3, 24.5, 7),
-(4, 124.5, 8),
-(5, 378.5, 9);
+(3, 0, 7),
+(4, 3928, 8),
+(5, 607.5, 9),
+(6, 70, 10);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
